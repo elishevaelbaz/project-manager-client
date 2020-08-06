@@ -2,6 +2,7 @@ import React from 'react'
 import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -19,7 +20,9 @@ const Header = () => {
     <div>
     <h1>Welcome, {currentUser ? currentUser.username : "user"}. You are viewing {currentBoard.name}</h1>
     <BoardDropdown />
-    <button onClick={handleLogout}>Logout</button>
+    <Link to="/login" >
+      <button onClick={handleLogout}>Logout</button>
+    </Link>
     </div>
   )
 }

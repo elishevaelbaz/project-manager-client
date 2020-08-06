@@ -1,7 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { signUp } from '../api'
-// import {  } from '../store/user/actions'
+import { Link } from 'react-router-dom'
 
 class SignUp extends React.Component {
   state = {
@@ -36,6 +34,7 @@ class SignUp extends React.Component {
     const { username, password} = this.state
 
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <h1>Signup</h1>
 
@@ -60,6 +59,8 @@ class SignUp extends React.Component {
 
         <input type="submit" value="Signup" />
       </form>
+      <Link to="/login" >Already have an account? Login here</Link>
+      </div>
     )
   }
 }

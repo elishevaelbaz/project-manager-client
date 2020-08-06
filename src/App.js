@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import SignUp from './components/SignUp';
 import Header from './components/Header';
 import CategoryContainer from './components/CategoryContainer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoards } from './store/board/actions';
 import { signUpAction, loginAction, autoLoginAction} from './store/user/actions';
 import Login from './components/Login';
 
 const App = () => {
 
+  const currentUser = useSelector(state => state.user.currentUser)
   const dispatch = useDispatch()
   
   useEffect(() => {
@@ -40,10 +42,24 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <SignUp handleSignUp={handleSignUp} /> */}
-      <Login handleLogin={handleLogin} />
+      {/* <Route exact path="/" /> */}
       <Header/>
-      <CategoryContainer />
+      <Switch>
+      <Route exact path="/">
+        {currentUser ? <CategoryContainer /> : <Redirect to='/login' />}
+      </Route>
+      <Route path="/signup">
+        {currentUser ?  <Redirect to='/' /> : <SignUp handleSignUp={handleSignUp} />}  
+      </Route>
+      <Route path="/login">
+        {currentUser ?  <Redirect to='/' /> : <Login handleLogin={handleLogin} />} 
+      </Route>
+      </Switch>
+
+      {/* <SignUp handleSignUp={handleSignUp} /> */}
+      {/* <Login handleLogin={handleLogin} /> */}
+      
+   
     </div>
   );
 }
