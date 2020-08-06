@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const BoardDropdown = () => {
   
-  const boards = useSelector(state => state.boards)
+  const boards = useSelector(state => state.task.boards)
   // const currentBoard = useSelector(state => state.currentBoard)
 
   return (
