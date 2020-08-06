@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER} from './types'
+import { SET_CURRENT_USER, LOGOUT_USER} from './types'
 import { signUp, login, autoLogin, logout } from '../../api'
 
 export const signUpAction = (username, password) => dispatch => {
@@ -34,5 +34,30 @@ export const loginAction = (username, password) => dispatch => {
       // setError(user.message)
     }
   })
+}
+
+export const autoLoginAction = () => dispatch => {
+  autoLogin()
+    .then(user => {
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: user
+      })
+    })
+    .catch((err) => console.error(err))
+}
+
+export const logoutAction = () => dispatch => {
+  logout()
+    .then(logoutResponse => {
+      dispatch({
+        // type: 'USER_LOGOUT',
+        type: LOGOUT_USER,
+      })
+      // this.setState({
+      //   currentUser: null,
+      //   message: logoutResponse.message
+      // })
+    })
 }
 

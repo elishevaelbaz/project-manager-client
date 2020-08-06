@@ -6,13 +6,24 @@ import categoryReducer from './category/reducer'
 import boardReducer from './board/reducer'
 import userReducer from './user/reducer'
 
-const rootReducer = combineReducers({
+// changed from rootReducer to appReducer
+const appReducer = combineReducers({
   task: taskReducer,
   category: categoryReducer,
   board: boardReducer,
   user: userReducer
 
 })
+
+// and addded this for logging out without mutating
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
+
+
 const store = createStore(
   rootReducer,
   composeWithDevTools(

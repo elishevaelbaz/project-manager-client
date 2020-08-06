@@ -5,7 +5,7 @@ import Header from './components/Header';
 import CategoryContainer from './components/CategoryContainer';
 import { useDispatch } from 'react-redux';
 import { fetchBoards } from './store/board/actions';
-import { signUpAction, loginAction} from './store/user/actions';
+import { signUpAction, loginAction, autoLoginAction} from './store/user/actions';
 import Login from './components/Login';
 
 const App = () => {
@@ -13,6 +13,8 @@ const App = () => {
   const dispatch = useDispatch()
   
   useEffect(() => {
+    dispatch(autoLoginAction())
+    
     dispatch(fetchBoards())
     // getTasks()
     //   .then(tasks => dispatch({ type: SET_TASKS, payload: tasks}))
