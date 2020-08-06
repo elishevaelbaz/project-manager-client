@@ -18,3 +18,9 @@ export const addTask = (taskObj) => {
     }))
 }
 
+
+export const getBoards = () => {
+  return fetch("http://localhost:3000/boards")
+    .then(r => r.json())
+}
+

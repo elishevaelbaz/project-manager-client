@@ -1,7 +1,6 @@
 import { SET_TASKS, FETCH_TASKS, ADD_TASK } from "./types"
 
 const defaultState = {
-  boards: [{name: "helloBoard"}, {name: "board numero dos"}],
   tasks: [],
   loading: false
 }
