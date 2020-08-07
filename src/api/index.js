@@ -1,5 +1,7 @@
-export const getTasks = () => {
-  return fetch("http://localhost:3000/tasks")
+export const getTasks = (id) => {
+  return fetch(`http://localhost:3000/tasks?board_id=${id}`,{
+    credentials: "include"
+  })
     .then(r => r.json())
 }
 
@@ -7,6 +9,7 @@ export const addTask = (taskObj) => {
   // const taskObj = {name, due_date, category_id, created_by}
   return fetch("http://localhost:3000/tasks", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -20,7 +23,17 @@ export const addTask = (taskObj) => {
 
 
 export const getBoards = () => {
-  return fetch("http://localhost:3000/boards")
+  return fetch("http://localhost:3000/boards", {
+    credentials: "include"
+  })
+    .then(r => r.json())
+}
+
+
+export const getCategories = (id) => {
+  return fetch(`http://localhost:3000/categories?board_id=${id}`,{
+    credentials: "include"
+  })
     .then(r => r.json())
 }
 

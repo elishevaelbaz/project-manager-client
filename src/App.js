@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     dispatch(autoLoginAction())
     
-    dispatch(fetchBoards())
+    
     // getTasks()
     //   .then(tasks => dispatch({ type: SET_TASKS, payload: tasks}))
   }, [dispatch])

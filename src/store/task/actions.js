@@ -13,9 +13,9 @@ import { getTasks, addTask } from '../../api'
 // }
 
 //another syntax
-export const fetchTasks = () => dispatch => {
+export const fetchTasks = (id) => dispatch => {
   dispatch({type: FETCH_TASKS})
-  getTasks().then(tasks => {
+  getTasks(id).then(tasks => {
     dispatch({ 
       type: SET_TASKS, 
       payload: tasks
@@ -23,7 +23,7 @@ export const fetchTasks = () => dispatch => {
   })
 }
 
-export const postTask = (taskObj) => dispatch => {
+export const addTaskAction = (taskObj) => dispatch => {
   addTask(taskObj)
   .then(task => {
     dispatch({
