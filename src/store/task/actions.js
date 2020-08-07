@@ -23,7 +23,7 @@ export const fetchTasks = (id) => dispatch => {
   })
 }
 
-export const postTask = (taskObj) => dispatch => {
+export const addTaskAction = (taskObj) => dispatch => {
   addTask(taskObj)
   .then(task => {
     dispatch({

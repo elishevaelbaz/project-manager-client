@@ -1,7 +1,6 @@
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux';
-import { SET_CURRENT_BOARD } from '../store/board/types';
 import { changeCurrentBoard } from '../store/board/actions';
 
 

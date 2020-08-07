@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import Task from './Task'
 import { useDispatch, useSelector } from 'react-redux'
+import { Grid } from 'semantic-ui-react'
+
 // import { getTasks } from '../api'
 // import { SET_TASKS } from '../store/types'
 import { fetchTasks } from '../store/task/actions'
@@ -25,18 +27,17 @@ const Category = ({ name }) => {
 
   // included dispatch in the array becuase of react warning, but dispatch doesn't change, so will still be mount only
   if (loading) return <h2>Loading...</h2>
-  
+
   return(
-    <div>
-    <h1>{name}</h1>
-    <ul>
-      {/* {tasks.map(task => <li key={task.name}><Task task={task} /></li>)} */}
+  
+    <Grid.Column>
+      {tasks.map(task => <Task key={task.id} task={task} />)}
+      {/* <li><Task /></li>
       <li><Task /></li>
       <li><Task /></li>
-      <li><Task /></li>
-      <li><Task /></li>
-    </ul>
-    </div>
+      <li><Task /></li> */}
+    {/* </ul> */}
+    </Grid.Column>
   )
 }
 
