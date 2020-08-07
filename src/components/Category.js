@@ -31,7 +31,7 @@ const Category = ({ name }) => {
   return(
   
     <Grid.Column>
-      {tasks.map(task => <Task key={task.id} task={task} />)}
+      {tasks[0] && tasks.map(task => <Task key={task.id} task={task} />)}
       {/* <li><Task /></li>
       <li><Task /></li>
       <li><Task /></li>

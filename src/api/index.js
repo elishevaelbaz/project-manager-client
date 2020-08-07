@@ -21,6 +21,17 @@ export const addTask = (taskObj) => {
     }))
 }
 
+export function deleteTask(id) {
+  return fetch(`http://localhost:3000/tasks/${id}`, {
+    method: 'DELETE',
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(r => r.json())
+}
+
 
 export const getBoards = () => {
   return fetch("http://localhost:3000/boards", {

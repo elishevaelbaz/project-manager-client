@@ -15,13 +15,6 @@ const Header = () => {
     dispatch(logoutAction())
   }
 
-  const handleAddTask = () => {
-    // dispatch(postTask)
-    // modal with submit
-    console.log("click")
-    return < TaskForm />
-  }
-
   const currentBoard = useSelector(state => state.board.currentBoard)
   const currentUser = useSelector(state => state.user.currentUser)
   console.log(currentBoard)
@@ -32,7 +25,7 @@ const Header = () => {
     <Link to="/login" >
       <button onClick={handleLogout}>Logout</button>
     </Link>
-    <Button onClick={handleAddTask}>Add Task</Button>
+    {/* <Button onClick={handleAddTask}>Add Task</Button> */}
 
     
     {/* <Modal
