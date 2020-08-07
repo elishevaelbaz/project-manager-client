@@ -18,7 +18,7 @@ const Header = () => {
   console.log(currentBoard)
   return(
     <div>
-    <h1>Welcome, {currentUser ? currentUser.username : "user"}. You are viewing {currentBoard.name}</h1>
+    <h1>Welcome, {currentUser ? currentUser.username : "user"}. You are viewing {currentBoard &&currentBoard.name}</h1>
     <BoardDropdown />
     <Link to="/login" >
       <button onClick={handleLogout}>Logout</button>

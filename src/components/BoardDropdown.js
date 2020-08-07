@@ -13,12 +13,14 @@ const BoardDropdown = () => {
 
   const handleDropdownClick = (e) => {
     console.log(e.target.textContent) //board.name
+
     dispatch(changeCurrentBoard(e.target.textContent))
   }
   return (
     <Dropdown text='Boards'>
       <Dropdown.Menu>
-        {boards.map(board => <Dropdown.Item key={board.name} text={board.name} onClick={handleDropdownClick}/>)}
+        {/* Errors out when signout */}
+        {boards && boards.map(board => <Dropdown.Item key={board.id} text={board.name} onClick={handleDropdownClick}/>)}
         
         <Dropdown.Item text='Open...' description='ctrl + o' />
         <Dropdown.Item icon='folder' text='Move to folder' />
