@@ -1,4 +1,4 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK } from "./types"
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK } from "./types"
 
 const defaultState = {
   tasks: [],
@@ -24,6 +24,23 @@ const reducer = (state = defaultState, action) => {
         ...state,
         tasks: [...state.tasks, action.payload]
       }
+      case UPDATE_TASK:
+        const updatedTasks = state.tasks.map(task => {
+          if (task.id === action.payload.id){
+            return {
+              ...task, // do we need this?
+              ...action.payload
+            }
+          }
+          else{
+              return task
+            }
+          })
+          console.log("updatedTasks", updatedTasks)
+      return {
+        ...state,
+        tasks: updatedTasks
+      } 
       case DELETE_TASK:
       return {
         ...state,

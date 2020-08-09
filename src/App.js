@@ -4,6 +4,7 @@ import './App.css';
 import SignUp from './components/SignUp';
 import Header from './components/Header';
 import CategoryContainer from './components/CategoryContainer';
+import BoardContainer from './components/BoardContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoards } from './store/board/actions';
 import { signUpAction, loginAction, autoLoginAction} from './store/user/actions';
@@ -45,19 +46,27 @@ const App = () => {
       {/* <Route exact path="/" /> */}
       <Header/>
       <Switch>
-      <Route exact path="/">
-        {currentUser ? <CategoryContainer /> : <Redirect to='/login' />}
+      {/* <Route exact path="/">
+        {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
+      </Route>
+      <Route exact path="/boards">
+        {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
+      </Route> */}
+      <Route path="/">
+        {currentUser ?  <CategoryContainer/> : <Login handleLogin={handleLogin} />}  
       </Route>
       <Route path="/signup">
-        {currentUser ?  <Redirect to='/' /> : <SignUp handleSignUp={handleSignUp} />}  
+        {currentUser ?  <Redirect to='/boards' /> : <SignUp handleSignUp={handleSignUp} />}  
       </Route>
       <Route path="/login">
-        {currentUser ?  <Redirect to='/' /> : <Login handleLogin={handleLogin} />} 
+        {currentUser ?  <Redirect to='/boards' /> : <Login handleLogin={handleLogin} />} 
       </Route>
+      {/* <Route path="/boards/:id" render={routeProps => (
+              <CategoryContainer {...routeProps} />
+              )} /> */}
       </Switch>
 
-      {/* <SignUp handleSignUp={handleSignUp} /> */}
-      {/* <Login handleLogin={handleLogin} /> */}
+     
       
    
     </div>

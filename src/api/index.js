@@ -21,6 +21,18 @@ export const addTask = (taskObj) => {
     }))
 }
 
+export function updateTask(id, body){
+  return fetch(`http://localhost:3000/tasks/${id}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    .then(r => r.json())
+}
+
 export function deleteTask(id) {
   return fetch(`http://localhost:3000/tasks/${id}`, {
     method: 'DELETE',
@@ -54,7 +66,7 @@ export const getCategories = (id) => {
 // user fetches
 // =====================
 export function signUp(username, password){
-  console.log("________", username, password)
+  console.log("from the api file", username, password)
   return fetch("http://localhost:3000/users", {
     method: "POST",
     credentials: "include",

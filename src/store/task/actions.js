@@ -1,5 +1,5 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK } from './types'
-import { getTasks, addTask, deleteTask } from '../../api'
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK } from './types'
+import { getTasks, addTask, deleteTask, updateTask } from '../../api'
 
 //thunky action
 // export const fetchTasks = () => {
@@ -40,6 +40,17 @@ export const deleteTaskAction = (id) => dispatch => {
     dispatch({
       type: DELETE_TASK,
       payload: id
+    })
+  })
+}
+
+export const updateTaskAction = (id, body) => dispatch => {
+  updateTask(id, body)
+  .then(updatedTask => {
+    console.log(updatedTask)
+    dispatch({
+      type: UPDATE_TASK,
+      payload: updatedTask
     })
   })
 }

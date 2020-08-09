@@ -11,10 +11,10 @@ export const fetchBoards = () => dispatch => {
       type: SET_BOARDS, 
       payload: boards
     })
-    setCurrentBoard(boards)
+    setCurrentBoard(boards[0].id)
     // dispatch({ 
     //   type: SET_CURRENT_BOARD, 
-    //   payload: boards[0]
+    //   payload: boards[0].id
     // })
   })
 }
@@ -37,10 +37,10 @@ export const changeCurrentBoard = (boardName) => dispatch => {
   // fetchCategories(boardName)
 }
 
-export const setCurrentBoard = (boards) => dispatch => {
+export const setCurrentBoard = (id) => dispatch => {
   dispatch({ 
     type: SET_CURRENT_BOARD, 
-    payload: boards[0]
+    payload: id
   })
   // fetchCategories(boards[0].id)
 }

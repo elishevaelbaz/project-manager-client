@@ -23,9 +23,11 @@ const reducer = (state = defaultState, action) => {
         loading: false
       }
     case SET_CURRENT_BOARD:
+      const currentBoard = state.boards.find(board => board.id === action.payload)
+      console.log("HHHH", currentBoard)
       return {
         ...state,
-        currentBoard: action.payload
+        currentBoard: currentBoard
       }
     case CHANGE_CURRENT_BOARD:
       index = state.boards.findIndex(board => board.name === action.payload)
