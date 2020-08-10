@@ -5,6 +5,13 @@ export const getTasks = (id) => {
     .then(r => r.json())
 }
 
+export const getCurrentTask = (id) => {
+  return fetch(`http://localhost:3000/tasks/${id}`,{
+    credentials: "include"
+  })
+    .then(r => r.json())
+}
+
 export const addTask = (taskObj) => {
   // const taskObj = {name, due_date, category_id, created_by}
   return fetch("http://localhost:3000/tasks", {

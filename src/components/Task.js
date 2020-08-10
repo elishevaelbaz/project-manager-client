@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Card, Button } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, updateTaskAction, setCurrentTask, closeCurrentTask } from '../store/task/actions'
@@ -14,6 +15,8 @@ const Task = ({task}) => {
 
 
   const dispatch = useDispatch()
+
+  let history = useHistory()
 
   const handleDeleteButton = (id) => {
     dispatch(deleteTaskAction(id))
@@ -33,7 +36,7 @@ const Task = ({task}) => {
       // can we set it to just an id
       // dispatch(setCurrentTask(id))
       dispatch(setCurrentTask(task))
-
+      history.push(`/tasks/${task.id}`);
     }
     
     // return <TaskDetail task={task} />
@@ -58,12 +61,12 @@ const Task = ({task}) => {
       <Card.Header>{task.name}</Card.Header>
       <Card.Meta>{task.description}</Card.Meta>
 
-      {currentTask.name === task.name && (<>
+      {/* {currentTask.name === task.name && (<>
         <Card.Meta>Due Date:{task.due_date}</Card.Meta>
         <Card.Meta>Category{task.category_id}</Card.Meta>
         <Card.Meta>Added by: {task.created_by === currentUser ? "you" : task.created_by}</Card.Meta>
         {renderComments()}
-      </>)}
+      </>)} */}
     
     {/* can put this instead in a ternary and will show this */}
     {/* {currentTask.name === task.name &&  <TaskDetail task={task}/> } */}

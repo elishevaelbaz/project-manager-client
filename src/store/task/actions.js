@@ -1,5 +1,5 @@
 import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK } from './types'
-import { getTasks, addTask, deleteTask, updateTask } from '../../api'
+import { getTasks, addTask, deleteTask, updateTask, getCurrentTask } from '../../api'
 
 //thunky action
 // export const fetchTasks = () => {
@@ -19,6 +19,17 @@ export const fetchTasks = (id) => dispatch => {
     dispatch({ 
       type: SET_TASKS, 
       payload: tasks
+    })
+  })
+}
+
+export const fetchCurrentTask = (id) => dispatch => {
+  dispatch({type: FETCH_TASKS})
+  getCurrentTask(id).then(task => {
+    console.log(task)
+    dispatch({ 
+      type: SET_CURRENT_TASK, 
+      payload: task
     })
   })
 }
@@ -55,6 +66,8 @@ export const updateTaskAction = (id, body) => dispatch => {
   })
 }
 
+
+//remove this???
 export const setCurrentTask = (task) => dispatch => {
   dispatch({ 
     type: SET_CURRENT_TASK, 

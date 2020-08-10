@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Icon } from 'semantic-ui-react'
+import {  Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { deleteCommentAction, updateCommentAction } from '../store/comment/actions'
 
@@ -23,7 +23,7 @@ const Comment = ({id, text, userId, taskId, username}) => {
     <>
     <p>COMMENT: {text}</p>
     {/* <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon> */}
-    {username === currentUser && <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon>}
+    {username === currentUser && <Icon name="trash" onClick={() => handleDelete(id)} ></Icon>}
 {/*   <Button key={task.id} negative onClick={() => handleDeleteButton(task.id)}>X</Button> : null} */}
       {/*  {task.created_by === currentUser ? <Button key={task.id} onClick={() => handleUpdateButton(task.id)}>Update task</Button> : null} */}
 

@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoards } from './store/board/actions';
 import { signUpAction, loginAction, autoLoginAction} from './store/user/actions';
 import Login from './components/Login';
+import TaskDetail from './components/TaskDetail';
+
 
 const App = () => {
 
@@ -52,15 +54,22 @@ const App = () => {
       <Route exact path="/boards">
         {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
       </Route> */}
-      <Route path="/">
-        {currentUser ?  <CategoryContainer/> : <Login handleLogin={handleLogin} />}  
+      <Route path="/tasks/:id">
+        {currentUser ?  <TaskDetail /> : <Login handleLogin={handleLogin} />} 
       </Route>
+      
       <Route path="/signup">
         {currentUser ?  <Redirect to='/boards' /> : <SignUp handleSignUp={handleSignUp} />}  
       </Route>
       <Route path="/login">
         {currentUser ?  <Redirect to='/boards' /> : <Login handleLogin={handleLogin} />} 
       </Route>
+      <Route path="/">
+        {currentUser ?  <CategoryContainer/> : <Login handleLogin={handleLogin} />}  
+      </Route>
+      
+
+      {/* history.push(`/tasks/${task.id}`); */}
       {/* <Route path="/boards/:id" render={routeProps => (
               <CategoryContainer {...routeProps} />
               )} /> */}

@@ -28,7 +28,8 @@ const reducer = (state = defaultState, action) => {
       case SET_CURRENT_TASK:
         return {
           ...state,
-          currentTask: action.payload
+          currentTask: action.payload,
+          loading: false
       }
       case CLOSE_CURRENT_TASK:
         return {
