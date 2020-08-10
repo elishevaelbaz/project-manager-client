@@ -36,8 +36,8 @@ const CategoryContainer = ({match}) => {
   const handleAddTask = (taskObj) => {
     // ======================
     // hardcoding category for now
-    if (!taskObj.category_id){
-      taskObj.category_id = categories[0].id
+    if (!taskObj.category){
+      taskObj.category = categories[0].name
     }
     console.log(taskObj)
     dispatch(addTaskAction(taskObj))

@@ -28,13 +28,17 @@ const Task = ({task}) => {
     dispatch(updateTaskAction(id, taskObj))
   }
 
-  const handleCardClick = () => {
+  const handleCardClick = (e) => {
     if (currentTask.name){
       dispatch(closeCurrentTask())
+    }
+    else if (e.target.className === "trash icon"){
+      handleDelete(task.id)
     }
     else{
       // can we set it to just an id
       // dispatch(setCurrentTask(id))
+      console.log("HEYYYYYY", e.target)
       dispatch(setCurrentTask(task))
       history.push(`/tasks/${task.id}`);
     }
