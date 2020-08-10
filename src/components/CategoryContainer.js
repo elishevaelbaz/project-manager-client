@@ -49,7 +49,7 @@ const CategoryContainer = ({match}) => {
 
     <Grid columns={categories.length}>
       <Grid.Row>
-        {categories.map(category => <Category key={category.id} name={category.name} />)}
+        {categories.map(category => <Category key={category.id} name={category.name} id={category.id}/>)}
       </Grid.Row>
 
     </Grid>

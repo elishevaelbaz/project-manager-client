@@ -1,4 +1,4 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK } from './types'
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK } from './types'
 import { getTasks, addTask, deleteTask, updateTask } from '../../api'
 
 //thunky action
@@ -54,3 +54,17 @@ export const updateTaskAction = (id, body) => dispatch => {
     })
   })
 }
+
+export const setCurrentTask = (task) => dispatch => {
+  dispatch({ 
+    type: SET_CURRENT_TASK, 
+    payload: task
+  })
+}
+
+export const closeCurrentTask = () => dispatch => {
+  dispatch({ 
+    type: CLOSE_CURRENT_TASK, 
+  })
+}
+

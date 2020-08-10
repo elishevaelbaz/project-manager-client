@@ -7,9 +7,10 @@ import { Grid } from 'semantic-ui-react'
 // import { SET_TASKS } from '../store/types'
 import { fetchTasks } from '../store/task/actions'
 
-const Category = ({ name }) => {
+const Category = ({ name, id }) => {
 
-  const tasks = useSelector(state => state.task.tasks)
+  const filteredTasks = useSelector(state => {
+    return state.task.tasks.filter(task => task.category_id === id)} )
   const loading = useSelector(state => state.task.loading)
   const currentBoard = useSelector(state => state.board.currentBoard)
 
@@ -31,13 +32,9 @@ const Category = ({ name }) => {
   return(
   
     <Grid.Column>
-      {tasks[0] && tasks.map(task => <Task key={task.id} task={task} />)}
-      {/* <li><Task /></li>
-      <li><Task /></li>
-      <li><Task /></li>
-      <li><Task /></li> */}
-    {/* </ul> */}
-    </Grid.Column>
+      {name}
+      {filteredTasks[0] && filteredTasks.map(task => <Task key={task.id} task={task} />)}
+      </Grid.Column>
   )
 }
 

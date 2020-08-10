@@ -1,7 +1,8 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK } from "./types"
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK } from "./types"
 
 const defaultState = {
   tasks: [],
+  currentTask: {},
   loading: false
 }
 
@@ -23,6 +24,16 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         tasks: [...state.tasks, action.payload]
+      }
+      case SET_CURRENT_TASK:
+        return {
+          ...state,
+          currentTask: action.payload
+      }
+      case CLOSE_CURRENT_TASK:
+        return {
+          ...state,
+          currentTask: {}
       }
       case UPDATE_TASK:
         const updatedTasks = state.tasks.map(task => {

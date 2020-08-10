@@ -1,12 +1,16 @@
 import React from 'react'
 import { Card, Button } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteTaskAction, updateTaskAction } from '../store/task/actions'
+import { deleteTaskAction, updateTaskAction, setCurrentTask, closeCurrentTask } from '../store/task/actions'
+import TaskDetail from './TaskDetail'
+
 const Task = ({task}) => {
   console.log("TASK", task)
   
 
   const currentUser = useSelector(state => state.user.currentUser.username)
+  const currentTask = useSelector(state => state.task.currentTask)
+
 
   const dispatch = useDispatch()
 
@@ -20,11 +24,26 @@ const Task = ({task}) => {
     dispatch(updateTaskAction(id, taskObj))
   }
 
+  const handleCardClick = () => {
+    if (currentTask.name){
+      dispatch(closeCurrentTask())
+    }
+    else{
+      // can we set it to just an id
+      // dispatch(setCurrentTask(id))
+      dispatch(setCurrentTask(task))
+
+    }
+    
+    // return <TaskDetail task={task} />
+  }
+
   return(
 
     <Card
       // href='#card-example-link-card'
       key={task.id}
+      onClick={handleCardClick}
     >
       <Card.Content>
       {task.created_by === currentUser ? <Button key={task.id} negative onClick={() => handleDeleteButton(task.id)}>X</Button> : null}
@@ -33,6 +52,14 @@ const Task = ({task}) => {
       {/* <Card.Href>#card-example-link-card</Card.Header> */}
       <Card.Header>{task.name}</Card.Header>
       <Card.Meta>{task.description}</Card.Meta>
+
+      {currentTask.name === task.name && (<><Card.Meta>Due Date:{task.due_date}</Card.Meta>
+      <Card.Meta>Category{task.category_id}</Card.Meta>
+      <Card.Meta>Added by: {task.created_by === currentUser ? "you" : task.created_by}</Card.Meta></>)}
+    
+    {/* can put this instead in a ternary and will show this */}
+    {/* {currentTask.name === task.name &&  <TaskDetail task={task}/> } */}
+      
       <Card.Description>
         Matthew is a musician living in Nashville.
       </Card.Description>
@@ -40,13 +67,7 @@ const Task = ({task}) => {
     </Card.Content>
       </Card>
     )
-    // <>
-    // <h4>Task</h4>
-    // <p>{task && task.name}</p>
-    // <p>{task && task.description}</p>
-    // <p>{task && task.category}</p>
     
-
 
     // </>
   
