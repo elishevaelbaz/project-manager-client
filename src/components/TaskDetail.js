@@ -1,10 +1,11 @@
-import React, { useEffect }  from 'react'
-import { Card, Button, Icon } from 'semantic-ui-react'
+import React, { useEffect, useState }  from 'react'
+import { Card, Button, Icon, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, updateTaskAction, fetchCurrentTask } from '../store/task/actions'
 import Comment from './Comment'
 import { withRouter } from 'react-router-dom'
 import { fetchComments } from '../store/comment/actions'
+import UpdateTask from './UpdateTask'
 const TaskDetail = ({ match, history }) => {
   
 
@@ -12,7 +13,8 @@ const TaskDetail = ({ match, history }) => {
   const currentTask = useSelector(state => state.task.currentTask)
   const comments = useSelector(state => state.comment.comments)
 
-
+  const [toggleEdit, setToggleEdit] = useState(false)
+  const [taskName, setTaskName] = useState(currentTask.name)
 
   const dispatch = useDispatch()
 
@@ -35,6 +37,14 @@ const TaskDetail = ({ match, history }) => {
     dispatch(updateTaskAction(id, taskObj))
   }
 
+  const handleNameClick = () => {
+    setToggleEdit(!toggleEdit)
+  }
+
+  const handleClick = () => {
+    // return < UpdateTask />
+  }
+
   const renderComments = () => {
     return comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={currentTask.id} userId={comment.user_id} username={comment.username}/>)
   }
@@ -44,15 +54,22 @@ const TaskDetail = ({ match, history }) => {
     <Card
       // href='#card-example-link-card'
       key={currentTask.id}
+      onClick={handleClick}
     >
       <Card.Content>
       {currentTask.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(currentTask.id)} /> : null}
       {currentTask.created_by === currentUser ? <Button key={currentTask.id} onClick={() => handleUpdateButton(currentTask.id)}>Update currentTask</Button> : null}
       
       {/* <Card.Href>#card-example-link-card</Card.Header> */}
-      <Card.Header>
-        <input type="text" name="name" autoComplete="off" value={currentTask.name} onChange={null} />
-      </Card.Header>
+      {/* <Card.Header onClick={handleNameClick}>
+        {toggleEdit ?  <input type="text" name="name" autoComplete="off" value={currentTask.name} onChange={null} />
+          : <Card.Header onClick={handleNameClick}>{currentTask.name}</Card.Header> }
+      </Card.Header> */}
+
+          <Card.Header>{currentTask.name}</Card.Header>
+     
+      
+     
       <Card.Meta>{currentTask.description}</Card.Meta>
       <Card.Meta>Due Date:{currentTask.due_date}</Card.Meta>
       <Card.Meta>Category{currentTask.category_id}</Card.Meta>
@@ -65,15 +82,6 @@ const TaskDetail = ({ match, history }) => {
     </Card.Content>
       </Card>
     )
-    // <>
-    // <h4>Task</h4>
-    // <p>{task && task.name}</p>
-    // <p>{task && task.description}</p>
-    // <p>{task && task.category}</p>
-    
-
-
-    // </>
   
 }
 
