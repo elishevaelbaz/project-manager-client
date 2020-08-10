@@ -1,27 +1,32 @@
 import React, { useEffect }  from 'react'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, updateTaskAction, fetchCurrentTask } from '../store/task/actions'
 import Comment from './Comment'
 import { withRouter } from 'react-router-dom'
-const TaskDetail = ({match}) => {
-  // console.log("PROPS", props)
+import { fetchComments } from '../store/comment/actions'
+const TaskDetail = ({ match, history }) => {
   
 
   const currentUser = useSelector(state => state.user.currentUser.username)
   const currentTask = useSelector(state => state.task.currentTask)
+  const comments = useSelector(state => state.comment.comments)
+
 
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchCurrentTask(match.params.id))
+// comments associated with this task
+    dispatch(fetchComments(match.params.id))
   }, [dispatch])
 
 
 
-  const handleDeleteButton = (id) => {
+  const handleDelete = (id) => {
     dispatch(deleteTaskAction(id))
+    history.goBack();
   }
 
   const handleUpdateButton = (id) => {
@@ -31,7 +36,7 @@ const TaskDetail = ({match}) => {
   }
 
   const renderComments = () => {
-    return currentTask.comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={currentTask.id} userId={comment.user_id} username={comment.username}/>)
+    return comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={currentTask.id} userId={comment.user_id} username={comment.username}/>)
   }
 
   return(
@@ -41,16 +46,18 @@ const TaskDetail = ({match}) => {
       key={currentTask.id}
     >
       <Card.Content>
-      {currentTask.created_by === currentUser ? <Button key={currentTask.id} negative onClick={() => handleDeleteButton(currentTask.id)}>X</Button> : null}
+      {currentTask.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(currentTask.id)} /> : null}
       {currentTask.created_by === currentUser ? <Button key={currentTask.id} onClick={() => handleUpdateButton(currentTask.id)}>Update currentTask</Button> : null}
       
       {/* <Card.Href>#card-example-link-card</Card.Header> */}
-      <Card.Header>{currentTask.name}</Card.Header>
+      <Card.Header>
+        <input type="text" name="name" autoComplete="off" value={currentTask.name} onChange={null} />
+      </Card.Header>
       <Card.Meta>{currentTask.description}</Card.Meta>
       <Card.Meta>Due Date:{currentTask.due_date}</Card.Meta>
       <Card.Meta>Category{currentTask.category_id}</Card.Meta>
       <Card.Meta>Added by: {currentTask.created_by === currentUser ? "you" : currentTask.created_by}</Card.Meta>
-        {currentTask.comments && renderComments()}
+        {comments && renderComments()}
       <Card.Description>
         Matthew is a musician living in Nashville.
       </Card.Description>

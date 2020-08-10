@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, updateTaskAction, setCurrentTask, closeCurrentTask } from '../store/task/actions'
 import Comment from './Comment'
@@ -18,7 +18,7 @@ const Task = ({task}) => {
 
   let history = useHistory()
 
-  const handleDeleteButton = (id) => {
+  const handleDelete = (id) => {
     dispatch(deleteTaskAction(id))
   }
 
@@ -54,7 +54,7 @@ const Task = ({task}) => {
       onClick={handleCardClick}
     >
       <Card.Content>
-      {task.created_by === currentUser ? <Button key={task.id} negative onClick={() => handleDeleteButton(task.id)}>X</Button> : null}
+      {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
       {task.created_by === currentUser ? <Button key={task.id} onClick={() => handleUpdateButton(task.id)}>Update task</Button> : null}
 
       {/* <Card.Href>#card-example-link-card</Card.Header> */}

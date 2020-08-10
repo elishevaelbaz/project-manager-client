@@ -1,3 +1,6 @@
+// =====================
+// task fetches
+// =====================
 export const getTasks = (id) => {
   return fetch(`http://localhost:3000/tasks?board_id=${id}`,{
     credentials: "include"
@@ -51,7 +54,9 @@ export function deleteTask(id) {
   .then(r => r.json())
 }
 
-
+// =====================
+// board fetches
+// =====================
 export const getBoards = () => {
   return fetch("http://localhost:3000/boards", {
     credentials: "include"
@@ -59,7 +64,9 @@ export const getBoards = () => {
     .then(r => r.json())
 }
 
-
+// =====================
+// category fetches
+// =====================
 export const getCategories = (id) => {
   return fetch(`http://localhost:3000/categories?board_id=${id}`,{
     credentials: "include"
@@ -67,7 +74,26 @@ export const getCategories = (id) => {
     .then(r => r.json())
 }
 
+// =====================
+// comment fetches
+// =====================
+export const getComments = (taskId) => {
+  return fetch(`http://localhost:3000/comments?task_id=${taskId}`,{
+    credentials: "include"
+  })
+    .then(r => r.json())
+}
 
+export function deleteComment(id) {
+  return fetch(`http://localhost:3000/comments/${id}`, {
+    method: 'DELETE',
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(r => r.json())
+}
 
 // =====================
 // user fetches
