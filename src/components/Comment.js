@@ -1,15 +1,16 @@
 import React from 'react'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { deleteCommentAction, updateCommentAction } from '../store/comment/actions'
 
-const Comment = ({id, text, userId, taskId}) => {
+const Comment = ({id, text, userId, taskId, username}) => {
   
 
   const currentUser = useSelector(state => state.user.currentUser.username)
 
   const handleDelete = (id) => {
     // dispatch(deleteCommentAction(id))
+    console.log("click")
   }
 
   // const handleUpdateButton = (id) => {
@@ -21,7 +22,8 @@ const Comment = ({id, text, userId, taskId}) => {
   return(
     <>
     <p>COMMENT: {text}</p>
-    {userId === currentUser && <i className="trash icon" onClick={() => handleDelete(id)} ></i>}
+    {/* <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon> */}
+    {username === currentUser && <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon>}
 {/*   <Button key={task.id} negative onClick={() => handleDeleteButton(task.id)}>X</Button> : null} */}
       {/*  {task.created_by === currentUser ? <Button key={task.id} onClick={() => handleUpdateButton(task.id)}>Update task</Button> : null} */}
 

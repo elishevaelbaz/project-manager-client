@@ -40,7 +40,7 @@ const Task = ({task}) => {
   }
 
   const renderComments = () => {
-    return task.comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id}/>)
+    return task.comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
   }
 
   return(
