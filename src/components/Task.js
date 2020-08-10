@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, Button } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, updateTaskAction, setCurrentTask, closeCurrentTask } from '../store/task/actions'
+import Comment from './Comment'
 import TaskDetail from './TaskDetail'
 
 const Task = ({task}) => {
@@ -38,6 +39,10 @@ const Task = ({task}) => {
     // return <TaskDetail task={task} />
   }
 
+  const renderComments = () => {
+    return task.comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id}/>)
+  }
+
   return(
 
     <Card
@@ -53,9 +58,12 @@ const Task = ({task}) => {
       <Card.Header>{task.name}</Card.Header>
       <Card.Meta>{task.description}</Card.Meta>
 
-      {currentTask.name === task.name && (<><Card.Meta>Due Date:{task.due_date}</Card.Meta>
-      <Card.Meta>Category{task.category_id}</Card.Meta>
-      <Card.Meta>Added by: {task.created_by === currentUser ? "you" : task.created_by}</Card.Meta></>)}
+      {currentTask.name === task.name && (<>
+        <Card.Meta>Due Date:{task.due_date}</Card.Meta>
+        <Card.Meta>Category{task.category_id}</Card.Meta>
+        <Card.Meta>Added by: {task.created_by === currentUser ? "you" : task.created_by}</Card.Meta>
+        {renderComments()}
+      </>)}
     
     {/* can put this instead in a ternary and will show this */}
     {/* {currentTask.name === task.name &&  <TaskDetail task={task}/> } */}
