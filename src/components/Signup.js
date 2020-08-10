@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-class SignUp extends React.Component {
-  state = {
+const  SignUp = (props) => {
+  const [signUpInput, setSignUpInput] = useState({
     username: "",
     password: ""
+  })
+
+  const handleChange = e => {
+    setSignUpInput({...signUpInput, [e.target.name]: e.target.value})
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault()
     // TODO: make a fetch request to sign up the current user
     // then set that user in state in our App component
-    this.props.handleSignUp(this.state)
+    props.handleSignUp(signUpInput)
         // fetch("http://localhost:3000/users", {
     //   method: "POST",
     //   credentials: "include",
@@ -30,12 +30,11 @@ class SignUp extends React.Component {
     //   })
   }
 
-  render() {
-    const { username, password} = this.state
+  
 
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h1>Signup</h1>
 
         <label>Username</label>
@@ -43,8 +42,8 @@ class SignUp extends React.Component {
           type="text"
           name="username"
           autoComplete="off"
-          value={username}
-          onChange={this.handleChange}
+          value={signUpInput.username}
+          onChange={handleChange}
         />
         
 
@@ -53,8 +52,8 @@ class SignUp extends React.Component {
           type="password"
           name="password"
           autoComplete="current-password"
-          value={password}
-          onChange={this.handleChange}
+          value={signUpInput.password}
+          onChange={handleChange}
         />
 
         <input type="submit" value="Signup" />
@@ -63,6 +62,5 @@ class SignUp extends React.Component {
       </div>
     )
   }
-}
 
 export default SignUp
