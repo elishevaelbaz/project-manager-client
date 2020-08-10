@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT } from './types'
+import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT, ADD_COMMENT } from './types'
 
 const defaultState = {
   comments: [],
@@ -20,6 +20,11 @@ const reducer = (state = defaultState, action) => {
         ...state,
         comments: action.payload,
         loading: false
+      }
+      case ADD_COMMENT:
+      return {
+        ...state,
+        comments: [...state.comments, action.payload]
       }
    
       case DELETE_COMMENT:

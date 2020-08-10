@@ -1,5 +1,5 @@
-import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT } from './types'
-import { getComments, deleteComment } from '../../api'
+import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT, ADD_COMMENT } from './types'
+import { getComments, deleteComment, addComment } from '../../api'
 
 //another syntax
 export const fetchComments = (taskId) => dispatch => {
@@ -11,6 +11,16 @@ export const fetchComments = (taskId) => dispatch => {
       payload: comments
     })
    
+  })
+}
+
+export const addCommentAction = (commentObj) => dispatch => {
+  addComment(commentObj)
+  .then(comment => {
+    dispatch({
+      type: ADD_COMMENT,
+      payload: comment
+    })
   })
 }
 

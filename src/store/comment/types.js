@@ -1,3 +1,5 @@
 export const SET_COMMENTS = "SET_COMMENTS"
 export const FETCH_COMMENTS = "FETCH_COMMENTS"
 export const DELETE_COMMENT = "DELETE_COMMENT"
+export const ADD_COMMENT = "ADD_COMMENT"
+

@@ -84,6 +84,22 @@ export const getComments = (taskId) => {
     .then(r => r.json())
 }
 
+export const addComment = (commentObj) => {
+  // const commentObj = {name, due_date, category_id, created_by}
+  return fetch("http://localhost:3000/comments", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commentObj)
+  })
+    .then(r => r.json().then(data => {
+      if (r.ok) return data
+      throw data
+    }))
+}
+
 export function deleteComment(id) {
   return fetch(`http://localhost:3000/comments/${id}`, {
     method: 'DELETE',

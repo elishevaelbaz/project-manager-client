@@ -1,10 +1,10 @@
 import React, { useEffect, useState }  from 'react'
-import { Card, Button, Icon, Header } from 'semantic-ui-react'
+import { Card, Button, Icon, Header, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, updateTaskAction, fetchCurrentTask } from '../store/task/actions'
 import Comment from './Comment'
 import { withRouter } from 'react-router-dom'
-import { fetchComments } from '../store/comment/actions'
+import { fetchComments, addCommentAction } from '../store/comment/actions'
 import UpdateTask from './UpdateTask'
 const TaskDetail = ({ match, history }) => {
   
@@ -13,8 +13,16 @@ const TaskDetail = ({ match, history }) => {
   const currentTask = useSelector(state => state.task.currentTask)
   const comments = useSelector(state => state.comment.comments)
 
+  
+  // const category = useSelector(state => {
+  //   return state.category.categories.find(category => category.id === currentTask.category_id)})
+
+
   const [toggleEdit, setToggleEdit] = useState(false)
-  const [taskName, setTaskName] = useState(currentTask.name)
+  const unmutatedTask = {...currentTask}
+  const [name, setName] = useState(currentTask.name)
+
+  const [newComment, setNewComment] = useState("")
 
   const dispatch = useDispatch()
 
@@ -37,13 +45,37 @@ const TaskDetail = ({ match, history }) => {
     dispatch(updateTaskAction(id, taskObj))
   }
 
-  const handleNameClick = () => {
-    setToggleEdit(!toggleEdit)
+  const handleNewCommentChange = (e) => {
+    setNewComment(e.target.value)
   }
 
-  const handleClick = () => {
-    // return < UpdateTask />
+  const handleNewCommentSubmit = e => {
+    e.preventDefault()
+    console.log("submit")
+    console.log(newComment)
+    const commentObj = {
+      text: newComment,
+      task_id: currentTask.id
+    }
+    dispatch(addCommentAction(commentObj))
   }
+
+  const handleNameClick = () => {
+    setToggleEdit(true)
+  }
+
+  const handleNameChange = e => {
+    // setLoginInput({...loginInput, [e.target.name]: e.target.value })
+    setName(e.target.value)
+    console.log(e.target.value)
+
+  }
+
+  // const handleClick = (e) => {
+  //   console.log(e.target)
+  //   if (e.target.value !== tname) {setToggleEdit(false)}
+  //   // return < UpdateTask />
+  // }
 
   const renderComments = () => {
     return comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={currentTask.id} userId={comment.user_id} username={comment.username}/>)
@@ -54,17 +86,17 @@ const TaskDetail = ({ match, history }) => {
     <Card
       // href='#card-example-link-card'
       key={currentTask.id}
-      onClick={handleClick}
+      // onClick={handleClick}
     >
       <Card.Content>
       {currentTask.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(currentTask.id)} /> : null}
       {currentTask.created_by === currentUser ? <Button key={currentTask.id} onClick={() => handleUpdateButton(currentTask.id)}>Update currentTask</Button> : null}
       
-      {/* <Card.Href>#card-example-link-card</Card.Header> */}
-      {/* <Card.Header onClick={handleNameClick}>
-        {toggleEdit ?  <input type="text" name="name" autoComplete="off" value={currentTask.name} onChange={null} />
-          : <Card.Header onClick={handleNameClick}>{currentTask.name}</Card.Header> }
-      </Card.Header> */}
+      {/* <Card.Href>#card-example-link-card</Card.Header>  */}
+      <Card.Header> 
+        {toggleEdit ?  <Form.Input type="text" name="name" autoComplete="off" value={name} onChange={handleNameChange} />
+          : <Card.Header onClick={handleNameClick} onSubmit={console.log("HEY:")}>{currentTask.name}</Card.Header> }
+      </Card.Header>
 
           <Card.Header>{currentTask.name}</Card.Header>
      
@@ -75,6 +107,9 @@ const TaskDetail = ({ match, history }) => {
       <Card.Meta>Category{currentTask.category_id}</Card.Meta>
       <Card.Meta>Added by: {currentTask.created_by === currentUser ? "you" : currentTask.created_by}</Card.Meta>
         {comments && renderComments()}
+        <Form onSubmit={handleNewCommentSubmit}>
+          <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} onChange={handleNewCommentChange} />
+        </Form>
       <Card.Description>
         Matthew is a musician living in Nashville.
       </Card.Description>
