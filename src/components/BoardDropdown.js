@@ -1,10 +1,11 @@
 import React from 'react'
 import { Dropdown, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux';
-import { changeCurrentBoard } from '../store/board/actions';
+import { changeCurrentBoard, setCurrentBoard } from '../store/board/actions';
+import { withRouter } from 'react-router-dom';
 
 
-const BoardDropdown = () => {
+const BoardDropdown = ( {history} ) => {
   
   const boards = useSelector(state => state.board.boards)
   // const currentBoard = useSelector(state => state.currentBoard)
@@ -12,8 +13,13 @@ const BoardDropdown = () => {
 
   const handleDropdownClick = (e) => {
     console.log(e.target.textContent) //board.name
+    const boardName = e.target.textContent
+    // find the id
+    const chosenBoard = boards.find(board => board.name === boardName)
+    dispatch(setCurrentBoard(chosenBoard.id))
+    history.push(`/boards/${chosenBoard.id}`)
 
-    dispatch(changeCurrentBoard(e.target.textContent))
+    // dispatch(changeCurrentBoard(e.target.textContent))
   }
   return (
     <Dropdown icon="table" text=' Boards' >
@@ -31,5 +37,5 @@ const BoardDropdown = () => {
     </Dropdown>
   )
 }
-export default BoardDropdown
+export default withRouter(BoardDropdown)
 

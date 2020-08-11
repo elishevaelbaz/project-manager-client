@@ -11,7 +11,7 @@ export const fetchBoards = () => dispatch => {
       type: SET_BOARDS, 
       payload: boards
     })
-    setCurrentBoard(boards[0].id)
+    // setCurrentBoard(boards[0].id)
     // dispatch({ 
     //   type: SET_CURRENT_BOARD, 
     //   payload: boards[0].id

@@ -22,7 +22,6 @@ const Header = () => {
     <div>
     <h1>Welcome, {currentUser ? currentUser.username : "user"}. You are viewing {currentBoard &&currentBoard.name}</h1>
     
-    address card
     {/* <Button onClick={handleAddTask}>Add Task</Button> */}
     <Menu >
     <Menu.Item></Menu.Item>

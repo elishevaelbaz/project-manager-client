@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentBoard } from '../store/board/actions';
 import CategoryContainer from './CategoryContainer'
 
-const BoardCard = ({board, history}) => {
+const BoardCard = ({board, history, match}) => {
   console.log("board", board)
   
 
@@ -13,9 +13,15 @@ const BoardCard = ({board, history}) => {
   const dispatch = useDispatch()
 
   const handleBoardClick = () => {
-    console.log("click")
-    dispatch(setCurrentBoard(board.id))
-    history.push(`/boards/${board.id}`)
+    if (match.params.id=== "new"){
+
+    }
+    else{
+      console.log("click")
+      dispatch(setCurrentBoard(board.id))
+      history.push(`/boards/${board.id}`)
+
+    }
 
   }
 
