@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCurrentBoard } from '../store/board/actions';
 
@@ -16,7 +16,7 @@ const BoardDropdown = () => {
     dispatch(changeCurrentBoard(e.target.textContent))
   }
   return (
-    <Dropdown text='Boards'>
+    <Dropdown icon="table" text=' Boards' >
       <Dropdown.Menu>
         {/* Errors out when signout */}
         {boards && boards.map(board => <Dropdown.Item key={board.id} text={board.name} onClick={handleDropdownClick}/>)}

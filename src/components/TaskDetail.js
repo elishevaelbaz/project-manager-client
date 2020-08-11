@@ -6,6 +6,7 @@ import Comment from './Comment'
 import { withRouter } from 'react-router-dom'
 import { fetchComments, addCommentAction } from '../store/comment/actions'
 import UpdateTask from './UpdateTask'
+
 const TaskDetail = ({ match, history }) => {
   
 
