@@ -31,7 +31,7 @@ const Category = ({ name, id }) => {
 
   return(
   
-    <Grid.Column>
+    <Grid.Column key={id}>
       {name}
       {filteredTasks[0] && filteredTasks.map(task => <Task key={task.id} task={task} />)}
       </Grid.Column>

@@ -1,4 +1,4 @@
-import { FETCH_CATEGORIES, SET_CATEGORIES } from "./types"
+import { FETCH_CATEGORIES, SET_CATEGORIES, ADD_CATEGORY } from "./types"
 import { SET_CURRENT_BOARD } from "../board/types";
 
 const defaultState = {
@@ -18,7 +18,12 @@ const reducer = (state = defaultState, action) => {
         ...state,
         categories: action.payload,
         loading: false
-      }  
+      } 
+    case ADD_CATEGORY:
+      return {
+        ...state,
+        categories: [...state.categories, action.payload]
+      } 
     // case SET_CURRENT_BOARD:
 
     //   return {

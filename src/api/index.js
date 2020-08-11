@@ -90,6 +90,22 @@ export const getCategories = (id) => {
     .then(r => r.json())
 }
 
+export const addCategory = (categoryObj) => {
+  // const categoryObj = {name, due_date, category_id, created_by}
+  return fetch("http://localhost:3000/categories", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(categoryObj)
+  })
+    .then(r => r.json().then(data => {
+      if (r.ok) return data
+      throw data
+    }))
+}
+
 // =====================
 // comment fetches
 // =====================

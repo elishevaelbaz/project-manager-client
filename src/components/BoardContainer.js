@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import CategoryContainer from './CategoryContainer'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBoards, addBoardAction } from '../store/board/actions'
+import { fetchBoards, addBoardAction, setCurrentBoard } from '../store/board/actions'
 import { fetchCategories } from '../store/category/actions';
 import BoardCard from './BoardCard';
 import { Card, Icon, Form } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom';
 
 
-const BoardContainer = () => {
+const BoardContainer = ({history}) => {
 
   const [nameInput, setNameInput] = useState("")
   const [formShown, setFormShown] = useState(false)
@@ -24,13 +25,17 @@ const boards = useSelector(state => state.board.boards)
   }, [dispatch])
 
   // useEffect(() => {
-  //   if (currentBoard.id) {
-  //     dispatch(fetchCategories(currentBoard.id))
-  //     dispatch(fetchTasks(currentBoard.id))
+  //   // if (currentBoard.id) {
+  //   //   dispatch(fetchCategories(currentBoard.id))
+  //   //   dispatch(fetchTasks(currentBoard.id))
 
-  //   }
+  //   // }
+  //   const id = boards[boards.length -1].id
+  //   dispatch(setCurrentBoard(id))
 
-  // }, [currentBoard])
+  //   history.push(`/boards/${id}`)
+
+  // }, [boards])
   const handleNewBoard = () => {
     setFormShown(true)
   }
@@ -70,4 +75,4 @@ const boards = useSelector(state => state.board.boards)
   )
 }
 
-export default BoardContainer;
+export default withRouter(BoardContainer);
