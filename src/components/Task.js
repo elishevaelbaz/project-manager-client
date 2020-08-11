@@ -59,7 +59,6 @@ const Task = ({task}) => {
     >
       <Card.Content>
       {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
-      {task.created_by === currentUser ? <Button key={task.id} onClick={() => handleUpdateButton(task.id)}>Update task</Button> : null}
 
       {/* <Card.Href>#card-example-link-card</Card.Header> */}
       <Card.Header>{task.name}</Card.Header>

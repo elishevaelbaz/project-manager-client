@@ -93,7 +93,6 @@ const TaskDetail = ({ match, history }) => {
     >
       <Card.Content>
       {currentTask.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(currentTask.id)} /> : null}
-      {currentTask.created_by === currentUser ? <Button key={currentTask.id} onClick={() => handleUpdateButton(currentTask.id)}>Update currentTask</Button> : null}
       
       {/* <Card.Href>#card-example-link-card</Card.Header>  */}
       <Card.Header> 
@@ -120,7 +119,7 @@ const TaskDetail = ({ match, history }) => {
     </Card.Content>
       </Card>
 
-<EditTaskForm task={currentTask} name={currentTask.name}/>
+{/* <EditTaskForm task={currentTask} name={currentTask.name}/> */}
       </div>
     )
   
