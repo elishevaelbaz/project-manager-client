@@ -1,5 +1,5 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD } from './types'
-import { getBoards, addBoard } from '../../api'
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER } from './types'
+import { getBoards, addBoard, addMember } from '../../api'
 import { fetchCategories } from '../category/actions'
 
 //another syntax
@@ -53,6 +53,18 @@ export const setCurrentBoard = (id) => dispatch => {
   })
   // fetchCategories(boards[0].id)
 }
+
+export const addMemberAction = (memberObj) => dispatch => {
+  addMember(memberObj)
+  .then(member => {
+    console.log(member)
+    // dispatch({
+    //   type: ADD_MEMBER,
+    //   payload: member
+    // })
+  })
+}
+
 
 
 // export const postTask = (taskObj) => dispatch => {

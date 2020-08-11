@@ -80,6 +80,22 @@ export const addBoard = (boardObj) => {
     }))
 }
 
+export const addMember = (memberObj) => {
+  // const memberObj = {name, due_date, category_id, created_by}
+  return fetch("http://localhost:3000/user_boards", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(memberObj)
+  })
+    .then(r => r.json().then(data => {
+      if (r.ok) return data
+      throw data
+    }))
+}
+
 // =====================
 // category fetches
 // =====================

@@ -1,8 +1,9 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD } from "./types"
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER } from "./types"
 
 const defaultState = {
   boards: [],
   currentBoard: "",
+  members: [],
   loading: false
 }
 
@@ -40,6 +41,12 @@ const reducer = (state = defaultState, action) => {
         ...state,
         currentBoard: state.boards[index]
       }
+      case ADD_MEMBER:
+        // index = state.boards.findIndex(board => board.name === action.payload)
+        return {
+          // ...state,
+          // currentBoard: state.boards[index]
+        }
       
   
     default:

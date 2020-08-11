@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
@@ -6,18 +6,36 @@ import { Link } from 'react-router-dom';
 import { postTask } from '../store/task/actions';
 import { Modal, Button, Menu, Popup, Form } from 'semantic-ui-react'
 import TaskForm from './TaskForm';
+import { addMemberAction } from '../store/board/actions';
 
 const Header = () => {
+
+  const currentBoard = useSelector(state => state.board.currentBoard)
+  const currentUser = useSelector(state => state.user.currentUser)
+  console.log(currentBoard)
+
+  const [newMemberInput, setNewMemberInput] = useState("")
 
   const dispatch = useDispatch()
 
   const handleLogout = () => {
     dispatch(logoutAction())
   }
+  
+  const handleChange = (e) => {
+    setNewMemberInput(e.target.value)
+  }
 
-  const currentBoard = useSelector(state => state.board.currentBoard)
-  const currentUser = useSelector(state => state.user.currentUser)
-  console.log(currentBoard)
+  const handleAddMember = (e) => {
+    console.log(newMemberInput)
+    const memberObj = {
+      username: newMemberInput,
+      board_id: currentBoard.id
+    }
+    dispatch(addMemberAction(memberObj))
+  }
+
+  
   return(
     <div>
     <h1>Welcome, {currentUser ? currentUser.username : "user"}. You are viewing {currentBoard &&currentBoard.name}</h1>
@@ -35,8 +53,8 @@ const Header = () => {
     <Popup
     // icon='plus '
             trigger={<Button icon=' address card' content='Invite' />}
-            content={<Form onSubmit={null}>
-            <Form.Input  name="name" label="Invite to board" placeholder='username' onChange={null} />
+            content={<Form onSubmit={handleAddMember}>
+            <Form.Input  name="name" label="Invite to board" placeholder='username' onChange={handleChange} />
         
             </Form>}
             on='click'
