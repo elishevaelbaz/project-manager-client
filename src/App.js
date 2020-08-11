@@ -51,6 +51,9 @@ const App = () => {
       {/* <Route exact path="/">
         {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
       </Route> */}
+      <Route exact path="/boards/:id">
+        {currentUser && <CategoryContainer />}
+      </Route>
       <Route exact path="/boards">
         {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
       </Route>

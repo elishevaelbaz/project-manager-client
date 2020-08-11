@@ -6,6 +6,8 @@ import { fetchCategories, addCategoryAction } from '../store/category/actions';
 import { addTaskAction, fetchTasks } from '../store/task/actions';
 import { Grid, Container, Form, Popup, Button } from 'semantic-ui-react'
 import TaskForm from './TaskForm';
+import UpdateTask from './UpdateTask';
+import { withRouter } from 'react-router-dom';
 
 
 const CategoryContainer = ({match}) => {
@@ -13,27 +15,37 @@ const CategoryContainer = ({match}) => {
   const [name, setName] = useState("")
   const [isOpen, setIsOpen] = useState(false)
 
- console.log("MATCH", match)
+  console.log("MATCH", match)
   const currentBoard = useSelector(state => state.board.currentBoard)
+  const boards = useSelector(state => state.board.boards)
   // const loading = useSelector(state => state.categories.loading)
 
   const categories = useSelector(state => state.category.categories)
   const tasks = useSelector(state => state.task.tasks)
 
   const dispatch = useDispatch()
+  // on component mount
   useEffect(() => {
     dispatch(fetchBoards())
   }, [dispatch])
 
+  // once the boards are fetched, set currentBoard
+  useEffect(() => {
+    if (boards) {
+      dispatch(setCurrentBoard(parseInt(match.params.id)))
+    }
+  }, [boards])
+
+  // once curretnBoard is set
   useEffect(() => {
     if (currentBoard) {
       dispatch(fetchCategories(currentBoard.id))
       dispatch(fetchTasks(currentBoard.id))
-
     }
-    else {
-      // dispatch(setCurrentBoard(parseInt(match.params.id)))
-    }
+    // else {
+    //   console.log("here")
+    //   dispatch(setCurrentBoard(parseInt(match.params.id)))
+    // }
 
   }, [currentBoard])
 
@@ -75,6 +87,7 @@ const CategoryContainer = ({match}) => {
   return(
     <Container>
       { categories[0] && <TaskForm handleAddTask={handleAddTask}/>}
+      <UpdateTask />
 
     <Grid columns={categories.length + 1}>
       <Grid.Row>
@@ -103,4 +116,4 @@ const CategoryContainer = ({match}) => {
   )
 }
 
-export default CategoryContainer;
+export default withRouter(CategoryContainer);
