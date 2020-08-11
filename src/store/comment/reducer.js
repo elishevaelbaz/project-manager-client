@@ -21,29 +21,29 @@ const reducer = (state = defaultState, action) => {
         comments: action.payload,
         loading: false
       }
-      case ADD_COMMENT:
+    case ADD_COMMENT:
       return {
         ...state,
         comments: [...state.comments, action.payload]
       }
    
       // form editing before save
-      case UPDATE_COMMENT:
-        const updatedComments = state.comments.map(comment => {
-          if (comment.id === action.payload.id){
-            return {
-              ...comment,
-              ...action.payload
-            }
+    case UPDATE_COMMENT:
+      const updatedComments = state.comments.map(comment => {
+        if (comment.id === action.payload.id){
+          return {
+            ...comment,
+            ...action.payload
           }
-          else {
-            return comment
-          }
-        })
-        return {
-          ...state,
-          comments: updatedComments
-        } 
+        }
+        else {
+          return comment
+        }
+      })
+      return {
+        ...state,
+        comments: updatedComments
+      } 
 
       case DELETE_COMMENT:
         return {
