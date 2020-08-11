@@ -22,31 +22,19 @@ const Comment = ({id, text, userId, taskId, username}) => {
     setToggleEdit(true)
   }
   const handleChange = (e) => {
-  // const commentObj = {
-  //   id: id,
-  //   task_id: taskId,
-  //   user_id: userId,
-  //   text: text,
-      
-  // }
-  //   dispatch(editComment())
-  setTextInput(e.target.value)
+    setTextInput(e.target.value)
   }
 
   const handleSubmit = () => {
     const commentObj = {
-    id: id,
-    text: textInput,
-  }
-  dispatch(editComment(id, commentObj))
+      id: id,
+      text: textInput,
+    }
+    dispatch(editComment(id, commentObj))
+    setToggleEdit(false)
   }
 
-  // const handleUpdateButton = (id) => {
-  //   console.log("ID", id)
-  //   const taskObj = { description: "hello"}
-  //   dispatch(updateCommentAction(id, taskObj))
-  // }
-
+  
   return(
     <>
 
