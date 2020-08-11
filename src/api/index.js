@@ -155,6 +155,18 @@ export const addComment = (commentObj) => {
     }))
 }
 
+export function updateComment(id, body){
+  return fetch(`http://localhost:3000/comments/${id}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    .then(r => r.json())
+}
+
 export function deleteComment(id) {
   return fetch(`http://localhost:3000/comments/${id}`, {
     method: 'DELETE',

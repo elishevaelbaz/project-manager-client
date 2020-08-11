@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT, ADD_COMMENT } from './types'
+import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT, ADD_COMMENT, UPDATE_COMMENT } from './types'
 
 const defaultState = {
   comments: [],
@@ -27,6 +27,24 @@ const reducer = (state = defaultState, action) => {
         comments: [...state.comments, action.payload]
       }
    
+      // form editing before save
+      case UPDATE_COMMENT:
+        const updatedComments = state.comments.map(comment => {
+          if (comment.id === action.payload.id){
+            return {
+              ...comment,
+              ...action.payload
+            }
+          }
+          else {
+            return comment
+          }
+        })
+        return {
+          ...state,
+          comments: updatedComments
+        } 
+
       case DELETE_COMMENT:
         return {
           ...state,
