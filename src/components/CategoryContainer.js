@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchBoards, setCurrentBoard } from '../store/board/actions'
 import { fetchCategories, addCategoryAction } from '../store/category/actions';
 import { addTaskAction, fetchTasks } from '../store/task/actions';
-import { Grid, Container, Form } from 'semantic-ui-react'
+import { Grid, Container, Form, Popup, Button } from 'semantic-ui-react'
 import TaskForm from './TaskForm';
 
 
 const CategoryContainer = ({match}) => {
 
   const [name, setName] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
 
  console.log("MATCH", match)
   const currentBoard = useSelector(state => state.board.currentBoard)
@@ -42,14 +43,23 @@ const CategoryContainer = ({match}) => {
 
   const handleAddCategory = (e) => {
     e.preventDefault()
-    const categoryObj = {
+    if (name.trim())
+    {
+      const categoryObj = {
       name,
       board_id: currentBoard.id
 
     }
+
+    
     dispatch(addCategoryAction(categoryObj))
   }
+    setIsOpen(false)
+  }
 
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
   
 
   const handleAddTask = (taskObj) => {
@@ -70,10 +80,19 @@ const CategoryContainer = ({match}) => {
       <Grid.Row>
         {categories.map(category => <Category key={category.id} name={category.name} id={category.id}/>)}
       
-      {<Form onSubmit={handleAddCategory}>
-    <Form.Input  name="name" label="Add a category" placeholder='Category name' onChange={handleChange} />
+      
 
-    </Form>}
+    <Popup
+        trigger={<Button icon='add' content='Add a category' />}
+        content={<Form onSubmit={handleAddCategory}>
+        <Form.Input  name="name" label="Add a category" placeholder='Category name' onChange={handleChange} />
+    
+        </Form>}
+        on='click'
+        open={isOpen}
+        onOpen={handleOpen}
+      />
+      
     </Grid.Row>
     </Grid>
 
