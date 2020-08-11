@@ -14,10 +14,12 @@ const TaskDetail = ({ match, history }) => {
   const currentTask = useSelector(state => state.task.currentTask)
   const comments = useSelector(state => state.comment.comments)
 
+  const categories = useSelector(state => state.category.categories)
+
   
-  
-  const categoryName = useSelector(state => {
-    return state.category.categories.find(category => category.id === currentTask.category_id)})
+  const currentCategory = categories.find(c => c.id === currentTask.category_id)
+  // const categoryName = useSelector(state => {
+  //   return state.category.categories.find(category => category.id === currentTask.category_id)})
 
 
   const [toggleEdit, setToggleEdit] = useState(false)
@@ -33,6 +35,16 @@ const TaskDetail = ({ match, history }) => {
 // comments associated with this task
     dispatch(fetchComments(match.params.id))
   }, [dispatch])
+
+//   useEffect(() => {
+//     if (currentTask){
+//       const
+//     }
+//     dispatch(fetchCurrentTask(match.params.id))
+// // comments associated with this task
+//     dispatch(fetchComments(match.params.id))
+//   }, [currentTask])
+
 
 
 
@@ -106,7 +118,7 @@ const TaskDetail = ({ match, history }) => {
      
       <Card.Meta>{currentTask.description}</Card.Meta>
       <Card.Meta>Due Date:{currentTask.due_date}</Card.Meta>
-      <Card.Meta>Category: {currentTask.category_id}</Card.Meta>
+      <Card.Meta>Category: {currentCategory.name}</Card.Meta>
       <Card.Meta>Added by: {currentTask.created_by === currentUser ? "you" : currentTask.created_by}</Card.Meta>
         {comments && renderComments()}
         <Form onSubmit={handleNewCommentSubmit}>
@@ -119,7 +131,7 @@ const TaskDetail = ({ match, history }) => {
     </Card.Content>
       </Card>
 
-{/* <EditTaskForm task={currentTask} name={currentTask.name}/> */}
+<EditTaskForm task={currentTask} categories={categories} categoryName={currentCategory.name} />
       </div>
     )
   

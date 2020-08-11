@@ -5,11 +5,10 @@ import { deleteTaskAction, updateTaskAction, fetchCurrentTask } from '../store/t
 import Comment from './Comment'
 import { withRouter } from 'react-router-dom'
 import { fetchComments, addCommentAction } from '../store/comment/actions'
-import UpdateTask from './UpdateTask'
 import { updateTask } from '../api'
 
-const EditTaskForm =({ task, name })=> {
-  const { description, category_id, dueDate, id} = task
+const EditTaskForm = ({ task, categories, categoryName}) => {
+  const { description, category_id, dueDate, id, name} = task
   console.log(category_id)
 
   const currentUser = useSelector(state=>state.user.currentUser)
@@ -17,11 +16,13 @@ const EditTaskForm =({ task, name })=> {
     return state.category.categories.find(category => category.id === category_id)
   })
 
+  // const currentCategory = categories.find(category => category.id === category_id)
+
   const dispatch = useDispatch()
   const [taskDetails, setTaskDetails] = useState({
     name: name,
     description: description,
-    category: category.name,
+    category: categoryName, //currentCategory.name,
     dueDate: dueDate,
     position: null
    })
