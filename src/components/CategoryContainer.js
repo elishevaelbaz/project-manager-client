@@ -35,7 +35,7 @@ const CategoryContainer = ({match}) => {
 
   const handleAddTask = (taskObj) => {
     // ======================
-    // hardcoding category for now
+    // if they don't choose a category, use the first category
     if (!taskObj.category){
       taskObj.category = categories[0].name
     }

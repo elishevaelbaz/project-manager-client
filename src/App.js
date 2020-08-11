@@ -50,10 +50,10 @@ const App = () => {
       <Switch>
       {/* <Route exact path="/">
         {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
-      </Route>
+      </Route> */}
       <Route exact path="/boards">
         {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
-      </Route> */}
+      </Route>
       <Route path="/tasks/:id">
         {currentUser ?  <TaskDetail /> : <Login handleLogin={handleLogin} />} 
       </Route>

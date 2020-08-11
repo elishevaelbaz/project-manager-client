@@ -1,4 +1,4 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD } from "./types"
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD } from "./types"
 
 const defaultState = {
   boards: [],
@@ -16,6 +16,11 @@ const reducer = (state = defaultState, action) => {
         ...state,
         loading: true
       }  
+    case ADD_BOARD:
+      return {
+        ...state,
+        boards: [...state.boards, action.payload]
+      }
     case SET_BOARDS:
       return {
         ...state,

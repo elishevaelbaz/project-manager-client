@@ -64,6 +64,22 @@ export const getBoards = () => {
     .then(r => r.json())
 }
 
+export const addBoard = (boardObj) => {
+  // const boardObj = {name, due_date, category_id, created_by}
+  return fetch("http://localhost:3000/boards", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(boardObj)
+  })
+    .then(r => r.json().then(data => {
+      if (r.ok) return data
+      throw data
+    }))
+}
+
 // =====================
 // category fetches
 // =====================
