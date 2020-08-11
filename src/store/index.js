@@ -6,6 +6,7 @@ import commentReducer from './comment/reducer'
 import categoryReducer from './category/reducer'
 import boardReducer from './board/reducer'
 import userReducer from './user/reducer'
+import { LOGOUT_USER } from './user/types'
 
 // changed from rootReducer to appReducer
 const appReducer = combineReducers({
@@ -19,7 +20,7 @@ const appReducer = combineReducers({
 
 // and addded this for logging out without mutating
 const rootReducer = (state, action) => {
-  if (action.type === 'USER_LOGOUT') {
+  if (action.type === LOGOUT_USER) {
     state = undefined
   }
   return appReducer(state, action)
