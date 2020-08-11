@@ -80,6 +80,13 @@ export const addBoard = (boardObj) => {
     }))
 }
 
+export const getMembers = (id) => {
+  return fetch(`http://localhost:3000/user_boards?board_id=${id}`, {
+    credentials: "include"
+  })
+    .then(r => r.json())
+}
+
 export const addMember = (memberObj) => {
   // const memberObj = {name, due_date, category_id, created_by}
   return fetch("http://localhost:3000/user_boards", {

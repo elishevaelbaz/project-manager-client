@@ -1,5 +1,5 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER } from './types'
-import { getBoards, addBoard, addMember } from '../../api'
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS } from './types'
+import { getBoards, addBoard, addMember, getMembers } from '../../api'
 import { fetchCategories } from '../category/actions'
 
 //another syntax
@@ -58,10 +58,20 @@ export const addMemberAction = (memberObj) => dispatch => {
   addMember(memberObj)
   .then(member => {
     console.log(member)
-    // dispatch({
-    //   type: ADD_MEMBER,
-    //   payload: member
-    // })
+    dispatch({
+      type: ADD_MEMBER,
+      payload: member
+    })
+  })
+}
+
+export const getMembersAction = (boardId) => dispatch => {
+  getMembers(boardId).then(members => {
+    console.log("members", members)
+    dispatch({ 
+      type: SET_MEMBERS, 
+      payload: members
+    })
   })
 }
 

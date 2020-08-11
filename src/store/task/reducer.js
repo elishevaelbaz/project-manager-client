@@ -40,7 +40,7 @@ const reducer = (state = defaultState, action) => {
         const updatedTasks = state.tasks.map(task => {
           if (task.id === action.payload.id){
             return {
-              ...task, // do we need this?
+              // ...task, // do we need this?
               ...action.payload
             }
           }

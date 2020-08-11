@@ -12,7 +12,6 @@ const Comment = ({id, text, userId, taskId, username}) => {
   
   const handleDelete = (id) => {
     dispatch(deleteCommentAction(id))
-    // console.log("click")
   }
 
   // const handleUpdateButton = (id) => {

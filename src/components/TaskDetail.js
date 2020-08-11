@@ -5,7 +5,7 @@ import { deleteTaskAction, updateTaskAction, fetchCurrentTask } from '../store/t
 import Comment from './Comment'
 import { withRouter } from 'react-router-dom'
 import { fetchComments, addCommentAction } from '../store/comment/actions'
-import UpdateTask from './UpdateTask'
+import EditTaskForm from './EditTaskForm'
 
 const TaskDetail = ({ match, history }) => {
   
@@ -15,8 +15,9 @@ const TaskDetail = ({ match, history }) => {
   const comments = useSelector(state => state.comment.comments)
 
   
-  // const category = useSelector(state => {
-  //   return state.category.categories.find(category => category.id === currentTask.category_id)})
+  
+  const categoryName = useSelector(state => {
+    return state.category.categories.find(category => category.id === currentTask.category_id)})
 
 
   const [toggleEdit, setToggleEdit] = useState(false)
@@ -84,6 +85,7 @@ const TaskDetail = ({ match, history }) => {
 
   return(
 
+    <div>
     <Card
       // href='#card-example-link-card'
       key={currentTask.id}
@@ -105,18 +107,21 @@ const TaskDetail = ({ match, history }) => {
      
       <Card.Meta>{currentTask.description}</Card.Meta>
       <Card.Meta>Due Date:{currentTask.due_date}</Card.Meta>
-      <Card.Meta>Category{currentTask.category_id}</Card.Meta>
+      <Card.Meta>Category: {currentTask.category_id}</Card.Meta>
       <Card.Meta>Added by: {currentTask.created_by === currentUser ? "you" : currentTask.created_by}</Card.Meta>
         {comments && renderComments()}
         <Form onSubmit={handleNewCommentSubmit}>
-          <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} onChange={handleNewCommentChange} />
+          <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} placeholder="Add a comment" onChange={handleNewCommentChange} />
         </Form>
-      <Card.Description>
+      {/* <Card.Description>
         Matthew is a musician living in Nashville.
-      </Card.Description>
+      </Card.Description> */}
 
     </Card.Content>
       </Card>
+
+<EditTaskForm task={currentTask} name={currentTask.name}/>
+      </div>
     )
   
 }

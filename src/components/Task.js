@@ -75,9 +75,9 @@ const Task = ({task}) => {
     {/* can put this instead in a ternary and will show this */}
     {/* {currentTask.name === task.name &&  <TaskDetail task={task}/> } */}
       
-      <Card.Description>
+      {/* <Card.Description>
         Matthew is a musician living in Nashville.
-      </Card.Description>
+      </Card.Description> */}
 
     </Card.Content>
       </Card>

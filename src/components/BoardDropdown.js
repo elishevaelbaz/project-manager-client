@@ -24,8 +24,8 @@ const BoardDropdown = ( {history} ) => {
   return (
     <Dropdown icon="table" text=' Boards' >
       <Dropdown.Menu>
-        {/* Errors out when signout */}
-        {boards && boards.map(board => <Dropdown.Item key={board.id} text={board.name} onClick={handleDropdownClick}/>)}
+        {/* boards.length avoids logout error - because when logout the message goes in boards for some reason */}
+        {boards.length && boards.map(board => <Dropdown.Item key={board.id} text={board.name} onClick={handleDropdownClick}/>)}
         
         <Dropdown.Item text='Open...' description='ctrl + o' />
         <Dropdown.Item icon='folder' text='Move to folder' />
