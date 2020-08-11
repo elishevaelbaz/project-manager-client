@@ -6,7 +6,6 @@ import { fetchCategories, addCategoryAction } from '../store/category/actions';
 import { addTaskAction, fetchTasks } from '../store/task/actions';
 import { Grid, Container, Form, Popup, Button } from 'semantic-ui-react'
 import TaskForm from './TaskForm';
-import UpdateTask from './UpdateTask';
 import { withRouter } from 'react-router-dom';
 
 
@@ -87,7 +86,6 @@ const CategoryContainer = ({match}) => {
   return(
     <Container>
       { categories[0] && <TaskForm handleAddTask={handleAddTask}/>}
-      <UpdateTask />
 
     <Grid columns={categories.length + 1}>
       <Grid.Row>
