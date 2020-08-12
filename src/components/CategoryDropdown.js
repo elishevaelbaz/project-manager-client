@@ -3,13 +3,10 @@ import { Dropdown } from 'semantic-ui-react'
 
 
 
-const CategoryDropdown = ({ categories }) => {
+const CategoryDropdown = ({ categories, handleSelect, currentCategory }) => {
 
-  const categoryOptions = categories.map(c =>( {key: c.id, text: c.name, value: c.id,}))
-  
+  const categoryOptions = categories.map(c =>( {key: c.id, text: c.name, value: c.id}))
 
-
-  
 
   return(
     <Dropdown
@@ -17,6 +14,8 @@ const CategoryDropdown = ({ categories }) => {
     fluid
     selection
     options={categoryOptions}
+    defaultValue={currentCategory.id}
+    onChange={(e, {value}) => handleSelect(value)}
     />
   )
   }

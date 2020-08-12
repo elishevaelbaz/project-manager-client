@@ -18,7 +18,7 @@ const EditTaskForm = ({ task, categories, currentCategory}) => {
   const [taskDetails, setTaskDetails] = useState({
     name: name,
     description: description,
-    category: currentCategory.name, //currentCategory.id,
+    category_id: category_id, // currentCategory.name, //currentCategory.id,
     dueDate: dueDate,
     position: null
    })
@@ -42,6 +42,10 @@ const handleSubmit = e => {
     
   }
 
+  const handleSelect = (categoryId) => {
+    setTaskDetails({...taskDetails, category_id: categoryId })
+  }
+
   console.log(task)
   return(
     <Card>
@@ -51,7 +55,9 @@ const handleSubmit = e => {
           <Form.Input fluid label='name' name="name" placeholder='Task name' value={taskDetails.name} onChange={handleChange} />
           <Form.Input fluid label='description' name="description" placeholder='description' value={taskDetails.description} onChange={handleChange} />
           {/* put a dropdown for category and datepicker */}
-          <CategoryDropdown categories={categories} />
+          <Form.Input fluid label='category'>
+            <CategoryDropdown categories={categories} currentCategory={currentCategory} handleSelect={handleSelect}/>
+            </Form.Input>
           {/* <Form.Input fluid label='category' name="category" placeholder='Task category' value={taskDetails.category} onChange={handleChange} /> */}
           <Form.Input fluid label='dueDate' name="dueDate" placeholder='due date' value={taskDetails.dueDate} onChange={handleChange} />
           <Form.Input fluid label='position' name="position" placeholder='Task position' value={taskDetails.position} onChange={handleChange} />
