@@ -1,9 +1,8 @@
 import React from 'react'
 import { withRouter } from "react-router";
-import { Card, Button } from 'semantic-ui-react'
-import { useSelector, useDispatch } from 'react-redux'
+import { Card } from 'semantic-ui-react'
+import { useDispatch } from 'react-redux'
 import { setCurrentBoard } from '../store/board/actions';
-import CategoryContainer from './CategoryContainer'
 
 const BoardCard = ({board, history, match}) => {
   console.log("board", board)

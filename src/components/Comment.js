@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {  Icon, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteCommentAction, updateCommentAction, editComment } from '../store/comment/actions'
+import { deleteCommentAction, editComment } from '../store/comment/actions'
 
 const Comment = ({id, text, userId, taskId, username}) => {
   

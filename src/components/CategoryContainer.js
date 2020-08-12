@@ -20,7 +20,6 @@ const CategoryContainer = ({match}) => {
   // const loading = useSelector(state => state.categories.loading)
 
   const categories = useSelector(state => state.category.categories)
-  const tasks = useSelector(state => state.task.tasks)
 
   const dispatch = useDispatch()
   // on component mount
@@ -33,7 +32,7 @@ const CategoryContainer = ({match}) => {
     if (boards) {
       dispatch(setCurrentBoard(parseInt(match.params.id)))
     }
-  }, [boards])
+  }, [boards, dispatch, match.params.id]) //really just boards, but added the others because of react warning
 
   // once curretnBoard is set
   useEffect(() => {
@@ -46,7 +45,7 @@ const CategoryContainer = ({match}) => {
     //   dispatch(setCurrentBoard(parseInt(match.params.id)))
     // }
 
-  }, [currentBoard])
+  }, [currentBoard, dispatch])
 
   const handleChange = (e) => {
     setName(e.target.value)

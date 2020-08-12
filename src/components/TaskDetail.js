@@ -1,7 +1,7 @@
 import React, { useEffect, useState }  from 'react'
-import { Card, Button, Icon, Header, Form } from 'semantic-ui-react'
+import { Card, Icon, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteTaskAction, updateTaskAction, fetchCurrentTask } from '../store/task/actions'
+import { deleteTaskAction, fetchCurrentTask } from '../store/task/actions'
 import Comment from './Comment'
 import { withRouter } from 'react-router-dom'
 import { fetchComments, addCommentAction } from '../store/comment/actions'
@@ -23,7 +23,7 @@ const TaskDetail = ({ match, history }) => {
 
 
   const [toggleEdit, setToggleEdit] = useState(false)
-  const unmutatedTask = {...currentTask}
+  // const unmutatedTask = {...currentTask}
   const [name, setName] = useState(currentTask.name)
 
   const [newComment, setNewComment] = useState("")
@@ -34,7 +34,7 @@ const TaskDetail = ({ match, history }) => {
     dispatch(fetchCurrentTask(match.params.id))
 // comments associated with this task
     dispatch(fetchComments(match.params.id))
-  }, [dispatch])
+  }, [dispatch, match.params.id])
 
 //   useEffect(() => {
 //     if (currentTask){
@@ -53,11 +53,11 @@ const TaskDetail = ({ match, history }) => {
     history.goBack();
   }
 
-  const handleUpdateButton = (id) => {
-    console.log("ID", id)
-    const taskObj = { description: "hello"}
-    dispatch(updateTaskAction(id, taskObj))
-  }
+  // const handleUpdateButton = (id) => {
+  //   console.log("ID", id)
+  //   const taskObj = { description: "hello"}
+  //   dispatch(updateTaskAction(id, taskObj))
+  // }
 
   const handleNewCommentChange = (e) => {
     setNewComment(e.target.value)

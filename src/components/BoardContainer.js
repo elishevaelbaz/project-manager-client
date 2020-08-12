@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import CategoryContainer from './CategoryContainer'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBoards, addBoardAction, setCurrentBoard } from '../store/board/actions'
-import { fetchCategories } from '../store/category/actions';
+import { fetchBoards, addBoardAction } from '../store/board/actions'
 import BoardCard from './BoardCard';
 import { Card, Icon, Form } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom';

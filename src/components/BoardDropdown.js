@@ -1,7 +1,7 @@
 import React from 'react'
-import { Dropdown, Icon } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux';
-import { changeCurrentBoard, setCurrentBoard } from '../store/board/actions';
+import { setCurrentBoard } from '../store/board/actions';
 import { withRouter } from 'react-router-dom';
 
 

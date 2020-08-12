@@ -38,6 +38,8 @@ const TaskForm = (props) => {
 
     return (
     <Form onSubmit={handleSubmit}>
+      <br />
+      <h3>Add a Task:</h3>
         <Form.Group widths='equal'>
           <Form.Input fluid label='name' name="name" placeholder='Task name' onChange={handleChange} />
           <Form.Input fluid label='description' name="description" placeholder='description' onChange={handleChange} />

@@ -1,21 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Task from './Task'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid } from 'semantic-ui-react'
-
-// import { getTasks } from '../api'
-// import { SET_TASKS } from '../store/types'
-import { fetchTasks } from '../store/task/actions'
 
 const Category = ({ name, id }) => {
 
   const filteredTasks = useSelector(state => {
     return state.task.tasks.filter(task => task.category_id === id)} )
   const loading = useSelector(state => state.task.loading)
-  const currentBoard = useSelector(state => state.board.currentBoard)
+  // const currentBoard = useSelector(state => state.board.currentBoard)
 
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   // hooks equivalent of componentDidMount
   // useEffect(() => {

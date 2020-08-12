@@ -1,20 +1,15 @@
-import React, { useEffect, useState }  from 'react'
-import { Card, Button, Icon, Header, Form } from 'semantic-ui-react'
-import { useSelector, useDispatch } from 'react-redux'
-import { deleteTaskAction, updateTaskAction, fetchCurrentTask } from '../store/task/actions'
-import Comment from './Comment'
-import { withRouter } from 'react-router-dom'
-import { fetchComments, addCommentAction } from '../store/comment/actions'
-import { updateTask } from '../api'
+import React, { useState }  from 'react'
+import { Card, Form } from 'semantic-ui-react'
+import { useDispatch } from 'react-redux'
+import {  updateTaskAction } from '../store/task/actions'
 
 const EditTaskForm = ({ task, categories, categoryName}) => {
   const { description, category_id, dueDate, id, name} = task
   console.log(category_id)
 
-  const currentUser = useSelector(state=>state.user.currentUser)
-  const category = useSelector(state => {
-    return state.category.categories.find(category => category.id === category_id)
-  })
+  // const category = useSelector(state => {
+  //   return state.category.categories.find(category => category.id === category_id)
+  // })
 
   // const currentCategory = categories.find(category => category.id === category_id)
 
@@ -41,9 +36,6 @@ const handleSubmit = e => {
 
     dispatch(updateTaskAction(id, taskDetails))
     
-    // debugger
-    // updateRecipe(updatedRecipe)
-    //   .then(recipe => dispatch({type: UPDATE_RECIPE, payload: recipe}))
   }
 
   console.log(task)

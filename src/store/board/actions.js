@@ -1,6 +1,6 @@
 import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS } from './types'
 import { getBoards, addBoard, addMember, getMembers } from '../../api'
-import { fetchCategories } from '../category/actions'
+// import { fetchCategories } from '../category/actions'
 
 //another syntax
 export const fetchBoards = () => dispatch => {

@@ -3,9 +3,7 @@ import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
 import { Link } from 'react-router-dom';
-import { postTask } from '../store/task/actions';
 import { Modal, Button, Menu, Popup, Form } from 'semantic-ui-react'
-import TaskForm from './TaskForm';
 import { addMemberAction, getMembersAction } from '../store/board/actions';
 
 const Header = () => {
@@ -23,7 +21,7 @@ const Header = () => {
     if (currentBoard){
       dispatch(getMembersAction(currentBoard.id))
     }
-  }, [currentBoard])
+  }, [currentBoard, dispatch])
 
   const handleLogout = () => {
     dispatch(logoutAction())
@@ -63,7 +61,7 @@ const Header = () => {
       <Menu.Item>{members.length > 1 ? `${members.length} members` : "you are the only member" }</Menu.Item>
     <Popup
     // icon='plus '
-            trigger={<Button icon=' address card' content='Invite' />}
+            trigger={<Button icon='address card' content='Invite' />}
             content={<Form onSubmit={handleAddMember}>
             <Form.Input  name="name" label="Invite to board" placeholder='username' onChange={handleChange} />
         

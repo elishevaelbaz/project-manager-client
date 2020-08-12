@@ -1,10 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Card, Button, Icon } from 'semantic-ui-react'
+import { Card, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteTaskAction, updateTaskAction, setCurrentTask, closeCurrentTask } from '../store/task/actions'
-import Comment from './Comment'
-import TaskDetail from './TaskDetail'
+import { deleteTaskAction, setCurrentTask, closeCurrentTask } from '../store/task/actions'
 
 const Task = ({task}) => {
   console.log("TASK", task)
@@ -20,12 +18,6 @@ const Task = ({task}) => {
 
   const handleDelete = (id) => {
     dispatch(deleteTaskAction(id))
-  }
-
-  const handleUpdateButton = (id) => {
-    console.log("ID", id)
-    const taskObj = { description: "hello"}
-    dispatch(updateTaskAction(id, taskObj))
   }
 
   const handleCardClick = (e) => {
@@ -46,9 +38,9 @@ const Task = ({task}) => {
     // return <TaskDetail task={task} />
   }
 
-  const renderComments = () => {
-    return task.comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
-  }
+  // const renderComments = () => {
+  //   return task.comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
+  // }
 
   return(
 
