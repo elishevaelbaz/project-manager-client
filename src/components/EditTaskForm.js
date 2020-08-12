@@ -2,6 +2,7 @@ import React, { useState }  from 'react'
 import { Card, Form } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
 import {  updateTaskAction } from '../store/task/actions'
+import CategoryDropdown from './CategoryDropdown'
 
 const EditTaskForm = ({ task, categories, currentCategory}) => {
   const { description, category_id, dueDate, id, name} = task
@@ -28,6 +29,7 @@ const EditTaskForm = ({ task, categories, currentCategory}) => {
     // const category = categories.find(c => c.name === e.target.textContent)
 
     setTaskDetails({...taskDetails, [e.target.name]: e.target.value })
+    console.log("taskDetails", taskDetails)
   }
 
 
@@ -49,7 +51,8 @@ const handleSubmit = e => {
           <Form.Input fluid label='name' name="name" placeholder='Task name' value={taskDetails.name} onChange={handleChange} />
           <Form.Input fluid label='description' name="description" placeholder='description' value={taskDetails.description} onChange={handleChange} />
           {/* put a dropdown for category and datepicker */}
-          <Form.Input fluid label='category' name="category" placeholder='Task category' value={taskDetails.category} onChange={handleChange} />
+          <CategoryDropdown categories={categories} />
+          {/* <Form.Input fluid label='category' name="category" placeholder='Task category' value={taskDetails.category} onChange={handleChange} /> */}
           <Form.Input fluid label='dueDate' name="dueDate" placeholder='due date' value={taskDetails.dueDate} onChange={handleChange} />
           <Form.Input fluid label='position' name="position" placeholder='Task position' value={taskDetails.position} onChange={handleChange} />
           {/* <Form.Field label="date" type={date}/> */}
