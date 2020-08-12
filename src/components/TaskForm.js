@@ -12,7 +12,7 @@ const TaskForm = (props) => {
     name: "",
     description: "", 
     due_date: null,
-    category: ""
+    category_id: ""
   })
 
   const handleChange = e => {
@@ -21,7 +21,8 @@ const TaskForm = (props) => {
   }
 
   const  handleDropdownClick = (e) => {
-    setTaskInput({...taskInput, category: e.target.textContent })
+    const category = categories.find(c => c.name === e.target.textContent)
+    setTaskInput({...taskInput, category_id: category.id })
     console.log(e.target)
     console.log(e.target.id)
   }

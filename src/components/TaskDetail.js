@@ -131,7 +131,7 @@ const TaskDetail = ({ match, history }) => {
     </Card.Content>
       </Card>
 
-<EditTaskForm task={currentTask} categories={categories} categoryName={currentCategory.name} />
+<EditTaskForm task={currentTask} categories={categories} currentCategory={currentCategory} />
       </div>
     )
   

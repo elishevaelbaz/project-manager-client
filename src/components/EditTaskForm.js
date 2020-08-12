@@ -3,7 +3,7 @@ import { Card, Form } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
 import {  updateTaskAction } from '../store/task/actions'
 
-const EditTaskForm = ({ task, categories, categoryName}) => {
+const EditTaskForm = ({ task, categories, currentCategory}) => {
   const { description, category_id, dueDate, id, name} = task
   console.log(category_id)
 
@@ -17,7 +17,7 @@ const EditTaskForm = ({ task, categories, categoryName}) => {
   const [taskDetails, setTaskDetails] = useState({
     name: name,
     description: description,
-    category: categoryName, //currentCategory.name,
+    category: currentCategory.name, //currentCategory.id,
     dueDate: dueDate,
     position: null
    })
@@ -25,6 +25,8 @@ const EditTaskForm = ({ task, categories, categoryName}) => {
    console.log(taskDetails, task.name, name)
   
    const handleChange = e => {
+    // const category = categories.find(c => c.name === e.target.textContent)
+
     setTaskDetails({...taskDetails, [e.target.name]: e.target.value })
   }
 
