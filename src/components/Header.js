@@ -5,6 +5,7 @@ import { logoutAction } from '../store/user/actions';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Menu, Popup, Form } from 'semantic-ui-react'
 import { addMemberAction, getMembersAction } from '../store/board/actions';
+import ErrorNotification from './ErrorNotification';
 
 const Header = () => {
 
@@ -80,7 +81,10 @@ const Header = () => {
     </Menu.Item>
   </Menu>
 
+
+
     }
+    <ErrorNotification />
     
     {/* <Modal
       trigger={<Button>Add Task</Button>}

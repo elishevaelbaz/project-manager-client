@@ -1,5 +1,6 @@
 import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK } from './types'
 import { getTasks, addTask, deleteTask, updateTask, getCurrentTask } from '../../api'
+import { SET_ERROR } from '../error/types'
 
 //thunky action
 // export const fetchTasks = () => {
@@ -37,10 +38,18 @@ export const fetchCurrentTask = (id) => dispatch => {
 export const addTaskAction = (taskObj) => dispatch => {
   addTask(taskObj)
   .then(task => {
-    dispatch({
-      type: ADD_TASK,
-      payload: task
-    })
+    if (task.error){
+      dispatch({
+        type: SET_ERROR,
+        payload: task.error
+      })
+    }
+    else{
+      dispatch({
+        type: ADD_TASK,
+        payload: task
+      })
+    }
   })
 }
 
@@ -59,10 +68,18 @@ export const updateTaskAction = (id, body) => dispatch => {
   updateTask(id, body)
   .then(updatedTask => {
     console.log(updatedTask)
+    if (updatedTask.error){
+      dispatch({
+        type: SET_ERROR,
+        payload: updatedTask.error
+      })
+    }
+    else{
     dispatch({
       type: UPDATE_TASK,
       payload: updatedTask
     })
+  }
   })
 }
 
