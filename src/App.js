@@ -25,6 +25,11 @@ const App = () => {
     //   .then(tasks => dispatch({ type: SET_TASKS, payload: tasks}))
   }, [dispatch])
 
+  // fetch boards in app, when the currentUser changes, so have acces in redux
+  useEffect(() => {
+    dispatch(fetchBoards())
+  }, [dispatch, currentUser])
+
   const handleSignUp = (signUpInfo) => {
     // set current user, then redirect to home page
     const { username, password } = signUpInfo
