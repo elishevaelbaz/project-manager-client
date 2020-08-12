@@ -28,7 +28,8 @@ const Category = ({ name, id }) => {
 
   return(
   
-    <Grid.Column key={id}>
+    // <Grid.Column key={id}>
+    <div >
       <Card className="categoryCard">
         
       <CardContent>{name}</CardContent>
@@ -36,7 +37,8 @@ const Category = ({ name, id }) => {
 
       <TaskForm categoryId={id}/>
       </Card>
-      </Grid.Column>
+      </div>
+      // </Grid.Column>
   )
 }
 

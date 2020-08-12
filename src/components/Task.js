@@ -48,7 +48,6 @@ const Task = ({task}) => {
       // href='#card-example-link-card'
       key={task.id}
       onClick={handleCardClick}
-      color='violet'
     >
       <Card.Content>
       {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
