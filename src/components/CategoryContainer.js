@@ -83,15 +83,43 @@ const CategoryContainer = ({match}) => {
   }
 
   return(
-    <Container>
-      { categories[0] && <TaskForm handleAddTask={handleAddTask}/>}
+    // <Container>
 
-    <Grid columns={categories.length + 1}>
-      <Grid.Row>
+    // <Grid columns={categories.length + 1}>
+    //   <Grid.Row>
+    //     {categories.map(category => <Category key={category.id} name={category.name} id={category.id}/>)}
+      
+      
+    //     <Grid.Column>
+    // <Popup
+    //     trigger={<Button icon='add' content='Add a category' />}
+    //     content={<Form onSubmit={handleAddCategory}>
+
+    //     <Form.Input  name="name" label="Add a category" placeholder='Category name' onChange={handleChange} />
+    
+    //     </Form>}
+    //     on='click'
+    //     // open={isOpen}
+    //     // onOpen={handleOpen}
+    //   />
+    //   </Grid.Column>
+      
+    // </Grid.Row>
+    // </Grid>
+
+    // {categories.length === 0 && <h1>Add categories to begin</h1>}
+    
+    // </Container>
+
+    <div className="container">
+
+    {/* <Grid columns={categories.length + 1}>
+      <Grid.Row> */}
+        {/* <div className="row"> */}
         {categories.map(category => <Category key={category.id} name={category.name} id={category.id}/>)}
       
-      
-        <Grid.Column>
+        {/* <Grid.Column> */}
+        <div>
     <Popup
         trigger={<Button icon='add' content='Add a category' />}
         content={<Form onSubmit={handleAddCategory}>
@@ -100,17 +128,20 @@ const CategoryContainer = ({match}) => {
     
         </Form>}
         on='click'
-        open={isOpen}
-        onOpen={handleOpen}
+        // open={isOpen}
+        // onOpen={handleOpen}
       />
-      </Grid.Column>
+      {/* </div> */}
+      </div>
+
+      {/* </Grid.Column> */}
       
-    </Grid.Row>
-    </Grid>
+    {/* </Grid.Row> */}
+    {/* </Grid> */}
 
     {categories.length === 0 && <h1>Add categories to begin</h1>}
     
-    </Container>
+    </div>
     
   )
 }

@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.categoryCard {
+  padding-left:10px !important;
+  padding-right:10px !important;
+  background-color: #e3e3e3 !important;
+  /* max-height: 80vh;  */
+  /* max-height: 100%;  */
+  /* overflow-y: scroll; */
+}
+.container {
+  padding: 10px;
+  display: grid;
+  grid-gap: 10px;
+
+  grid-auto-flow: column;
+  grid-template-columns:repeat(auto-fit, minmax(200px , 1fr));
+  overflow-x:auto;
+}
+
+/* .row{
+  grid-row: 1;   
+} */
+
+.ui.card > .ui.card
+{
+  height: fit-content !important;
+}

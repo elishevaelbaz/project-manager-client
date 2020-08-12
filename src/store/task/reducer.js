@@ -51,7 +51,8 @@ const reducer = (state = defaultState, action) => {
           console.log("updatedTasks", updatedTasks)
       return {
         ...state,
-        tasks: updatedTasks
+        tasks: updatedTasks,
+        currentTask: action.payload // update currentTask - see change on screen immediately
       } 
       case DELETE_TASK:
       return {

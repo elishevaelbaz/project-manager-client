@@ -1,27 +1,28 @@
 import React, { useState } from 'react'
-import { Form, Dropdown } from 'semantic-ui-react'
-import { useSelector } from 'react-redux'
+import { Form, Dropdown, Popup, Button } from 'semantic-ui-react'
+import { useSelector, useDispatch } from 'react-redux'
 import CategoryDropdown from './CategoryDropdown'
+import { addTaskAction } from '../store/task/actions'
 
 // import { Link } from 'react-router-dom'
 
-const TaskForm = (props) => {
+const TaskForm = ({ categoryId }) => {
 
-  const categories = useSelector(state => state.category.categories)
+  
 
   const [taskInput, setTaskInput] = useState({
     name: "",
-    description: "", 
-    due_date: null,
-    category_id: ""
+    description: ""
   })
+
+  const dispatch = useDispatch()
 
   const handleChange = e => {
 
     setTaskInput({...taskInput, [e.target.name]: e.target.value })
   }
 
-  const  handleDropdownClick = (categoryId) => {
+  // const  handleDropdownClick = (categoryId) => {
   //   const category = categories.find(c => c.name === e.target.textContent)
   //   setTaskInput({...taskInput, category_id: category.id })
   //   console.log(e.target)
@@ -29,14 +30,18 @@ const TaskForm = (props) => {
   // }
 
   // const handleSelect = (categoryId) => {
-    setTaskInput({...taskInput, category_id: categoryId })
-  }
+    // setTaskInput({...taskInput, category_id: categoryId })
+  // }
 
-  const  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault()
     console.log(taskInput)
+    const taskObj = {...taskInput, category_id: categoryId }
 
-    props.handleAddTask(taskInput)
+    console.log(taskObj)
+    dispatch(addTaskAction(taskObj))
+
+    // props.handleAddTask(taskInput)
 
     // props.handleLogin(state)
     // TODO: make a fetch request to login the current user
@@ -45,36 +50,42 @@ const TaskForm = (props) => {
   }
 
     return (
-    <Form onSubmit={handleSubmit}>
-      <br />
-      <h3>Add a Task:</h3>
-        <Form.Group widths='equal'>
-          <Form.Input fluid label='name' name="name" placeholder='Task name' onChange={handleChange} />
-          <Form.Input fluid label='description' name="description" placeholder='description' onChange={handleChange} />
-          {/* <Form.Field label="date" type={date}/> */}
-            {/* <label>Date</label> */}
-            {/* <input type="date">
-          </Form.Field> */}
+    // <Form >
+    //     <Form.Group widths='equal'>
+    //       <Form.Input fluid label='name' name="name" placeholder='Task name' onChange={handleChange} />
+    //       <Form.Input fluid label='description' name="description" placeholder='description' onChange={handleChange} />
+    //       {/* <Form.Field label="date" type={date}/> */}
+    //         {/* <label>Date</label> */}
+    //         {/* <input type="date">
+    //       </Form.Field> */}
             
-          {/* /> */}
+    //       {/* /> */}
 
-          <Form.Input fluid label='category'>
-            <CategoryDropdown categories={categories} handleSelect={handleDropdownClick}/>
-            </Form.Input>
-        
-        {/* <Dropdown text='Category'>
-      <Dropdown.Menu> */}
-        {/* Errors out when signout */}
-        {/* {categories.map(category => <Dropdown.Item key={category.id} id={category.id}  text={category.name} onClick={handleDropdownClick}/>)}
-        
-       
-      </Dropdown.Menu>
-    </Dropdown> */}
+    //       <Form.Input fluid label='category'>
+    //         <CategoryDropdown categories={categories} handleSelect={handleDropdownClick}/>
+    //         </Form.Input>
 
-    </Form.Group>
+    // </Form.Group>
           
-        <Form.Button>Submit</Form.Button>
-      </Form>
+    //     <Form.Button>Submit</Form.Button>
+    //   </Form>
+
+
+
+      <Popup
+        trigger={<Button icon='add' content='Add a task' />}
+        content={<Form onSubmit={handleSubmit}>
+
+        <Form.Input  label='name' name="name" placeholder='Task name' onChange={handleChange} />
+
+        <Form.Input  label='description' name="description" placeholder='description' onChange={handleChange} />
+
+        <Form.Button color='violet'>Submit</Form.Button>
+                </Form>}
+        on='click'
+        // open={isOpen}
+        // onOpen={handleOpen}
+      />
     )
   }
 
