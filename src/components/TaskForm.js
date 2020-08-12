@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Dropdown } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
+import CategoryDropdown from './CategoryDropdown'
 
 // import { Link } from 'react-router-dom'
 
@@ -20,17 +21,23 @@ const TaskForm = (props) => {
     setTaskInput({...taskInput, [e.target.name]: e.target.value })
   }
 
-  const  handleDropdownClick = (e) => {
-    const category = categories.find(c => c.name === e.target.textContent)
-    setTaskInput({...taskInput, category_id: category.id })
-    console.log(e.target)
-    console.log(e.target.id)
+  const  handleDropdownClick = (categoryId) => {
+  //   const category = categories.find(c => c.name === e.target.textContent)
+  //   setTaskInput({...taskInput, category_id: category.id })
+  //   console.log(e.target)
+  //   console.log(e.target.id)
+  // }
+
+  // const handleSelect = (categoryId) => {
+    setTaskInput({...taskInput, category_id: categoryId })
   }
 
   const  handleSubmit = e => {
     e.preventDefault()
-    // console.log(state)
+    console.log(taskInput)
+
     props.handleAddTask(taskInput)
+
     // props.handleLogin(state)
     // TODO: make a fetch request to login the current user
     // then set that user in state in our App component
@@ -50,15 +57,19 @@ const TaskForm = (props) => {
           </Form.Field> */}
             
           {/* /> */}
+
+          <Form.Input fluid label='category'>
+            <CategoryDropdown categories={categories} handleSelect={handleDropdownClick}/>
+            </Form.Input>
         
-        <Dropdown text='Category'>
-      <Dropdown.Menu>
+        {/* <Dropdown text='Category'>
+      <Dropdown.Menu> */}
         {/* Errors out when signout */}
-        {categories.map(category => <Dropdown.Item key={category.id} id={category.id}  text={category.name} onClick={handleDropdownClick}/>)}
+        {/* {categories.map(category => <Dropdown.Item key={category.id} id={category.id}  text={category.name} onClick={handleDropdownClick}/>)}
         
        
       </Dropdown.Menu>
-    </Dropdown>
+    </Dropdown> */}
 
     </Form.Group>
           
