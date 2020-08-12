@@ -118,7 +118,7 @@ const TaskDetail = ({ match, history }) => {
      
       <Card.Meta>{currentTask.description}</Card.Meta>
       <Card.Meta>Due Date:{currentTask.due_date}</Card.Meta>
-      <Card.Meta>Category: {currentCategory.name}</Card.Meta>
+      <Card.Meta>Category: {currentCategory && currentCategory.name}</Card.Meta>
       <Card.Meta>Added by: {currentTask.created_by === currentUser ? "you" : currentTask.created_by}</Card.Meta>
         {comments && renderComments()}
         <Form onSubmit={handleNewCommentSubmit}>

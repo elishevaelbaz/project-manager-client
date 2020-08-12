@@ -67,21 +67,6 @@ const CategoryContainer = ({match}) => {
     setIsOpen(false)
   }
 
-  const handleOpen = () => {
-    setIsOpen(true)
-  }
-  
-
-  const handleAddTask = (taskObj) => {
-    // ======================
-    // if they don't choose a category, use the first category
-    if (!taskObj.category_id){
-      taskObj.category_id = categories[0].id
-    }
-    console.log(taskObj)
-    dispatch(addTaskAction(taskObj))
-  }
-
   return(
     // <Container>
 
