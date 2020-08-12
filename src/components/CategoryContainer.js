@@ -84,7 +84,6 @@ const CategoryContainer = ({match}) => {
 
   return(
     <Container>
-      { categories[0] && <TaskForm handleAddTask={handleAddTask}/>}
 
     <Grid columns={categories.length + 1}>
       <Grid.Row>
