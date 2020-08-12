@@ -27,11 +27,11 @@ const BoardDropdown = ( {history} ) => {
         {/* boards.length avoids logout error - because when logout the message goes in boards for some reason */}
         {boards.length && boards.map(board => <Dropdown.Item key={board.id} text={board.name} onClick={handleDropdownClick}/>)}
         
-        <Dropdown.Item text='Open...' description='ctrl + o' />
+        {/* <Dropdown.Item text='Open...' description='ctrl + o' />
         <Dropdown.Item icon='folder' text='Move to folder' />
 
         <Dropdown.Divider />
-        <Dropdown.Item text='Download As...' />
+        <Dropdown.Item text='Download As...' /> */}
        
       </Dropdown.Menu>
     </Dropdown>

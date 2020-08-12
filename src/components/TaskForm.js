@@ -53,11 +53,6 @@ const TaskForm = (props) => {
         {/* Errors out when signout */}
         {categories.map(category => <Dropdown.Item key={category.id} id={category.id}  text={category.name} onClick={handleDropdownClick}/>)}
         
-        <Dropdown.Item text='Open...' description='ctrl + o' />
-        <Dropdown.Item icon='folder' text='Move to folder' />
-
-        <Dropdown.Divider />
-        <Dropdown.Item text='Download As...' />
        
       </Dropdown.Menu>
     </Dropdown>
