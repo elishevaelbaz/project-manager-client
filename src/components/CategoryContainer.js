@@ -100,8 +100,8 @@ const CategoryContainer = ({match}) => {
     
         </Form>}
         on='click'
-        open={isOpen}
-        onOpen={handleOpen}
+        // open={isOpen}
+        // onOpen={handleOpen}
       />
       </Grid.Column>
       
