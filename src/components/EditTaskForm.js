@@ -56,7 +56,7 @@ const handleSubmit = e => {
           <Form.Input fluid label='description' name="description" placeholder='description' value={taskDetails.description} onChange={handleChange} />
           {/* put a dropdown for category and datepicker */}
           <Form.Input fluid label='category'>
-            <CategoryDropdown categories={categories} currentCategory={currentCategory} handleSelect={handleSelect}/>
+            <CategoryDropdown categories={categories} currentCategoryId={currentCategory.id} handleSelect={handleSelect}/>
             </Form.Input>
           {/* <Form.Input fluid label='category' name="category" placeholder='Task category' value={taskDetails.category} onChange={handleChange} /> */}
           <Form.Input fluid label='dueDate' name="dueDate" placeholder='due date' value={taskDetails.dueDate} onChange={handleChange} />
