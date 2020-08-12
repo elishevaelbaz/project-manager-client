@@ -92,10 +92,11 @@ const CategoryContainer = ({match}) => {
         {categories.map(category => <Category key={category.id} name={category.name} id={category.id}/>)}
       
       
-
+        <Grid.Column>
     <Popup
         trigger={<Button icon='add' content='Add a category' />}
         content={<Form onSubmit={handleAddCategory}>
+
         <Form.Input  name="name" label="Add a category" placeholder='Category name' onChange={handleChange} />
     
         </Form>}
@@ -103,6 +104,7 @@ const CategoryContainer = ({match}) => {
         open={isOpen}
         onOpen={handleOpen}
       />
+      </Grid.Column>
       
     </Grid.Row>
     </Grid>
