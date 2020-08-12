@@ -1,7 +1,7 @@
 import React from 'react'
 import Task from './Task'
 import { useDispatch, useSelector } from 'react-redux'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Card, CardContent } from 'semantic-ui-react'
 
 const Category = ({ name, id }) => {
 
@@ -28,8 +28,11 @@ const Category = ({ name, id }) => {
   return(
   
     <Grid.Column key={id}>
-      {name}
+      <Card className="categoryCard">
+        
+      <CardContent>{name}</CardContent>
       {filteredTasks[0] && filteredTasks.map(task => <Task key={task.id} task={task} />)}
+      </Card>
       </Grid.Column>
   )
 }

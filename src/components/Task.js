@@ -48,13 +48,16 @@ const Task = ({task}) => {
       // href='#card-example-link-card'
       key={task.id}
       onClick={handleCardClick}
+      color='violet'
     >
       <Card.Content>
       {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
 
       {/* <Card.Href>#card-example-link-card</Card.Header> */}
-      <Card.Header>{task.name}</Card.Header>
-      <Card.Meta>{task.description}</Card.Meta>
+      <Card.Description>
+      {task.name}
+      </Card.Description>
+      {/* <Card.Meta>{task.description}</Card.Meta> */}
 
       {/* {currentTask.name === task.name && (<>
         <Card.Meta>Due Date:{task.due_date}</Card.Meta>
@@ -66,9 +69,7 @@ const Task = ({task}) => {
     {/* can put this instead in a ternary and will show this */}
     {/* {currentTask.name === task.name &&  <TaskDetail task={task}/> } */}
       
-      {/* <Card.Description>
-        Matthew is a musician living in Nashville.
-      </Card.Description> */}
+      
 
     </Card.Content>
       </Card>

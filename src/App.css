@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.categoryCard {
+  /* border: solid 1px; */
+  /* border-radius:0 0 .28571429rem .28571429rem!important */
+  padding-left:10px !important;
+  padding-right:10px !important;
+  background-color: #e3e3e3 !important;
+}
+
+.ui.card > .ui.card
+{
+  /* background-color: #e3e3e3; */
+}
+
+
+/* .ui.grid.column.categoryCard .column:not(:first-child), .ui.grid .row .column:not(:first-child), .ui.grid .column {
+  padding-left: 10px;
+} */
