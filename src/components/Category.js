@@ -3,12 +3,19 @@ import Task from './Task'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Card, CardContent } from 'semantic-ui-react'
 import TaskForm from './TaskForm'
+import { Droppable } from 'react-beautiful-dnd'
 
-const Category = ({ name, id }) => {
+const Category = ({ name, id, taskOrder}) => {
 
   const filteredTasks = useSelector(state => {
     return state.task.tasks.filter(task => task.category_id === id)} )
     console.log(name, filteredTasks.length)
+
+    // console.log("taskOrder", taskOrder)
+    // const sortedTasks = taskOrder.map(t => {
+    //   return filteredTasks.find(task => task.id === t.id)})
+
+      // console.log(filteredTasks)
 
     const sortedTasks = filteredTasks.sort((taskA, taskB) => (taskA.position > taskB.position) ? 1 : -1)
     console.log("SORTED", sortedTasks)
@@ -30,8 +37,15 @@ const Category = ({ name, id }) => {
       <Card className="categoryCard">
         
       <CardContent>{name}</CardContent>
-      {sortedTasks[0] && sortedTasks.map(task => <Task key={task.id} task={task} count={sortedTasks.length} index={taskIndex(task)}/>)}
 
+      <Droppable droppableId={id.toString()}>
+        {provided => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+        {sortedTasks[0] && sortedTasks.map((task, index) => <Task key={task.id} task={task} count={sortedTasks.length} index={index}/>)}
+        {provided.placeholder}
+        </div>
+        )}
+      </Droppable>
       <TaskForm categoryId={id}/>
       </Card>
       </div>

@@ -17,7 +17,7 @@ const ErrorNotification = (props) => {
  return (
  <>
  {isOpen && error && (
- <div class="fancy-error-class">
+ <div className="fancy-error-class">
    <span>{error}</span>
  <button onClick={handleClose}>Close Error</button>
  

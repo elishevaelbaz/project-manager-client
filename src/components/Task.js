@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Card, Icon, Dropdown } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, setCurrentTask, closeCurrentTask, updatePositionAction } from '../store/task/actions'
+import { Draggable } from 'react-beautiful-dnd'
 
 const Task = ({task, count, index}) => {
   console.log("TASK", task)
@@ -79,11 +80,18 @@ const Task = ({task, count, index}) => {
 }
 
   return(
+    <Draggable draggableId={task.id.toString()} index={index}>
+      {(provided, ) => (
 
+      
+<div {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      ref={provided.innerRef}>
     <Card
       // href='#card-example-link-card'
       key={task.id}
       onClick={handleCardClick}
+      
     >
       <Card.Content>
       {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
@@ -118,11 +126,11 @@ const Task = ({task, count, index}) => {
 
     </Card.Content>
       </Card>
-    )
-    
-
+      </div>
+    )}
+    </Draggable>
     // </>
-  
+    )
 }
 
 export default Task;
