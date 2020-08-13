@@ -120,6 +120,7 @@ const TaskDetail = ({ match, history }) => {
       <Card.Meta>Due Date:{currentTask.due_date}</Card.Meta>
       <Card.Meta>Category: {currentCategory && currentCategory.name}</Card.Meta>
       <Card.Meta>Added by: {currentTask.created_by === currentUser ? "you" : currentTask.created_by}</Card.Meta>
+      <Card.Meta>Position: {currentTask.position}</Card.Meta>
         {comments && renderComments()}
         <Form onSubmit={handleNewCommentSubmit}>
           <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} placeholder="Add a comment" onChange={handleNewCommentChange} />

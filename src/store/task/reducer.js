@@ -1,4 +1,4 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK } from "./types"
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_TASK_POSITION } from "./types"
 
 const defaultState = {
   tasks: [],
@@ -8,6 +8,8 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   console.log("taskReducer", action)
+  let updatedTasks;
+
   switch (action.type) {
     case FETCH_TASKS:
       return {
@@ -37,7 +39,7 @@ const reducer = (state = defaultState, action) => {
           currentTask: {}
       }
       case UPDATE_TASK:
-        const updatedTasks = state.tasks.map(task => {
+        updatedTasks = state.tasks.map(task => {
           if (task.id === action.payload.id){
             return {
               // ...task, // do we need this?
@@ -53,6 +55,32 @@ const reducer = (state = defaultState, action) => {
         ...state,
         tasks: updatedTasks,
         currentTask: action.payload // update currentTask - see change on screen immediately
+      }
+      case UPDATE_TASK_POSITION:
+      const updated = state.tasks.map(task => {
+        for (const element of action.payload) {
+          if (task.id === element.id){
+            console.log("el", element)
+            console.log("task ", task)
+
+            return {
+              // ...task, // do we need this?
+              
+              ...element
+            }
+          }
+          else{
+            return task
+          }
+        }
+        return updated
+
+      })
+          console.log("updatedTasks reducer", updated)
+      return {
+        ...state,
+        tasks: updated,
+        // currentTask: action.payload // update currentTask - see change on screen immediately
       } 
       case DELETE_TASK:
       return {

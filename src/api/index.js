@@ -54,6 +54,18 @@ export function deleteTask(id) {
   .then(r => r.json())
 }
 
+export function updatePosition(id, body){
+  return fetch(`http://localhost:3000/tasks/${id}/position`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    .then(r => r.json())
+}
+
 // =====================
 // board fetches
 // =====================

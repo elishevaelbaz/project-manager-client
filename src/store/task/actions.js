@@ -1,5 +1,5 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK } from './types'
-import { getTasks, addTask, deleteTask, updateTask, getCurrentTask } from '../../api'
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_TASK_POSITION } from './types'
+import { getTasks, addTask, deleteTask, updateTask, getCurrentTask, updatePosition } from '../../api'
 import { SET_ERROR } from '../error/types'
 
 //thunky action
@@ -80,6 +80,35 @@ export const updateTaskAction = (id, body) => dispatch => {
       payload: updatedTask
     })
   }
+  })
+}
+
+export const updatePositionAction = (id, body) => dispatch => {
+  updatePosition (id, body)
+  .then(updatedTasks => {
+    console.log("updatedTasks, action", updatedTasks)
+    if (!updatedTasks.exception){
+      console.log("LLL")
+      dispatch({
+        type: UPDATE_TASK_POSITION,
+        payload: updatedTasks
+      })
+    }
+
+
+
+  //   if (updatedTask.error){
+  //     dispatch({
+  //       type: SET_ERROR,
+  //       payload: updatedTask.error
+  //     })
+  //   }
+  //   else{
+  //   dispatch({
+  //     type: UPDATE_TASK,
+  //     payload: updatedTask
+  //   })
+  // }
   })
 }
 

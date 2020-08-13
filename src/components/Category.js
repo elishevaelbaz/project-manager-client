@@ -8,22 +8,19 @@ const Category = ({ name, id }) => {
 
   const filteredTasks = useSelector(state => {
     return state.task.tasks.filter(task => task.category_id === id)} )
+    console.log(name, filteredTasks.length)
+
+    const sortedTasks = filteredTasks.sort((taskA, taskB) => (taskA.position > taskB.position) ? 1 : -1)
+    console.log("SORTED", sortedTasks)
   const loading = useSelector(state => state.task.loading)
   // const currentBoard = useSelector(state => state.board.currentBoard)
 
 
   // const dispatch = useDispatch()
+  const taskIndex = (task) => {
+    return filteredTasks.findIndex(t => t.name === task.name)
+  }
 
-  // hooks equivalent of componentDidMount
-  // useEffect(() => {
-  //   dispatch(fetchTasks())
-  //   // getTasks()
-  //   //   .then(tasks => dispatch({ type: SET_TASKS, payload: tasks}))
-  // }, [dispatch]) //empty dependencies array - will only run when component is first rendered
-
-  
-
-  // included dispatch in the array becuase of react warning, but dispatch doesn't change, so will still be mount only
   if (loading) return <h2>Loading...</h2>
 
   return(
@@ -33,7 +30,7 @@ const Category = ({ name, id }) => {
       <Card className="categoryCard">
         
       <CardContent>{name}</CardContent>
-      {filteredTasks[0] && filteredTasks.map(task => <Task key={task.id} task={task} />)}
+      {sortedTasks[0] && sortedTasks.map(task => <Task key={task.id} task={task} count={sortedTasks.length} index={taskIndex(task)}/>)}
 
       <TaskForm categoryId={id}/>
       </Card>
