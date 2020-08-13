@@ -44,7 +44,6 @@ const Header = () => {
   
   return(
     <div>
-    <h1>Welcome, {currentUser ? currentUser.username : "user"}. You are viewing {currentBoard &&currentBoard.name}</h1>
     
     {/* <Button onClick={handleAddTask}>Add Task</Button> */}
     { currentUser && 
