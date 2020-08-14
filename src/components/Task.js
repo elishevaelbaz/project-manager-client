@@ -15,6 +15,17 @@ const Task = ({task, count, index}) => {
   const [newComment, setNewComment] = useState("")
   const [newAssignee, setNewAssignee] = useState("")
 
+  const [toggleEdit, setToggleEdit] = useState({
+    name: false,
+    description: false, 
+    category_id: false,
+    assigned_to: false,
+    position: false
+  })
+  const [taskInput, setTaskInput] = useState({
+    ...task
+  })
+
 
   const currentUser = useSelector(state => state.user.currentUser.username)
   const currentTask = useSelector(state => state.task.currentTask)
@@ -114,6 +125,35 @@ const handleDropdownClick = (member) => {
     // console.log(e.target.id)
   }
 
+
+  const handleEditClick = taskPart => {
+    setToggleEdit({
+      ...toggleEdit, [taskPart]: true
+    })
+    console.log("EDIT", toggleEdit)
+  }
+
+  const handleChange = (e) => {
+    console.log(e.target.name)
+    setTaskInput({...taskInput, [e.target.name]: e.target.value})
+  }
+
+
+  const handleSubmit = (taskPart) => {
+    console.log("taskpart", taskPart)
+    // console.log(e.target.name.taskPart, "e")
+    // e.preventDefault()
+    const taskObj = {
+      ...taskInput
+
+    }
+    console.log("taskObj", taskObj)
+    dispatch(updateTaskAction(task.id, taskObj))
+    setToggleEdit({
+      ...toggleEdit, [taskPart]: false 
+    })
+  }
+
   return(
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided, ) => (
@@ -173,7 +213,17 @@ const handleDropdownClick = (member) => {
     <Modal.Content >
         <Modal.Description>
         <Button icon='close' onClick={() => setOpen(false)}/>
-        <Header>{task.name}</Header>
+        <h4>Title:</h4>
+
+
+        { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}><Form.Input type="text" name="name" autoComplete="off" value={taskInput.name} onChange={handleChange} /></Form>
+      : <Header> {task.name}
+      {/* <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon> */}
+        <span>
+          <Icon name="edit" onClick={() => handleEditClick("name")} ></Icon>
+        </span>
+      </Header>
+    }
 
         {/* {task.assigned_to ? (<>Assigned to:</h4>
           <p>{task.assigned_to}</p>
@@ -190,7 +240,20 @@ const handleDropdownClick = (member) => {
             <h4><Icon name='bars'/>
             Description
           </h4>
-          <p>{task.description}</p>
+
+          { toggleEdit.description ?  <Form onSubmit={() => handleSubmit("description")}><Form.Input type="text" name="description" autoComplete="off" value={taskInput.description} onChange={handleChange} /></Form>
+      : <p> {task.description}
+      {/* <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon> */}
+        <span>
+          <Icon name="edit" onClick={() => handleEditClick("description")} ></Icon>
+        </span>
+      </p>
+    }
+
+
+
+
+
           <h4>
             Activity
           </h4>
