@@ -57,58 +57,19 @@ const reducer = (state = defaultState, action) => {
         currentTask: action.payload // update currentTask - see change on screen immediately
       }
       case UPDATE_TASK_POSITION:
-      const updated = state.tasks.map(task => {
-        for (const element of action.payload) {
-          if (task.id === element.id){
-            console.log("el", element)
-            console.log("task ", task)
+        console.log("action.payload", action.payload)
+        // let updated =[];
 
-            return {
-              // ...task, // do we need this?
-              
-              ...element
-            }
-          }
-          else{
-            return task
-          }
+        const updated = state.tasks.map(task => {
+          let updatedTask = action.payload.find(t => t.id === task.id)
+          return updatedTask ? updatedTask : task
+        })
+
+        console.log("updatedTasks reducer", updated)
+        return {
+          ...state,
+          tasks: updated,
         }
-        return updated
-
-      })
-          console.log("updatedTasks reducer", updated)
-      return {
-        ...state,
-        tasks: updated,
-        // currentTask: action.payload // update currentTask - see change on screen immediately
-      } 
-
-      // case REORDER_TASKS:
-      // const updatedTasks = state.tasks.map(task => {
-      //   for (const element of action.payload) {
-      //     if (task.id === element.id){
-      //       console.log("el", element)
-      //       console.log("task ", task)
-
-      //       return {
-      //         // ...task, // do we need this?
-              
-      //         ...element
-      //       }
-      //     }
-      //     else{
-      //       return task
-      //     }
-      //   }
-      //   return updated
-
-      // })
-      //     console.log("updatedTasks reducer", updated)
-      // return {
-      //   ...state,
-      //   tasks: updated,
-      //   // currentTask: action.payload // update currentTask - see change on screen immediately
-      // } 
       case DELETE_TASK:
       return {
         ...state,

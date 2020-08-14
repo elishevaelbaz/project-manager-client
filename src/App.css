@@ -55,6 +55,11 @@
   overflow-x:auto;
 }
 
+.categoryCard{
+  /* deal with this later */
+  min-height: 200px !important; 
+
+}
 /* .row{
   grid-row: 1;   
 } */

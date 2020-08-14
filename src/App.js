@@ -51,9 +51,9 @@ const App = () => {
   const onDragEnd = result => {
     //TODO: reorder the column
   }
-  
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    // <DragDropContext onDragEnd={onDragEnd}>
 
     <div className="App">
       {/* <Route exact path="/" /> */}
@@ -93,7 +93,7 @@ const App = () => {
       
    
     </div>
-    </DragDropContext>
+    // </DragDropContext>
   );
 }
 

@@ -5,11 +5,11 @@ import { fetchBoards, setCurrentBoard } from '../store/board/actions'
 import { fetchCategories, addCategoryAction } from '../store/category/actions';
 import { addTaskAction, fetchTasks, updateTaskAction, updatePositionAction } from '../store/task/actions';
 import { Grid, Container, Form, Popup, Button } from 'semantic-ui-react'
-import TaskForm from './TaskForm';
+// import TaskForm from './TaskForm';
 import { withRouter } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd'
-import { REORDER_CATEGORY_TASKS, REORDER_CATEGORIES_TASKS } from '../store/category/types';
-import { REORDER_TASKS } from '../store/task/types';
+// import { REORDER_CATEGORY_TASKS, REORDER_CATEGORIES_TASKS } from '../store/category/types';
+// import { REORDER_TASKS } from '../store/task/types';
 
 
 const CategoryContainer = ({match}) => {
@@ -73,6 +73,7 @@ const CategoryContainer = ({match}) => {
 
   const onDragEnd = result => {
     //TODO: reorder the column
+    console.log("RESULT", result)
     const { destination, source, draggableId } = result
     if (!destination){
       return
@@ -84,8 +85,8 @@ const CategoryContainer = ({match}) => {
     }
     // if position is changed
     // reorder taskIds array
-    const start = categories.find(category => category.id === parseInt(source.droppableId))
-    const finish = categories.find(category => category.id === parseInt(destination.droppableId))
+    const start = categories.find(category => category.id === parseInt(source.droppableId, 10))
+    const finish = categories.find(category => category.id === parseInt(destination.droppableId, 10))
 console.log("Start", start)
 console.log("Finish", finish)
 console.log("categories", categories)
