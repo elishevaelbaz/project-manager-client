@@ -86,4 +86,9 @@ button.corner {
 .ui.card > .ui.card
 {
   height: fit-content !important;
+  margin-top: 5px !important;
+}
+
+.editIcon{
+  margin-left: 5px !important;
 }

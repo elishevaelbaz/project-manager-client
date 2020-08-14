@@ -159,33 +159,33 @@ const handleDropdownClick = (member) => {
       {(provided, ) => (
 
       
-<div {...provided.draggableProps}
-      {...provided.dragHandleProps}
-      ref={provided.innerRef}>
-    <Card
-      // href='#card-example-link-card'
-      key={task.id}
-      onClick={() => setOpen(true)}
-      
-    >
-      <Card.Content>
-      {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
+      <div {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}>
+        <Card
+          // href='#card-example-link-card'
+          key={task.id}
+          onClick={() => setOpen(true)}
+          
+        >
+          <Card.Content>
+          {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
 
-      {/* <Card.Href>#card-example-link-card</Card.Header> */}
-      <Card.Description>
-      {task.name}
-      </Card.Description>
-      <Card.Meta>{task.position}</Card.Meta>
-      <Card.Meta>{index}</Card.Meta>
-      <Dropdown
-    placeholder='Change position'
-    fluid
-    selection
-    options={positionOptions}
-    // defaultValue={currentCategoryId || null}
-    onChange={(e, {value}) => handleSelect(value)}
-    />
-      {/* <Card.Meta>{task.description}</Card.Meta> */}
+          {/* <Card.Href>#card-example-link-card</Card.Header> */}
+            <Card.Description>
+            {task.name}
+            </Card.Description>
+            <Card.Meta>{task.position}</Card.Meta>
+            <Card.Meta>{index}</Card.Meta>
+            <Dropdown
+          placeholder='Change position'
+          fluid
+          selection
+          options={positionOptions}
+          // defaultValue={currentCategoryId || null}
+          onChange={(e, {value}) => handleSelect(value)}
+          />
+            {/* <Card.Meta>{task.description}</Card.Meta> */}
 
 
       {/* {currentTask.name === task.name && (<>
@@ -218,16 +218,12 @@ const handleDropdownClick = (member) => {
 
         { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}><Form.Input type="text" name="name" autoComplete="off" value={taskInput.name} onChange={handleChange} /></Form>
       : <Header> {task.name}
-      {/* <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon> */}
         <span>
-          <Icon name="edit" onClick={() => handleEditClick("name")} ></Icon>
+          <Icon name="pencil" className="editIcon" onClick={() => handleEditClick("name")} ></Icon>
         </span>
       </Header>
     }
 
-        {/* {task.assigned_to ? (<>Assigned to:</h4>
-          <p>{task.assigned_to}</p>
-          </>) : <p>Not assigned to anyone yet</p>} */}
         <span>
           Assigned to:
           <AssigneeDropdown currentAssignee={task.assigned_to} members={members} handleSelect={handleDropdownClick}/>
@@ -242,10 +238,10 @@ const handleDropdownClick = (member) => {
           </h4>
 
           { toggleEdit.description ?  <Form onSubmit={() => handleSubmit("description")}><Form.Input type="text" name="description" autoComplete="off" value={taskInput.description} onChange={handleChange} /></Form>
-      : <p> {task.description}
-      {/* <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon> */}
+      : <p> {task.description ? task.description : "No description yet..."}
+      {/* nested ternary ^ */}
         <span>
-          <Icon name="edit" onClick={() => handleEditClick("description")} ></Icon>
+          <Icon name="pencil" className="editIcon" onClick={() => handleEditClick("description")} ></Icon>
         </span>
       </p>
     }

@@ -48,7 +48,7 @@ const Header = () => {
     {/* <Button onClick={handleAddTask}>Add Task</Button> */}
     { currentUser && 
     <Menu >
-    <Menu.Item></Menu.Item>
+    {/* <Menu.Item></Menu.Item> */}
       {  currentBoard &&  <Menu.Item>{currentBoard.name}</Menu.Item>}
     <Menu.Item>
     <BoardDropdown />
@@ -57,17 +57,15 @@ const Header = () => {
     
 
     
-    {currentBoard && <Menu.Item>
-    <Menu.Item>{members.length == 1 ? "you are the only member" : <Popup trigger={<Menu.Item> {members.length} members</Menu.Item>}>
+    {currentBoard && <>
+    <Menu.Item>
+      {members.length === 1 ? "you are the only member" : <Popup trigger={<p> {members.length} members</p>}>
       <Popup.Content>
       {members.map(member => <span><Image src={"https://react.semantic-ui.com/images/avatar/small/stevie.jpg"} alt="avatar" avatar /><p key={member.username}>{member.username}</p></span>)}
     </Popup.Content>
-      </Popup>
-        
-        
-        // header={user.name}
-        
-         }</Menu.Item>
+      </Popup>     
+         }
+         </Menu.Item>
       <Menu.Item><Popup
     // icon='plus '
             trigger={<p><Icon.Group size='large'>
@@ -75,7 +73,6 @@ const Header = () => {
             <Icon corner name='add' />
           </Icon.Group>
           Invite</p>
-          // <Button icon='address card' content='Invite' />
         }
             content={<Form onSubmit={handleAddMember}>
             <Form.Input  name="name" label="Invite to board" placeholder='username' onChange={handleChange} />
@@ -86,8 +83,9 @@ const Header = () => {
             // onOpen={handleOpen}
           /></Menu.Item>
     
-    </Menu.Item>}
-    <Menu.Item>
+    </>}
+            
+    <Menu.Item  position='right'>
   
       <Link to="/login" >
         <Button onClick={handleLogout}>Logout</Button>
