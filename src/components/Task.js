@@ -2,16 +2,18 @@ import React, { useState, useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
 import { Card, Icon, Dropdown, Modal, Button, Form, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteTaskAction, setCurrentTask, closeCurrentTask, updatePositionAction } from '../store/task/actions'
+import { deleteTaskAction, setCurrentTask, closeCurrentTask, updatePositionAction, updateTaskAction } from '../store/task/actions'
 import { addCommentAction, fetchComments } from '../store/comment/actions'
 import { Draggable } from 'react-beautiful-dnd'
 import Comment from './Comment'
+import AssigneeDropdown from './AssigneeDropdown'
 
 const Task = ({task, count, index}) => {
   console.log("TASK", task)
   
   const [open, setOpen] = React.useState(false)
   const [newComment, setNewComment] = useState("")
+  const [newAssignee, setNewAssignee] = useState("")
 
 
   const currentUser = useSelector(state => state.user.currentUser.username)
@@ -19,6 +21,8 @@ const Task = ({task, count, index}) => {
   const currentCategory = useSelector(state => state.category.categories.find(c => c.id === task.category_id))
 
  const comments = useSelector(state => state.comment.comments)
+
+ const members = useSelector(state => state.board.members)
   const dispatch = useDispatch()
 
 
@@ -98,6 +102,18 @@ const handleNewCommentSubmit = e => {
   setNewComment("")
 }
 
+
+const handleDropdownClick = (member) => {
+  console.log("member", member)
+    // const member = members.find(m => m.username === e.target.textContent)
+    setNewAssignee(member)
+    const body = {...task, assigned_to: member}
+    console.log("BODY", body)
+    dispatch(updateTaskAction(task.id, body))
+    // console.log(e.target)
+    // console.log(e.target.id)
+  }
+
   return(
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided, ) => (
@@ -158,8 +174,16 @@ const handleNewCommentSubmit = e => {
         <Modal.Description>
         <Button icon='close' onClick={() => setOpen(false)}/>
         <Header>{task.name}</Header>
-          <h4>
-            Category:
+
+        {/* {task.assigned_to ? (<>Assigned to:</h4>
+          <p>{task.assigned_to}</p>
+          </>) : <p>Not assigned to anyone yet</p>} */}
+        <span>
+          Assigned to:
+          <AssigneeDropdown currentAssignee={task.assigned_to} members={members} handleSelect={handleDropdownClick}/>
+          </span>
+
+          <h4>Category:
           </h4>
           <p>{currentCategory && currentCategory.name}</p>
           
@@ -167,7 +191,6 @@ const handleNewCommentSubmit = e => {
             Description
           </h4>
           <p>{task.description}</p>
-          <p>hey</p>
           <h4>
             Activity
           </h4>

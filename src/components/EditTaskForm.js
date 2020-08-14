@@ -5,7 +5,7 @@ import {  updateTaskAction } from '../store/task/actions'
 import CategoryDropdown from './CategoryDropdown'
 
 const EditTaskForm = ({ task, categories, currentCategory}) => {
-  const { description, category_id, dueDate, id, name, position} = task
+  const { description, category_id, dueDate, id, name, position, assigned_to} = task
   console.log(category_id)
 
   // const category = useSelector(state => {
@@ -20,7 +20,8 @@ const EditTaskForm = ({ task, categories, currentCategory}) => {
     description: description,
     category_id: category_id, // currentCategory.name, //currentCategory.id,
     dueDate: dueDate,
-    position: position
+    position: position,
+    assigned_to: assigned_to
    })
 
    console.log(taskDetails, task.name, name)
