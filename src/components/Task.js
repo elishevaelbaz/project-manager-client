@@ -1,11 +1,11 @@
 import React, { useState, useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
-import { Card, Icon, Dropdown, Modal, Button, Form, Header } from 'semantic-ui-react'
+import { Card, Icon, Dropdown, Modal, Button, Form, Header, Comment } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, setCurrentTask, closeCurrentTask, updatePositionAction, updateTaskAction } from '../store/task/actions'
 import { addCommentAction, fetchComments } from '../store/comment/actions'
 import { Draggable } from 'react-beautiful-dnd'
-import Comment from './Comment'
+import CommentComp from './CommentComp'
 import AssigneeDropdown from './AssigneeDropdown'
 
 const Task = ({task, count, index}) => {
@@ -70,7 +70,7 @@ const Task = ({task, count, index}) => {
   // }
 
   const renderComments = () => {
-    return comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
+    return comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
   }
 
  //==========================
@@ -257,7 +257,9 @@ const handleDropdownClick = (member) => {
           <h4>
             Activity
           </h4>
+          <Comment.Group>
           {comments && renderComments()}
+          </Comment.Group>
         <Form onSubmit={handleNewCommentSubmit}>
           <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} placeholder="Add a comment" onChange={handleNewCommentChange} />
         </Form>
