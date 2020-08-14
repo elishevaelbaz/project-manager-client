@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form, Dropdown, Popup, Button } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import CategoryDropdown from './CategoryDropdown'
@@ -8,12 +8,43 @@ import { addTaskAction } from '../store/task/actions'
 
 const TaskForm = ({ categoryId }) => {
 
-  
+  const node = useRef();
+
+  const [isOpen, setIsOpen] = useState(false)
 
   const [taskInput, setTaskInput] = useState({
     name: "",
     description: ""
   })
+
+  // const handleClickOutside = e => {
+  //   console.log("clicking anywhere");
+  //   console.log(e.target)
+  //   console.log(node.current)
+  //   // if (node.current.contains(e.target)) {
+  //   //   // inside click
+  //   //   return;
+  //   // }
+  //   // outside click
+  //   setIsOpen(false);
+  // };
+
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [isOpen]);
+
+
+  
+
+  
 
   const dispatch = useDispatch()
 
@@ -40,6 +71,7 @@ const TaskForm = ({ categoryId }) => {
 
     console.log(taskObj)
     dispatch(addTaskAction(taskObj))
+    setIsOpen(false)
 
     // props.handleAddTask(taskInput)
 
@@ -73,7 +105,8 @@ const TaskForm = ({ categoryId }) => {
 
 
       <Popup
-        trigger={<Button icon='add' content='Add a task' />}
+        ref={node}
+        trigger={<Button icon='add' content='Add a task' onClick={() => setIsOpen(!isOpen)} />}
         content={<Form onSubmit={handleSubmit}>
 
         <Form.Input  label='name' name="name" placeholder='Task name' onChange={handleChange} />
@@ -83,7 +116,7 @@ const TaskForm = ({ categoryId }) => {
         <Form.Button color='violet'>Submit</Form.Button>
                 </Form>}
         on='click'
-        // open={isOpen}
+        open={isOpen}
         // onOpen={handleOpen}
       />
     )

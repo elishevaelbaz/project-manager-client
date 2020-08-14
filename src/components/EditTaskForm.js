@@ -5,7 +5,7 @@ import {  updateTaskAction } from '../store/task/actions'
 import CategoryDropdown from './CategoryDropdown'
 
 const EditTaskForm = ({ task, categories, currentCategory}) => {
-  const { description, category_id, dueDate, id, name} = task
+  const { description, category_id, dueDate, id, name, position, assigned_to} = task
   console.log(category_id)
 
   // const category = useSelector(state => {
@@ -20,7 +20,8 @@ const EditTaskForm = ({ task, categories, currentCategory}) => {
     description: description,
     category_id: category_id, // currentCategory.name, //currentCategory.id,
     dueDate: dueDate,
-    position: null
+    position: position,
+    assigned_to: assigned_to
    })
 
    console.log(taskDetails, task.name, name)
@@ -56,7 +57,7 @@ const handleSubmit = e => {
           <Form.Input fluid label='description' name="description" placeholder='description' value={taskDetails.description} onChange={handleChange} />
           {/* put a dropdown for category and datepicker */}
           <Form.Input fluid label='category'>
-            <CategoryDropdown categories={categories} currentCategoryId={currentCategory.id} handleSelect={handleSelect}/>
+            <CategoryDropdown categories={categories} currentCategoryId={currentCategory && currentCategory.id} handleSelect={handleSelect}/>
             </Form.Input>
           {/* <Form.Input fluid label='category' name="category" placeholder='Task category' value={taskDetails.category} onChange={handleChange} /> */}
           <Form.Input fluid label='dueDate' name="dueDate" placeholder='due date' value={taskDetails.dueDate} onChange={handleChange} />

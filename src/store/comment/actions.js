@@ -14,6 +14,18 @@ export const fetchComments = (taskId) => dispatch => {
   })
 }
 
+// export const fetchAllComments = () => dispatch => {
+//   dispatch({type: FETCH_COMMENTS})
+//   getAllComments().then(comments => {
+    
+//     dispatch({ 
+//       type: SET_COMMENTS, 
+//       payload: comments
+//     })
+   
+//   })
+// }
+
 export const addCommentAction = (commentObj) => dispatch => {
   addComment(commentObj)
   .then(comment => {

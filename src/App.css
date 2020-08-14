@@ -55,9 +55,23 @@
   overflow-x:auto;
 }
 
+.categoryCard{
+  /* deal with this later */
+  min-height: 200px !important; 
+
+}
 /* .row{
   grid-row: 1;   
 } */
+
+.description {
+  position: relative;
+}
+.description > button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
 
 .ui.card > .ui.card
 {

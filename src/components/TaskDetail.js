@@ -1,5 +1,5 @@
 import React, { useEffect, useState }  from 'react'
-import { Card, Icon, Form } from 'semantic-ui-react'
+import { Card, Icon, Form, Modal, Button, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, fetchCurrentTask } from '../store/task/actions'
 import Comment from './Comment'
@@ -27,6 +27,8 @@ const TaskDetail = ({ match, history }) => {
   const [name, setName] = useState(currentTask.name)
 
   const [newComment, setNewComment] = useState("")
+
+  const [open, setOpen] = React.useState(false)
 
   const dispatch = useDispatch()
 
@@ -118,8 +120,9 @@ const TaskDetail = ({ match, history }) => {
      
       <Card.Meta>{currentTask.description}</Card.Meta>
       <Card.Meta>Due Date:{currentTask.due_date}</Card.Meta>
-      <Card.Meta>Category: {currentCategory.name}</Card.Meta>
+      <Card.Meta>Category: {currentCategory && currentCategory.name}</Card.Meta>
       <Card.Meta>Added by: {currentTask.created_by === currentUser ? "you" : currentTask.created_by}</Card.Meta>
+      <Card.Meta>Position: {currentTask.position}</Card.Meta>
         {comments && renderComments()}
         <Form onSubmit={handleNewCommentSubmit}>
           <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} placeholder="Add a comment" onChange={handleNewCommentChange} />
@@ -132,6 +135,59 @@ const TaskDetail = ({ match, history }) => {
       </Card>
 
 <EditTaskForm task={currentTask} categories={categories} currentCategory={currentCategory} />
+
+
+
+<Modal
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      open={open}
+      trigger={<Button>Show Modal</Button>}
+      size='small'
+    >
+      
+      <Modal.Content image>
+        <Modal.Description>
+        <Button icon='close' onClick={() => setOpen(false)}/>
+          {/* <Icon name='close' onClick={() => setOpen(false)}/> */}
+          {/* <Button icon='close' onClick={() => setOpen(false)}>x</Button> */}
+          <Header>{currentTask.name}</Header>
+          <h4>
+            Category:
+          </h4>
+          <p>{currentCategory && currentCategory.name}</p>
+          
+            <h4><Icon name='bars'/>
+            Description
+          </h4>
+          <p>{currentTask.description}</p>
+          <h4>
+            Activity
+          </h4>
+          {comments && renderComments()}
+        <Form onSubmit={handleNewCommentSubmit}>
+          <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} placeholder="Add a comment" onChange={handleNewCommentChange} />
+        </Form>
+        </Modal.Description>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='black' onClick={() => setOpen(false)}>
+          Nope
+        </Button>
+        <Button
+          content="Yep, that's me"
+          labelPosition='right'
+          icon='checkmark'
+          onClick={() => setOpen(false)}
+          positive
+        />
+      </Modal.Actions>
+    </Modal>
+
+
+
+
+
       </div>
     )
   

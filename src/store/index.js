@@ -6,6 +6,7 @@ import commentReducer from './comment/reducer'
 import categoryReducer from './category/reducer'
 import boardReducer from './board/reducer'
 import userReducer from './user/reducer'
+import errorReducer from './error/reducer'
 import { LOGOUT_USER } from './user/types'
 
 // changed from rootReducer to appReducer
@@ -14,7 +15,8 @@ const appReducer = combineReducers({
   comment: commentReducer,
   category: categoryReducer,
   board: boardReducer,
-  user: userReducer
+  user: userReducer,
+  error: errorReducer
 
 })
 

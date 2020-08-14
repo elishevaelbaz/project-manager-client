@@ -54,6 +54,18 @@ export function deleteTask(id) {
   .then(r => r.json())
 }
 
+export function updatePosition(id, body){
+  return fetch(`http://localhost:3000/tasks/${id}/position`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    .then(r => r.json())
+}
+
 // =====================
 // board fetches
 // =====================
@@ -138,6 +150,13 @@ export const getComments = (taskId) => {
   })
     .then(r => r.json())
 }
+
+// export const getAllComments = () => {
+//   return fetch(`http://localhost:3000/comments`,{
+//     credentials: "include"
+//   })
+//     .then(r => r.json())
+// }
 
 export const addComment = (commentObj) => {
   // const commentObj = {name, due_date, category_id, created_by}

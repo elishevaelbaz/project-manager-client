@@ -10,6 +10,7 @@ import { fetchBoards } from './store/board/actions';
 import { signUpAction, loginAction, autoLoginAction} from './store/user/actions';
 import Login from './components/Login';
 import TaskDetail from './components/TaskDetail';
+import { DragDropContext } from 'react-beautiful-dnd'
 
 
 const App = () => {
@@ -24,6 +25,11 @@ const App = () => {
     // getTasks()
     //   .then(tasks => dispatch({ type: SET_TASKS, payload: tasks}))
   }, [dispatch])
+
+  // fetch boards in app, when the currentUser changes, so have acces in redux
+  useEffect(() => {
+    dispatch(fetchBoards())
+  }, [dispatch, currentUser])
 
   const handleSignUp = (signUpInfo) => {
     // set current user, then redirect to home page
@@ -42,8 +48,13 @@ const App = () => {
     //   this.props.history.push('/home')
     // })
   }
+  const onDragEnd = result => {
+    //TODO: reorder the column
+  }
 
   return (
+    // <DragDropContext onDragEnd={onDragEnd}>
+
     <div className="App">
       {/* <Route exact path="/" /> */}
       <Header/>
@@ -82,6 +93,7 @@ const App = () => {
       
    
     </div>
+    // </DragDropContext>
   );
 }
 
