@@ -148,7 +148,8 @@ const TaskDetail = ({ match, history }) => {
       
       <Modal.Content image>
         <Modal.Description>
-          <Icon name='close' onClick={() => setOpen(false)}/>
+        <Button icon='close' onClick={() => setOpen(false)}/>
+          {/* <Icon name='close' onClick={() => setOpen(false)}/> */}
           {/* <Button icon='close' onClick={() => setOpen(false)}>x</Button> */}
           <Header>{currentTask.name}</Header>
           <h4>
