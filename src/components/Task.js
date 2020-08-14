@@ -261,18 +261,6 @@ const handleDropdownClick = (member) => {
         </Form>
         </Modal.Description>
       </Modal.Content>
-      <Modal.Actions>
-        <Button color='black' onClick={() => setOpen(false)}>
-          Nope
-        </Button>
-        <Button
-          content="Yep, that's me"
-          labelPosition='right'
-          icon='checkmark'
-          onClick={() => setOpen(false)}
-          positive
-        />
-    </Modal.Actions>
   </Modal>
       
       </div>
