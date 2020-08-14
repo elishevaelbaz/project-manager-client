@@ -151,6 +151,13 @@ export const getComments = (taskId) => {
     .then(r => r.json())
 }
 
+// export const getAllComments = () => {
+//   return fetch(`http://localhost:3000/comments`,{
+//     credentials: "include"
+//   })
+//     .then(r => r.json())
+// }
+
 export const addComment = (commentObj) => {
   // const commentObj = {name, due_date, category_id, created_by}
   return fetch("http://localhost:3000/comments", {
