@@ -5,6 +5,7 @@ import { Grid, Card, CardContent } from 'semantic-ui-react'
 import TaskForm from './TaskForm'
 import { Droppable } from 'react-beautiful-dnd'
 import { fetchAllComments } from '../store/comment/actions'
+import PlaceholderCard from './PlaceholderCard'
 
 const Category = ({ name, id, taskOrder}) => {
 
@@ -38,7 +39,7 @@ const Category = ({ name, id, taskOrder}) => {
 //     dispatch(fetchAllComments())
 //   }, [dispatch])
 
-  if (loading) return <h2>Loading...</h2>
+  if (loading) return <PlaceholderCard />
 
   return(
   
