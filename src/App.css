@@ -64,6 +64,15 @@
   grid-row: 1;   
 } */
 
+.description {
+  position: relative;
+}
+.description > i {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
 .ui.card > .ui.card
 {
   height: fit-content !important;
