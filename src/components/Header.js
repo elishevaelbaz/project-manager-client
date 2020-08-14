@@ -3,7 +3,7 @@ import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
 import { Link } from 'react-router-dom';
-import { Modal, Button, Menu, Popup, Form, Icon} from 'semantic-ui-react'
+import { Image, Button, Menu, Popup, Form, Icon} from 'semantic-ui-react'
 import { addMemberAction, getMembersAction } from '../store/board/actions';
 import ErrorNotification from './ErrorNotification';
 
@@ -58,7 +58,16 @@ const Header = () => {
 
     
     {currentBoard && <Menu.Item>
-      <Menu.Item>{members.length > 1 ? `${members.length} members` : "you are the only member" }</Menu.Item>
+    <Menu.Item>{members.length == 1 ? "you are the only member" : <Popup trigger={<Menu.Item> {members.length} members</Menu.Item>}>
+      <Popup.Content>
+      {members.map(member => <span><Image src={"https://react.semantic-ui.com/images/avatar/small/stevie.jpg"} alt="avatar" avatar /><p key={member.username}>{member.username}</p></span>)}
+    </Popup.Content>
+      </Popup>
+        
+        
+        // header={user.name}
+        
+         }</Menu.Item>
       <Menu.Item><Popup
     // icon='plus '
             trigger={<p><Icon.Group size='large'>

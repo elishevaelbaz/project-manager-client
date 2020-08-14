@@ -73,6 +73,16 @@
   right: 0px;
 }
 
+button.corner {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+ /* ui.menu + .ui.compact.floating.negative.message{
+  padding-right:5px !important;
+  margin-right:5px !important;
+} */
 .ui.card > .ui.card
 {
   height: fit-content !important;

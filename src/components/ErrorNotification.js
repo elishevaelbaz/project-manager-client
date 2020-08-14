@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { HIDE_ERROR } from '../store/error/types';
+import { Message, Icon } from 'semantic-ui-react'
 
 const ErrorNotification = (props) => {
  const isOpen = useSelector(state => state.error.isOpen);
@@ -17,11 +18,12 @@ const ErrorNotification = (props) => {
  return (
  <>
  {isOpen && error && (
- <div className="fancy-error-class">
-   <span>{error}</span>
- <button onClick={handleClose}>Close Error</button>
- 
- </div>
+
+<Message negative compact floating >
+<Icon name='close' onClick={handleClose} className="corner" color="red"/>
+<Message.Header className="errorMessage">{error}</Message.Header>
+{/* <p>{error}</p> */}
+</Message>
  )}
  </>
  )
