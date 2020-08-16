@@ -7,8 +7,9 @@ import { addCommentAction, fetchComments } from '../store/comment/actions'
 import { Draggable } from 'react-beautiful-dnd'
 import CommentComp from './CommentComp'
 import AssigneeDropdown from './AssigneeDropdown'
+import { CLEAR_COMMENTS } from '../store/comment/types'
 
-const Task = ({task, count, index}) => {
+const Task = ({task, count, index,}) => {
   console.log("TASK", task)
   
   const [open, setOpen] = React.useState(false)
@@ -37,13 +38,13 @@ const Task = ({task, count, index}) => {
   const dispatch = useDispatch()
 
 
-  // if separate out the modal, moce this useeffect there
-  //so don't have to fetch all the comments at once
-    useEffect(() => {
-    // dispatch(fetchCurrentTask(match.params.id))
-// comments associated with this task
-    dispatch(fetchComments(task.id))
-  }, [dispatch, task])
+  // if separate out the modal, move this useeffect there
+  // so don't have to fetch all the comments at once
+//     useEffect(() => {
+//     // dispatch(fetchCurrentTask(match.params.id))
+// // comments associated with this task
+//     // dispatch(fetchComments(task.id))
+//   }, [dispatch, task])
 
   let history = useHistory()
 
@@ -69,9 +70,8 @@ const Task = ({task, count, index}) => {
   //   // return <TaskDetail task={task} />
   // }
 
-  const renderComments = () => {
-    return comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
-  }
+  const renderComments = () =>  comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
+  
 
  //==========================
  let positionOptions = []
@@ -105,9 +105,12 @@ const handleNewCommentSubmit = e => {
   e.preventDefault()
   console.log("submit")
   console.log(newComment)
+  // console.log("currentTask", currentTask)
+  // console.log("task", task)
+
   const commentObj = {
     text: newComment,
-    task_id: currentTask.id
+    task_id: task.id
   }
   dispatch(addCommentAction(commentObj))
   setNewComment("")
@@ -165,7 +168,10 @@ const handleDropdownClick = (member) => {
         <Card
           // href='#card-example-link-card'
           key={task.id}
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            dispatch(fetchComments(task.id))
+            setOpen(true)
+          }}
           
         >
           <Card.Content>
@@ -205,14 +211,19 @@ const handleDropdownClick = (member) => {
 
 
   <Modal
-    onClose={() => setOpen(false)}
+    onClose={() => {
+      setOpen(false)}}
     onOpen={() => setOpen(true)}
     open={open}
     // trigger={<Button>Show Modal</Button>}
   >
     <Modal.Content >
         <Modal.Description>
-        <Button icon='close' onClick={() => setOpen(false)}/>
+        <Button icon='close' onClick={() => {
+          // to avoid the jump of old comments when opening a modal
+          dispatch({type: CLEAR_COMMENTS})
+          setOpen(false)
+          }}/>
         <h4>Title:</h4>
 
 

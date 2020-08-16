@@ -31,7 +31,6 @@ const Category = ({ name, id, taskOrder}) => {
   }
 
   const comments = useSelector(state => state.comment.comments)
-  // const taskComments = comment.filter(comment => comment.task_id === )
 
 //   useEffect(() => {
 //     // dispatch(fetchCurrentTask(match.params.id))
