@@ -131,10 +131,6 @@ const handleAssigneeDropdownClick = (member) => {
   }
 
   const  handleCategoryDropdownClick = (categoryId) => {
-    // setTaskInput({...taskInput, category_id: categoryId })
-    // console.log(e.target)
-    // console.log(e.target.id)
-
     const numTasksInCategory = tasks.filter(t => t.category_id === categoryId).length
 
     const body = {...task, category_id: categoryId, position: numTasksInCategory + 1} //last in the category (gem for position starts with 1)

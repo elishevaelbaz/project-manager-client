@@ -108,6 +108,7 @@ console.log("droppableId", source.droppableId)
 
     // task with draggableId
     const tk = tasks.find(t => t.id === parseInt(draggableId))
+    console.log("elishevatk", tk)
     newTasks.splice(destination.index , 0, tk) //removedTaskArr[0]
 console.log("newTasks", newTasks)
     const newColumn = {
@@ -120,7 +121,7 @@ console.log("newColumn", newColumn)
     //   type: REORDER_CATEGORY_TASKS, 
     //   payload: newColumn
     // })
-    dispatch(updatePositionAction(tk.id, {position: destination.index + 1, category_id: tk.category_id}))
+    dispatch(updatePositionAction(tk.id, {...tk, position: destination.index + 1, category_id: tk.category_id}))
     return
 
     }
@@ -177,7 +178,7 @@ console.log("newFinish", newFinish)
 console.log("jjj", destination.index)
 // dispatch(updateTaskAction(t.id, {...t, category_id: newFinish.id }))
 
-dispatch(updatePositionAction(t.id, {category_id: newFinish.id, position: destination.index + 1}))
+dispatch(updatePositionAction(t.id, {...t, category_id: newFinish.id, position: destination.index + 1}))
 
 
   }

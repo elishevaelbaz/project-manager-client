@@ -1,6 +1,7 @@
 import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_TASK_POSITION } from './types'
 import { getTasks, addTask, deleteTask, updateTask, getCurrentTask, updatePosition } from '../../api'
 import { SET_ERROR } from '../error/types'
+// import { SET_ORDER } from '../category/types'
 
 //thunky action
 // export const fetchTasks = () => {
@@ -21,6 +22,25 @@ export const fetchTasks = (id) => dispatch => {
       type: SET_TASKS, 
       payload: tasks
     })
+
+    // const ids = tasks.map(task => ({"id": task.id, "category_id:": task.category_id}))
+    // dispatch({
+    //   type: SET_ORDER,
+    //   payload:tasks
+    // })
+
+
+    // const updated = state.categories.forEach(category => {
+    //   let tasks = action.payload.filter(t => t.category_id === category.id)
+    //   tasks.map(t => t.id)
+
+
+    //   let tasks = action.payload.filter(t => t.category_id === category.id)
+    //   return updatedTask ? updatedTask : task
+    // })
+
+
+
   })
 }
 
@@ -84,6 +104,11 @@ export const updateTaskAction = (id, body) => dispatch => {
 }
 
 export const updatePositionAction = (id, body) => dispatch => {
+  console.log(body)
+  dispatch({
+    type: UPDATE_TASK,
+    payload: body
+  })
   updatePosition (id, body)
   .then(updatedTasks => {
     console.log("updatedTasks, action", updatedTasks)
