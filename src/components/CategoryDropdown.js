@@ -11,7 +11,7 @@ const CategoryDropdown = ({ categories, handleSelect, currentCategoryId }) => {
   return(
     <Dropdown
     placeholder='Select Category'
-    fluid
+    
     selection
     options={categoryOptions}
     defaultValue={currentCategoryId || null}

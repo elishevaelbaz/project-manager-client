@@ -8,6 +8,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import CommentComp from './CommentComp'
 import AssigneeDropdown from './AssigneeDropdown'
 import { CLEAR_COMMENTS } from '../store/comment/types'
+import CategoryDropdown from './CategoryDropdown'
 
 const Task = ({task, count, index,}) => {
   console.log("TASK", task)
@@ -31,7 +32,8 @@ const Task = ({task, count, index,}) => {
   const currentUser = useSelector(state => state.user.currentUser.username)
   const currentTask = useSelector(state => state.task.currentTask)
   const currentCategory = useSelector(state => state.category.categories.find(c => c.id === task.category_id))
-
+  const categories = useSelector(state => state.category.categories)
+const tasks = useSelector(state => state.task.tasks)
  const comments = useSelector(state => state.comment.comments)
 
  const members = useSelector(state => state.board.members)
@@ -117,7 +119,7 @@ const handleNewCommentSubmit = e => {
 }
 
 
-const handleDropdownClick = (member) => {
+const handleAssigneeDropdownClick = (member) => {
   console.log("member", member)
     // const member = members.find(m => m.username === e.target.textContent)
     setNewAssignee(member)
@@ -126,6 +128,19 @@ const handleDropdownClick = (member) => {
     dispatch(updateTaskAction(task.id, body))
     // console.log(e.target)
     // console.log(e.target.id)
+  }
+
+  const  handleCategoryDropdownClick = (categoryId) => {
+    // setTaskInput({...taskInput, category_id: categoryId })
+    // console.log(e.target)
+    // console.log(e.target.id)
+
+    const numTasksInCategory = tasks.filter(t => t.category_id === categoryId).length
+
+    const body = {...task, category_id: categoryId, position: numTasksInCategory + 1} //last in the category (gem for position starts with 1)
+    console.log("BODY", body)
+    dispatch(updateTaskAction(task.id, body))
+
   }
 
 
@@ -237,12 +252,16 @@ const handleDropdownClick = (member) => {
 
         <span>
           Assigned to:
-          <AssigneeDropdown currentAssignee={task.assigned_to} members={members} handleSelect={handleDropdownClick}/>
+          <AssigneeDropdown currentAssignee={task.assigned_to} members={members} handleSelect={handleAssigneeDropdownClick}/>
           </span>
 
           <h4>Category:
           </h4>
           <p>{currentCategory && currentCategory.name}</p>
+
+          <Form.Input fluid >
+            <CategoryDropdown categories={categories} currentCategoryId={task.category_id} handleSelect={handleCategoryDropdownClick}/>
+          </Form.Input>
           
             <h4><Icon name='bars'/>
             Description
@@ -262,7 +281,7 @@ const handleDropdownClick = (member) => {
 
 
           <h4>
-            Activity
+            Comments
           </h4>
           <Comment.Group>
           {comments && renderComments()}
