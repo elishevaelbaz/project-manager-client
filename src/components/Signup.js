@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Form } from 'semantic-ui-react'
 
 const  SignUp = (props) => {
   const [signUpInput, setSignUpInput] = useState({
@@ -7,33 +8,27 @@ const  SignUp = (props) => {
     password: ""
   })
 
-  const handleChange = e => {
-    setSignUpInput({...signUpInput, [e.target.name]: e.target.value})
+  const handleChange = (e, value) => {
+    setSignUpInput({...signUpInput, [e.target.name]: value})
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    // TODO: make a fetch request to sign up the current user
-    // then set that user in state in our App component
     props.handleSignUp(signUpInput)
-        // fetch("http://localhost:3000/users", {
-    //   method: "POST",
-    //   credentials: "include",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(this.state)
-    // })
-    //   .then(r => r.json())
-    //   .then(user => {
-    //     this.props.handleLogin(user)
-    //   })
   }
-
-  
 
     return (
       <div>
+      {/* // <div className="signUp"> */}
+        {/* <Form onSubmit={handleSubmit} className="signUp-form">
+        
+        
+          <Form.Input label='Username' name="username" placeholder='username' onChange={( e, { value }) => handleChange}/>
+          <Form.Input label='Password' name="password" placeholder='password' />
+         
+
+        <Form.Button onClick={handleSubmit}>Submit</Form.Button>
+      </Form> */}
       <form onSubmit={handleSubmit}>
         <h1>Signup</h1>
 

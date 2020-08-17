@@ -247,3 +247,60 @@ export function logout(){
   })
   .then(r => r.json())
 }
+
+// =====================
+// attachment fetches
+// =====================
+
+export const getAttachments = (taskId) => {
+  return fetch(`http://localhost:3000/attachments?task_id=${taskId}`,{
+    credentials: "include"
+  })
+    .then(r => r.json())
+}
+
+// export const getAllAttachments = () => {
+//   return fetch(`http://localhost:3000/attachments`,{
+//     credentials: "include"
+//   })
+//     .then(r => r.json())
+// }
+
+export const addAttachment = (attachmentObj) => {
+  // const attachmentObj = {name, due_date, category_id, created_by}
+  return fetch("http://localhost:3000/attachments", {
+    method: "POST",
+    credentials: "include",
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+    body: JSON.stringify(attachmentObj)
+  })
+    .then(r => r.json().then(data => {
+      if (r.ok) return data
+      throw data
+    }))
+}
+
+export function updateAttachment(id, body){
+  return fetch(`http://localhost:3000/attachments/${id}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    .then(r => r.json())
+}
+
+export function deleteAttachment(id) {
+  return fetch(`http://localhost:3000/attachments/${id}`, {
+    method: 'DELETE',
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(r => r.json())
+}

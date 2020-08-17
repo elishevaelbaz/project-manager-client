@@ -92,3 +92,15 @@ button.corner {
 .editIcon{
   margin-left: 5px !important;
 }
+.signUp{
+  /* width: 300px ; */
+  position: relative;
+}
+
+.signUp > .signUp-form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 170px 0 0 -70px;
+}

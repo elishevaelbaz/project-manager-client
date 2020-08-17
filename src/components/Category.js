@@ -10,17 +10,12 @@ import PlaceholderCard from './PlaceholderCard'
 const Category = ({ name, id, taskOrder}) => {
 
   const filteredTasks = useSelector(state => {
-    return state.task.tasks.filter(task => task.category_id === id)} )
-    console.log(name, filteredTasks.length)
+  return state.task.tasks.filter(task => task.category_id === id)} )
+  console.log(name, filteredTasks.length)
 
-    // console.log("taskOrder", taskOrder)
-    // const sortedTasks = taskOrder.map(t => {
-    //   return filteredTasks.find(task => task.id === t.id)})
 
-      // console.log(filteredTasks)
-
-    const sortedTasks = filteredTasks.sort((taskA, taskB) => (taskA.position > taskB.position) ? 1 : -1)
-    console.log("SORTED", sortedTasks)
+  const sortedTasks = filteredTasks.sort((taskA, taskB) => (taskA.position > taskB.position) ? 1 : -1)
+  console.log("SORTED", sortedTasks)
   const loading = useSelector(state => state.task.loading)
   // const currentBoard = useSelector(state => state.board.currentBoard)
 

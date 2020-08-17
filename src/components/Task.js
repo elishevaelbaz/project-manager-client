@@ -4,11 +4,14 @@ import { Card, Icon, Dropdown, Modal, Button, Form, Header, Comment } from 'sema
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, setCurrentTask, closeCurrentTask, updatePositionAction, updateTaskAction } from '../store/task/actions'
 import { addCommentAction, fetchComments } from '../store/comment/actions'
+import { fetchAttachments } from '../store/attachment/actions'
 import { Draggable } from 'react-beautiful-dnd'
 import CommentComp from './CommentComp'
 import AssigneeDropdown from './AssigneeDropdown'
 import { CLEAR_COMMENTS } from '../store/comment/types'
 import CategoryDropdown from './CategoryDropdown'
+import AttachmentForm from './AttachmentForm'
+import { CLEAR_ATTACHMENTS } from '../store/attachment/types'
 
 const Task = ({task, count, index,}) => {
   console.log("TASK", task)
@@ -28,6 +31,11 @@ const Task = ({task, count, index,}) => {
     ...task
   })
 
+  const [attachment, setAttachment] = useState({
+    image: {},
+    video: {}
+  })
+
 
   const currentUser = useSelector(state => state.user.currentUser.username)
   const currentTask = useSelector(state => state.task.currentTask)
@@ -35,6 +43,7 @@ const Task = ({task, count, index,}) => {
   const categories = useSelector(state => state.category.categories)
 const tasks = useSelector(state => state.task.tasks)
  const comments = useSelector(state => state.comment.comments)
+ const attachments = useSelector(state => state.attachment.attachments)
 
  const members = useSelector(state => state.board.members)
   const dispatch = useDispatch()
@@ -168,6 +177,30 @@ const handleAssigneeDropdownClick = (member) => {
     })
   }
 
+  // const handleAttachmentChange = (e) => {
+  //   e.persist()
+  //   setAttachment({
+  //     ...attachment,
+  //     [e.target.name]: e.target.files[0]
+  //   })
+  // }
+
+  // const handleAttachmentSubmit = (e) => {
+   
+  //   e.preventDefault()
+  //   const form = new FormData()
+  //   form.append("image", attachment.image)
+  //   form.append("video", attachment.video)
+  //   form.task_id = task.id
+  //   console.log("form", JSON.stringify(form))
+  //   console.log(attachment)
+  //   fetch(`http://localhost:3000/attachments`, {
+  //       method: "POST",
+  //       credentials: "include",
+  //       body: form
+  //   })
+  // }
+
   return(
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided, ) => (
@@ -181,6 +214,7 @@ const handleAssigneeDropdownClick = (member) => {
           key={task.id}
           onClick={() => {
             dispatch(fetchComments(task.id))
+            dispatch(fetchAttachments(task.id))
             setOpen(true)
           }}
           
@@ -238,6 +272,8 @@ const handleAssigneeDropdownClick = (member) => {
         <Button icon='close' onClick={() => {
           // to avoid the jump of old comments when opening a modal
           dispatch({type: CLEAR_COMMENTS})
+          dispatch({type: CLEAR_ATTACHMENTS})
+
           setOpen(false)
           }}/>
           <h4><Icon name='book'/>
@@ -280,6 +316,15 @@ const handleAssigneeDropdownClick = (member) => {
       </p>
     }
 
+        <h4><Icon name='attach'onClick={null}/>
+            Attachments
+          </h4>
+          <AttachmentForm taskId={task.id} />
+          {/* <Form ><Form.Input type="file" name="image" autoComplete="off" onChange={handleAttachmentChange} />
+          <Button type='submit' onClick={handleAttachmentSubmit}>Submit</Button></Form>
+           */}
+           {attachments && attachments.map(attachment => <img src={attachment.image} alt="attachment"/>)}
+
 
 
 
@@ -292,6 +337,7 @@ const handleAssigneeDropdownClick = (member) => {
           </Comment.Group>
         <Form onSubmit={handleNewCommentSubmit}>
           <Form.Input type="text" name="newComment" autoComplete="off" value={newComment} placeholder="Add a comment" onChange={handleNewCommentChange} />
+          
         </Form>
         </Modal.Description>
       </Modal.Content>
