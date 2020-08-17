@@ -4,7 +4,7 @@ import { Card, Icon, Dropdown, Modal, Button, Form, Header, Comment } from 'sema
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, setCurrentTask, closeCurrentTask, updatePositionAction, updateTaskAction } from '../store/task/actions'
 import { addCommentAction, fetchComments } from '../store/comment/actions'
-import { fetchAttachments } from '../store/attachment/actions'
+import { fetchAttachments, deleteAttachmentAction } from '../store/attachment/actions'
 import { Draggable } from 'react-beautiful-dnd'
 import CommentComp from './CommentComp'
 import AssigneeDropdown from './AssigneeDropdown'
@@ -80,6 +80,10 @@ const tasks = useSelector(state => state.task.tasks)
     
   //   // return <TaskDetail task={task} />
   // }
+
+  const handleDeleteAttachment = (id) =>{
+    dispatch(deleteAttachmentAction(id))
+  }
 
   const renderComments = () =>  comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
   
@@ -323,7 +327,9 @@ const handleAssigneeDropdownClick = (member) => {
           {/* <Form ><Form.Input type="file" name="image" autoComplete="off" onChange={handleAttachmentChange} />
           <Button type='submit' onClick={handleAttachmentSubmit}>Submit</Button></Form>
            */}
-           {attachments && attachments.map(attachment => <img src={attachment.image} alt="attachment"/>)}
+           {attachments && attachments.map(attachment => <><img src={attachment.image} alt="attachment"/>
+           {attachment.username === currentUser && <Icon name="trash" onClick={() => handleDeleteAttachment(attachment.id)} ></Icon>}
+           </>)}
 
 
 
