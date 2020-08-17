@@ -202,7 +202,12 @@ const handleAssigneeDropdownClick = (member) => {
           // defaultValue={currentCategoryId || null}
           onChange={(e, {value}) => handleSelect(value)}
           />
-            {/* <Card.Meta>{task.description}</Card.Meta> */}
+          <Card.Content extra>
+      {comments.filter(c => c.task_id === task.id) ? 
+        <Icon name='comment outline' /> : null}
+   
+    </Card.Content>
+            {/* <Card.Meta><Icon comment outline/></Card.Meta> */}
 
 
       {/* {currentTask.name === task.name && (<>
@@ -235,7 +240,10 @@ const handleAssigneeDropdownClick = (member) => {
           dispatch({type: CLEAR_COMMENTS})
           setOpen(false)
           }}/>
-        <h4>Title:</h4>
+          <h4><Icon name='book'/>
+            Title:
+          </h4>
+      
 
 
         { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}><Form.Input type="text" name="name" autoComplete="off" value={taskInput.name} onChange={handleChange} /></Form>

@@ -3,7 +3,7 @@ import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
 import { Link } from 'react-router-dom';
-import { Image, Button, Menu, Popup, Form, Icon, Input} from 'semantic-ui-react'
+import { Image, Button, Menu, Popup, Form, Icon, Input, Search} from 'semantic-ui-react'
 import { addMemberAction, getMembersAction } from '../store/board/actions';
 import ErrorNotification from './ErrorNotification';
 
@@ -86,7 +86,7 @@ const Header = () => {
     </>}
 
           <Menu.Item>
-            <Input icon='search' placeholder='Search tasks...' />
+            <Search icon='search' placeholder='Search tasks... ' />
           </Menu.Item>
           {/* <Menu.Item
             name='logout'

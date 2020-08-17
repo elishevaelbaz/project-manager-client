@@ -72,72 +72,56 @@ const CategoryContainer = ({match}) => {
   }
 
   const onDragEnd = result => {
-    //TODO: reorder the column
     console.log("RESULT", result)
     const { destination, source, draggableId } = result
+
     if (!destination){
       return
-
     }
     // dropped at same place where it started
     if (destination.droppableId === source.droppableId && destination.index === source.index){
       return
     }
     // if position is changed
-    // reorder taskIds array
     const start = categories.find(category => category.id === parseInt(source.droppableId, 10))
     const finish = categories.find(category => category.id === parseInt(destination.droppableId, 10))
-console.log("Start", start)
-console.log("Finish", finish)
-console.log("categories", categories)
-console.log("droppableId", source.droppableId)
+    console.log("Start:", start,"Finish:", finish, "categories:", categories, "droppableId:", source.droppableId)
     // if start and end in same category
     if (start === finish){
       console.log("start = finish", start, finish)
 
-    
+      const newTasks = tasks.filter(task => task.category_id === parseInt(start.id))
+      console.log("source.index:", source.index, "destination.index:", destination.index, "newTasks:", newTasks)
 
-    // const newTasks = Array.from(start.tasks)
-    const newTasks = tasks.filter(task => task.category_id === parseInt(start.id))
-    console.log("source.index", source.index)
-    console.log("destination.index", destination.index)
-    console.log("newTasks", newTasks)
+      newTasks.splice(source.index, 1)
+      console.log("newTasks", newTasks)
 
-    newTasks.splice(source.index, 1) //const removedTaskArr = 
-    console.log("newTasks", newTasks)
-
-    // task with draggableId
-    const tk = tasks.find(t => t.id === parseInt(draggableId))
-    console.log("elishevatk", tk)
-    newTasks.splice(destination.index , 0, tk) //removedTaskArr[0]
-console.log("newTasks", newTasks)
-    const newColumn = {
-      ...start,
-      tasks: newTasks
-    }
-console.log("newColumn", newColumn)
-    //dispatch
-    // dispatch({ 
-    //   type: REORDER_CATEGORY_TASKS, 
-    //   payload: newColumn
-    // })
-    dispatch(updatePositionAction(tk.id, {...tk, position: destination.index + 1, category_id: tk.category_id}))
-    return
-
+      // task with draggableId
+      const tk = tasks.find(t => t.id === parseInt(draggableId))
+      newTasks.splice(destination.index, 0, tk) //removedTaskArr[0]
+      console.log("newTasks", newTasks)
+      const newColumn = {
+        ...start,
+        tasks: newTasks
+      }
+      console.log("newColumn", newColumn)
+      
+      const body = {
+        ...tk, 
+        position: destination.index + 1,
+        category_id: tk.category_id,
+        prev_category_id: start.id,
+        prev_position: source.index + 1
+      }
+      console.log("BODY", body)
+      dispatch(updatePositionAction(tk.id, body))
+      return
     }
 
     // if start and end in diferent categories
-
-
     const startTasks = tasks.filter(task => task.category_id === parseInt(start.id))
 
-    // const startTasks = Array.from(start.tasks)
-    // console.log("source.index", source.index)
-    // console.log("destination.index", destination.index)
-    // console.log("startTasks", startTasks)
-
     startTasks.splice(source.index, 1) //const removedTaskArr = 
-    // console.log("startTasks", startTasks)
 
     const newStart = {
       ...start,
@@ -148,39 +132,33 @@ console.log("newColumn", newColumn)
 
     const finishTasks = tasks.filter(task => task.category_id === parseInt(finish.id))
 
-    // const finishTasks = Array.from(finish.tasks)
     const t = tasks.find(t => t.id === parseInt(draggableId))
     console.log(t)
 
     finishTasks.splice(destination.index , 0, t) //removedTaskArr[0]
 
-
     // task with draggableId
-console.log("startTasks", startTasks)
-console.log("finishTasks", finishTasks)
+    console.log("startTasks", startTasks)
+    console.log("finishTasks", finishTasks)
     const newFinish = {
       ...finish,
       tasks: finishTasks
     }
-console.log("newFinish", newFinish)
+    console.log("newFinish", newFinish)
 
-// dispatch({ 
-//   type: REORDER_CATEGORIES_TASKS, 
-//   payload: {start: newStart, finish: newFinish}
-// })
+    // update category in database as well 
+    console.log("destination.index", destination.index)
+    
 
-// dispatch({ 
-//   type: REORDER_TASKS, 
-//   payload: {start: newStart, finish: newFinish}
-// })
-
-// update category in database as well 
-console.log("jjj", destination.index)
-// dispatch(updateTaskAction(t.id, {...t, category_id: newFinish.id }))
-
-dispatch(updatePositionAction(t.id, {...t, category_id: newFinish.id, position: destination.index + 1}))
-
-
+    const body = {
+      ...t,
+      category_id: newFinish.id,
+      position: destination.index + 1,
+      prev_category_id: start.id,
+      prev_position: source.index + 1
+    }
+    console.log("BODY", JSON.stringify(body))
+    dispatch(updatePositionAction(t.id, body))
   }
 
   return(

@@ -6,7 +6,7 @@ import { Dropdown } from 'semantic-ui-react'
 const AssigneeDropdown = ({ members, currentAssignee, handleSelect}) => {
 
 const avatarNames = [
-  "joe", "jenny", "steve", "elliot", "stevie", "christian", "matt"
+  "joe", "jenny", "steve", "elliot", "stevie", "christian", "matt", "rachel", "lindsay", "veronika", "tom", "helen", "daniel", "lena", "mark", "molly"
 ]
 
 const rand = Math.floor(Math.random() * (avatarNames.length -1))
