@@ -3,7 +3,7 @@ import { Form, Comment } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteCommentAction, editComment } from '../store/comment/actions'
 
-const CommentComp = ({id, text, userId, taskId, username}) => {
+const CommentComp = ({id, text, userId, taskId, username, avatar}) => {
   
 
   const currentUser = useSelector(state => state.user.currentUser.username)
@@ -38,7 +38,7 @@ const CommentComp = ({id, text, userId, taskId, username}) => {
   return(
   
     <Comment>
-      <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
+      <Comment.Avatar as='a' src={`https://react.semantic-ui.com/images/avatar/small/${avatar}.jpg`} />
       <Comment.Content>
         <Comment.Author>{username === currentUser ? "You" :username}</Comment.Author>
         { toggleEdit ?  <Form onSubmit={handleSubmit}><Form.Input type="text" name="comment" autoComplete="off" value={textInput} onChange={handleChange} /></Form>

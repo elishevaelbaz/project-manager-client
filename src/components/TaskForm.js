@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Form, Dropdown, Popup, Button } from 'semantic-ui-react'
+import { Form, Dropdown, Popup, Button, Icon} from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import CategoryDropdown from './CategoryDropdown'
 import { addTaskAction } from '../store/task/actions'
@@ -81,6 +81,10 @@ const TaskForm = ({ categoryId }) => {
 
   }
 
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
     return (
     // <Form >
     //     <Form.Group widths='equal'>
@@ -108,6 +112,8 @@ const TaskForm = ({ categoryId }) => {
         ref={node}
         trigger={<Button icon='add' content='Add a task' onClick={() => setIsOpen(!isOpen)} />}
         content={<Form onSubmit={handleSubmit}>
+
+      <Icon name='close' onClick={handleClose} className="corner" />
 
         <Form.Input  label='name' name="name" placeholder='Task name' onChange={handleChange} />
 

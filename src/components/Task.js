@@ -85,7 +85,7 @@ const tasks = useSelector(state => state.task.tasks)
     dispatch(deleteAttachmentAction(id))
   }
 
-  const renderComments = () =>  comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username}/>)
+  const renderComments = () =>  comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} taskId={task.id} userId={comment.user_id} username={comment.username} avatar={comment.avatar}/>)
   
 
  //==========================
@@ -230,16 +230,16 @@ const handleAssigneeDropdownClick = (member) => {
             <Card.Description>
             {task.name}
             </Card.Description>
-            <Card.Meta>{task.position}</Card.Meta>
-            <Card.Meta>{index}</Card.Meta>
-            <Dropdown
+            {/* <Card.Meta>{task.position}</Card.Meta>
+            <Card.Meta>{index}</Card.Meta> */}
+            {/* <Dropdown
           placeholder='Change position'
           fluid
           selection
           options={positionOptions}
           // defaultValue={currentCategoryId || null}
           onChange={(e, {value}) => handleSelect(value)}
-          />
+          /> */}
           <Card.Content extra>
       {comments.filter(c => c.task_id === task.id) ? 
         <Icon name='comment outline' /> : null}

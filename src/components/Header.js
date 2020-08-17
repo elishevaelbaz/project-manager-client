@@ -43,7 +43,7 @@ const Header = () => {
 
   
   return(
-    <div>
+    <div className="page-header">
     
     {/* <Button onClick={handleAddTask}>Add Task</Button> */}
     { currentUser && 
@@ -61,7 +61,7 @@ const Header = () => {
     <Menu.Item>
       {members.length === 1 ? "you are the only member" : <Popup trigger={<p> {members.length} members</p>}>
       <Popup.Content>
-      {members.map(member => <span><Image src={"https://react.semantic-ui.com/images/avatar/small/stevie.jpg"} alt="avatar" avatar /><p key={member.username}>{member.username}</p></span>)}
+      {members.map(member => <span><Image src={`https://react.semantic-ui.com/images/avatar/small/${member.avatar}.jpg`} alt="avatar" avatar /><p key={member.username}>{member.username}</p></span>)}
     </Popup.Content>
       </Popup>     
          }
