@@ -5,7 +5,7 @@ const defaultState = {
   // task: {},
   comments: [],
   attachments: [],
-  loading: false
+  // loading: false
 }
 
 const reducer = (state = defaultState, action) => {
@@ -18,12 +18,12 @@ const reducer = (state = defaultState, action) => {
         ...state,
         // task: action.payload,
         isOpen: true,
-        loading: true
+        // loading: true
       }  
     case SET_MODAL:
       return {
         ...state,
-        loading: false
+        // loading: false
       }  
     case CLOSE_MODAL:
       return {
