@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoards } from './store/board/actions';
 import { signUpAction, loginAction, autoLoginAction} from './store/user/actions';
 import Login from './components/Login';
-import TaskDetail from './components/TaskDetail';
-import { DragDropContext } from 'react-beautiful-dnd'
 
 
 const App = () => {
@@ -68,9 +66,7 @@ const App = () => {
       <Route exact path="/boards">
         {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
       </Route>
-      <Route path="/tasks/:id">
-        {currentUser ?  <TaskDetail /> : <Login handleLogin={handleLogin} />} 
-      </Route>
+      
       
       <Route path="/signup">
         {currentUser ?  <Redirect to='/boards' /> : <SignUp handleSignUp={handleSignUp} />}  
