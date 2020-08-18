@@ -1,3 +1,13 @@
+body{   
+  /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
+  background-image: linear-gradient(to right top, #403c63, #37325f, #2e295b, #251f57, #1b1653);
+  background-image: linear-gradient(to left bottom, #403c63, #5c5778, #78738e, #9491a4, #b2b0bb);
+  background-image: linear-gradient(to right top, #403c63, #5c5778, #78738e, #9491a4, #b2b0bb);
+  background-image: linear-gradient(to top, #403c63, #5c5778, #78738e, #9491a4, #b2b0bb);
+  /* background-image: linear-gradient(to bottom, #403c63, #5c5778, #78738e, #9491a4, #b2b0bb); */
+}
+
+
 .App {
   text-align: center;
 }
@@ -57,7 +67,7 @@
 
 .categoryCard{
   /* deal with this later */
-  min-height: 200px !important; 
+  min-height: 100px !important; 
 
 }
 /* .row{
@@ -73,7 +83,7 @@
   right: 0px;
 }
 
-button.corner {
+button.corner, i.corner{
   position: absolute;
   top: 0px;
   right: 0px;
@@ -103,4 +113,52 @@ button.corner {
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 170px 0 0 -70px;
+}
+
+.signup-container{
+  /* margin-top: 10% */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10%;
+  /* margin: 170px 0 0 -70px; */
+  /* background-color:rgba(192,192,192,0.4) */
+  /* opacity: 0.5; */
+}
+
+.signup-container > .field > .ui.input{
+  margin-left:5px;
+}
+.signup-header{
+  color:white;
+}
+
+::placeholder{
+  color: rgb(177, 34, 34)
+}
+
+.ui.menu{
+  /* background-color:#9A98A5!important; */
+  background-color:#B2B0BB!important;
+  /* background-color:#413D6F!important; */
+  /* background-color:#161242 !important; */
+  color:white !important;
+}
+
+/* .ui.menu > .item{
+  color:white !important;
+} */
+
+.tileWrapper {
+  height: 80%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  /* margin-top: 10vh; */
+  padding-top: 15vh;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 5vh 5vw;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }

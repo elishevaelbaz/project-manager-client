@@ -1,4 +1,4 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC } from './types'
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC, SET_FILTER, CLEAR_FILTER } from './types'
 import { getTasks, addTask, deleteTask, updateTask, getCurrentTask, updatePosition } from '../../api'
 import { SET_ERROR } from '../error/types'
 
@@ -133,3 +133,17 @@ export const closeCurrentTask = () => dispatch => {
   })
 }
 
+
+export const setFilter = (filterQuery) => dispatch => {
+  dispatch({
+    type: SET_FILTER,
+    payload: filterQuery
+  })
+}
+
+
+export const clearFilter = () => dispatch => {
+  dispatch({
+    type: CLEAR_FILTER,
+  })
+}

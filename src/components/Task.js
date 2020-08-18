@@ -6,12 +6,14 @@ import { deleteTaskAction, setCurrentTask, closeCurrentTask, updatePositionActio
 import { addCommentAction, fetchComments } from '../store/comment/actions'
 import { fetchAttachments, deleteAttachmentAction } from '../store/attachment/actions'
 import { Draggable } from 'react-beautiful-dnd'
-import CommentComp from './CommentComp'
+import CommentComp from './Comment'
 import AssigneeDropdown from './AssigneeDropdown'
 import { CLEAR_COMMENTS } from '../store/comment/types'
 import CategoryDropdown from './CategoryDropdown'
 import AttachmentForm from './AttachmentForm'
 import { CLEAR_ATTACHMENTS } from '../store/attachment/types'
+import { openModal } from '../store/modal/actions'
+import TaskModal from './TaskModal'
 
 const Task = ({task, count, index,}) => {
   console.log("TASK", task)
@@ -46,6 +48,9 @@ const tasks = useSelector(state => state.task.tasks)
  const attachments = useSelector(state => state.attachment.attachments)
 
  const members = useSelector(state => state.board.members)
+
+ const modalIsOpen = useSelector(state => state.modal.isOpen)
+
   const dispatch = useDispatch()
 
 
@@ -217,9 +222,12 @@ const handleAssigneeDropdownClick = (member) => {
           // href='#card-example-link-card'
           key={task.id}
           onClick={() => {
+            // dispatch({type: "OPEN_MODAL"})
             dispatch(fetchComments(task.id))
             dispatch(fetchAttachments(task.id))
-            setOpen(true)
+            dispatch(openModal(task))
+
+            // setOpen(true)
           }}
           
         >
@@ -259,12 +267,12 @@ const handleAssigneeDropdownClick = (member) => {
     {/* {currentTask.name === task.name &&  <TaskDetail task={task}/> } */}
       
       
-
     </Card.Content>
       </Card>
 
+      {modalIsOpen && <TaskModal />}
 
-  <Modal
+  {/* <Modal
     onClose={() => {
       setOpen(false)}}
     onOpen={() => setOpen(true)}
@@ -312,9 +320,9 @@ const handleAssigneeDropdownClick = (member) => {
           </h4>
 
           { toggleEdit.description ?  <Form onSubmit={() => handleSubmit("description")}><Form.Input type="text" name="description" autoComplete="off" value={taskInput.description} onChange={handleChange} /></Form>
-      : <p> {task.description ? task.description : "No description yet..."}
+      : <p> {task.description ? task.description : "No description yet..."} */}
       {/* nested ternary ^ */}
-        <span>
+        {/* <span>
           <Icon name="pencil" className="editIcon" onClick={() => handleEditClick("description")} ></Icon>
         </span>
       </p>
@@ -323,11 +331,11 @@ const handleAssigneeDropdownClick = (member) => {
         <h4><Icon name='attach'onClick={null}/>
             Attachments
           </h4>
-          <AttachmentForm taskId={task.id} />
+          <AttachmentForm taskId={task.id} /> */}
           {/* <Form ><Form.Input type="file" name="image" autoComplete="off" onChange={handleAttachmentChange} />
           <Button type='submit' onClick={handleAttachmentSubmit}>Submit</Button></Form>
            */}
-           {attachments && attachments.map(attachment => <><img src={attachment.image} alt="attachment"/>
+           {/* {attachments && attachments.map(attachment => <><img src={attachment.image} />
            {attachment.username === currentUser && <Icon name="trash" onClick={() => handleDeleteAttachment(attachment.id)} ></Icon>}
            </>)}
 
@@ -347,7 +355,7 @@ const handleAssigneeDropdownClick = (member) => {
         </Form>
         </Modal.Description>
       </Modal.Content>
-  </Modal>
+  </Modal> */}
       
       </div>
     )}

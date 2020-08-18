@@ -48,13 +48,14 @@ const boards = useSelector(state => state.board.boards)
       name: nameInput
     }
     dispatch(addBoardAction(boardObj))
+    setNameInput("")
+    setFormShown(false)
+
   }
 
   return(
-    <div>
-      {boards[0] && boards.map(board => <BoardCard key={board.id} board={board} />)}
-      
-      <Card
+    <div className="tileWrapper">
+            <Card
       // key={board.id}
       onClick={handleNewBoard}>
       <Card.Content>
@@ -66,7 +67,11 @@ const boards = useSelector(state => state.board.boards)
     <Form.Input fluid name="name" placeholder='Board name' onChange={handleChange} />
 
     </Form>}
-      </Card>      
+      </Card>   
+      
+      {boards[0] && boards.map(board => <BoardCard key={board.id} board={board} />)}
+      
+   
     </div>
     
     

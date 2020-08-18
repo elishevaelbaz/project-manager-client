@@ -1,9 +1,11 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC } from "./types"
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC, SET_FILTER, CLEAR_FILTER } from "./types"
+import { OPEN_MODAL, CLOSE_MODAL } from "../modal/types";
 
 const defaultState = {
   tasks: [],
   currentTask: {},
-  loading: false
+  loading: false,
+  filterBy: ""
 }
 
 const reducer = (state = defaultState, action) => {
@@ -197,6 +199,29 @@ const reducer = (state = defaultState, action) => {
             ...state,
             tasks: updated,
           }
+      case SET_FILTER:
+        return {
+          ...state,
+          filterBy: action.payload
+        }
+
+      case CLEAR_FILTER:
+        return {
+          ...state,
+          filterBy: ""
+        }
+      case OPEN_MODAL:
+        return {
+          ...state,
+          currentTask: action.payload
+        }
+
+      //clear currentTask to avoid jumpiness on next open
+      case CLOSE_MODAL:
+        return {
+          ...state,
+          currentTask: {}
+        } 
       case DELETE_TASK:
       return {
         ...state,

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import {  Icon, Form } from 'semantic-ui-react'
+import { Form, Comment } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteCommentAction, editComment } from '../store/comment/actions'
 
-const Comment = ({id, text, userId, taskId, username}) => {
+const CommentComp = ({id, text, userId, taskId, username, avatar}) => {
   
 
   const currentUser = useSelector(state => state.user.currentUser.username)
@@ -36,25 +36,25 @@ const Comment = ({id, text, userId, taskId, username}) => {
 
   
   return(
-    <>
-
-    { toggleEdit ?  <Form onSubmit={handleSubmit}><Form.Input type="text" name="comment" autoComplete="off" value={textInput} onChange={handleChange} /></Form>
-      : <p>COMMENT: {text}
-      {/* <Icon name="trash icon" onClick={() => handleDelete(id)} ></Icon> */}
-        {username === currentUser && <span>
-          <Icon name="trash" onClick={() => handleDelete(id)} ></Icon>
-          <Icon name="edit" onClick={handleCommentClick} ></Icon>
-        </span>}
-      </p>
-    }
-    </>
-
-    
-    
-    )
-    
-
   
+    <Comment>
+      <Comment.Avatar as='a' src={`https://react.semantic-ui.com/images/avatar/small/${avatar}.jpg`} />
+      <Comment.Content>
+        <Comment.Author>{username === currentUser ? "You" :username}</Comment.Author>
+        { toggleEdit ?  <Form onSubmit={handleSubmit}><Form.Input type="text" name="comment" autoComplete="off" value={textInput} onChange={handleChange} /></Form>
+      : <>
+        <Comment.Text>{text}</Comment.Text> 
+        {username === currentUser && 
+  
+          <Comment.Actions>
+            <Comment.Action onClick={handleCommentClick}>Edit </Comment.Action>
+            <Comment.Action onClick={() => handleDelete(id)}> Delete</Comment.Action>
+          
+          </Comment.Actions>}
+        </>}
+      </Comment.Content>
+    </Comment> 
+  )
 }
 
-export default Comment;
+export default CommentComp

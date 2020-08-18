@@ -1,4 +1,5 @@
 import { FETCH_ATTACHMENTS, SET_ATTACHMENTS, DELETE_ATTACHMENT, ADD_ATTACHMENT, UPDATE_ATTACHMENT, CLEAR_ATTACHMENTS } from './types'
+import { CLOSE_MODAL } from '../modal/types'
 
 const defaultState = {
   attachments: [],
@@ -44,7 +45,8 @@ const reducer = (state = defaultState, action) => {
         ...state,
         attachments: updatedAttachments
       } 
-      case CLEAR_ATTACHMENTS:
+      //clear attachments to avoid jumpiness on next open
+      case CLOSE_MODAL:
         return {
           ...state,
           attachments: []

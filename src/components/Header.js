@@ -3,15 +3,18 @@ import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
 import { Link } from 'react-router-dom';
-import { Image, Button, Menu, Popup, Form, Icon, Input, Search} from 'semantic-ui-react'
+import { Image, Button, Menu, Popup, Form, Icon, Checkbox, Search, Dropdown, Input} from 'semantic-ui-react'
 import { addMemberAction, getMembersAction } from '../store/board/actions';
 import ErrorNotification from './ErrorNotification';
+import { setFilter } from '../store/task/actions';
 
 const Header = () => {
 
   const currentBoard = useSelector(state => state.board.currentBoard)
   const members = useSelector(state => state.board.members)
   const currentUser = useSelector(state => state.user.currentUser)
+  const filter = useSelector(state => state.task.filterBy)
+
   console.log("currentBoard", currentBoard)
 
   const [newMemberInput, setNewMemberInput] = useState("")
@@ -39,6 +42,13 @@ const Header = () => {
       board_id: currentBoard.id
     }
     dispatch(addMemberAction(memberObj))
+  }
+
+  // hardcoding to filter assigned tasks
+  const handleFilter = (e) => {
+    console.log("filter")
+    console.log(e.target)
+    dispatch(setFilter(currentUser.username))
   }
 
   
@@ -93,6 +103,39 @@ const Header = () => {
             active={activeItem === 'logout'}
             onClick={this.handleItemClick}
           /> */}
+
+          <Menu.Item>
+         { filter && <Icon name="filter" />}
+          {/* <Checkbox onClick={handleFilter} label="tasks assigned to me" /> */}
+
+
+          {/* <Dropdown  text='Filter tasks'
+          icon='filter'
+          floating
+          clearable
+          labeled
+          button
+          className='icon' >
+            <Dropdown.Menu>
+              <Dropdown.Item text="assigned to me" onClick={handleFilter}/>
+      </Dropdown.Menu>
+    </Dropdown> */}
+
+          <Dropdown
+            // icon="filter"
+            text={ filter ? `Filtering by ${filter}` : "Filter by"}
+            clearable
+            // placeholder='Filter by'
+            // selection
+            defaultValue={"hello" || null}
+            onClick={handleFilter}
+            // onChange={(e, {value}) => handleSelect(value)}
+            >
+              <Dropdown.Menu>
+        <Dropdown.Item text="assigned to me" onClick={handleFilter}/>
+      </Dropdown.Menu>
+              </Dropdown>
+          </Menu.Item>
             
     <Menu.Item  position='right'>
   

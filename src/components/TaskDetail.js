@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from 'react'
 import { Card, Icon, Form, Modal, Button, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction, fetchCurrentTask } from '../store/task/actions'
-import Comment from './Comment'
+import CommentComponent from './CommentComponent'
 import { withRouter } from 'react-router-dom'
 import { fetchComments, addCommentAction } from '../store/comment/actions'
 import EditTaskForm from './EditTaskForm'
@@ -94,7 +94,7 @@ const TaskDetail = ({ match, history }) => {
   // }
 
   const renderComments = () => {
-    return comments.map(comment => <Comment key={comment.id} id={comment.id} text={comment.text} taskId={currentTask.id} userId={comment.user_id} username={comment.username}/>)
+    return comments.map(comment => <CommentComponent key={comment.id} id={comment.id} text={comment.text} taskId={currentTask.id} userId={comment.user_id} username={comment.username}/>)
   }
 
   return(
