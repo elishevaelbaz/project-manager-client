@@ -11,7 +11,6 @@ import TaskModal from './TaskModal'
 const Task = ({task, count, index,}) => {
   console.log("TASK", task)
   
-
   const currentUser = useSelector(state => state.user.currentUser.username)
   const comments = useSelector(state => state.comment.comments)
 

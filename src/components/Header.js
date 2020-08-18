@@ -7,13 +7,14 @@ import { Image, Button, Menu, Popup, Form, Icon, Checkbox, Search, Dropdown, Inp
 import { addMemberAction, getMembersAction } from '../store/board/actions';
 import ErrorNotification from './ErrorNotification';
 import { setFilter } from '../store/task/actions';
+import SearchBar from './SearchBar';
 
 const Header = () => {
 
   const currentBoard = useSelector(state => state.board.currentBoard)
   const members = useSelector(state => state.board.members)
   const currentUser = useSelector(state => state.user.currentUser)
-  const filter = useSelector(state => state.task.filterBy)
+  const filter = useSelector(state => state.task.query)
 
   console.log("currentBoard", currentBoard)
 
@@ -96,7 +97,8 @@ const Header = () => {
     </>}
 
           <Menu.Item>
-            <Search icon='search' placeholder='Search tasks... ' />
+            <SearchBar/>
+            {/* <Search icon='search' placeholder='Search tasks... ' /> */}
           </Menu.Item>
           {/* <Menu.Item
             name='logout'

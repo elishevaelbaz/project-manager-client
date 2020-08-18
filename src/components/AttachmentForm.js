@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 
 const AttachmentForm = ({ taskId }) => {
 
-
   const [attachment, setAttachment] = useState(
     {
       image: {},

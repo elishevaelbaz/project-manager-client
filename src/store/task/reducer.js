@@ -5,7 +5,7 @@ const defaultState = {
   tasks: [],
   currentTask: {},
   loading: false,
-  filterBy: ""
+  query: ""
 }
 
 const reducer = (state = defaultState, action) => {
@@ -199,23 +199,21 @@ const reducer = (state = defaultState, action) => {
             ...state,
             tasks: updated,
           }
-      case SET_FILTER:
+      case SET_FILTER:        
         return {
           ...state,
-          filterBy: action.payload
+          query: action.payload,
         }
-
       case CLEAR_FILTER:
         return {
           ...state,
-          filterBy: ""
+          query: ""
         }
       case OPEN_MODAL:
         return {
           ...state,
           currentTask: action.payload
         }
-
       //clear currentTask to avoid jumpiness on next open
       case CLOSE_MODAL:
         return {

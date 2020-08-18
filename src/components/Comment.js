@@ -34,7 +34,7 @@ const CommentComp = ({id, text, userId, taskId, username, avatar}) => {
     setToggleEdit(false)
   }
 
-  
+
   return(
   
     <Comment>

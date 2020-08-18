@@ -25,6 +25,7 @@ const CategoryContainer = ({match}) => {
   const categories = useSelector(state => state.category.categories)
   const tasks = useSelector(state => state.task.tasks)
 
+
   const dispatch = useDispatch()
   // on component mount
   useEffect(() => {
