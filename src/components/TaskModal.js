@@ -1,5 +1,5 @@
 
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Icon, Modal, Button, Form, Header, Comment } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,6 +11,7 @@ import AssigneeDropdown from './AssigneeDropdown'
 import CategoryDropdown from './CategoryDropdown'
 import AttachmentForm from './AttachmentForm'
 import { CLOSE_MODAL } from '../store/modal/types'
+import { openForm } from '../store/modal/actions'
 
 
 const TaskModal = () => {
@@ -26,20 +27,39 @@ const TaskModal = () => {
   const tasks = useSelector(state => state.task.tasks)
   const comments = useSelector(state => state.comment.comments)
   const attachments = useSelector(state => state.attachment.attachments)
+  const isEditOpen = useSelector(state => state.modal.focus)
+
 
   const [newComment, setNewComment] = useState("")
   const [newAssignee, setNewAssignee] = useState("")
 
-  const [toggleEdit, setToggleEdit] = useState({
+  const defaultToggleEdit = {
     name: false,
     description: false, 
     category_id: false,
     assigned_to: false,
     position: false
+  }
+  const [toggleEdit, setToggleEdit] = useState({
+    ...defaultToggleEdit
   })
   const [taskInput, setTaskInput] = useState({
     ...currentTask
   })
+
+  // see category.js for explanation
+  useEffect(() => {
+    // also checking that the objects are not the same
+    // using JSON.stringify because the objects are passed by value not reference, they will never be ===
+    if (!isEditOpen && JSON.stringify(taskInput) !== JSON.stringify(currentTask)){
+      console.log(taskInput)
+      console.log(currentTask)
+      setToggleEdit({...defaultToggleEdit})
+        console.log("currentTask", currentTask)
+        // only update tasks that were changed. otherwise will dispatch for all tasks
+        dispatch(updateTaskAction(currentTask.id, taskInput))
+    }
+  }, [isEditOpen, taskInput])
 
   const dispatch = useDispatch()
 
@@ -80,6 +100,7 @@ const TaskModal = () => {
     setToggleEdit({
       ...toggleEdit, [taskPart]: true
     })
+    dispatch(openForm())
     console.log("EDIT", toggleEdit)
   }
 
@@ -123,35 +144,42 @@ const TaskModal = () => {
         icon='close' 
         onClick={() => {dispatch({type: CLOSE_MODAL})}}
         />
-        <h4><Icon name='book'/>Title:</h4>
+        <h4 style={{display:"inline", paddingRight:"5px"}}><Icon name='book'/>Title:</h4>
       
-        { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}><Form.Input type="text" name="name" autoComplete="off" value={taskInput.name} onChange={handleChange} /></Form>
-      : <Header> {currentTask.name}
-        <span>
-          <Icon name="pencil" className="editIcon" onClick={() => handleEditClick("name")} ></Icon>
-        </span>
+        { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}><Form.Input className="inputToggle" type="text" name="name" autoComplete="off" value={taskInput.name} onChange={handleChange} /></Form>
+      : <><Header style={{display:"inline"}} className="inputToggle"> {currentTask.name}
+        {/* <span>
+        </span> */}
       </Header>
+      {/* if want icon to be same size, put inside the header */}
+          <Icon name="pencil" className="editIcon" onClick={() => handleEditClick("name")} ></Icon>
+          </>
     }
+    <br/>
+          <br/>
 
+{/* <h4>Assigned to:</h4> */}
         <span>
-          Assigned to:
+        <h4 style={{display:"inline", paddingRight:"5px"}}>Assigned to: </h4>
           <AssigneeDropdown currentAssignee={currentTask.assigned_to} members={members} handleSelect={handleAssigneeDropdownClick}/>
           </span>
+          <br/>
+          <br/>
 
-          <h4>Category:
-          </h4>
-          <p>{currentCategory && currentCategory.name}</p>
+          <h4 style={{display:"inline", paddingRight:"5px"}}>Category:</h4>
+          {/* <p>{currentCategory && currentCategory.name}</p> */}
 
-          <Form.Input fluid >
-            <CategoryDropdown categories={categories} currentCategoryId={currentTask.category_id} handleSelect={handleCategoryDropdownClick}/>
-          </Form.Input>
+          {/* <Form.Input fluid  > */}
+            <CategoryDropdown inline categories={categories} currentCategoryId={currentTask.category_id} handleSelect={handleCategoryDropdownClick}/>
+          {/* </Form.Input> */}
+          
           
             <h4><Icon name='bars'/>
             Description
           </h4>
 
-          { toggleEdit.description ?  <Form onSubmit={() => handleSubmit("description")}><Form.Input type="text" name="description" autoComplete="off" value={taskInput.description} onChange={handleChange} /></Form>
-      : <p> {currentTask.description ? currentTask.description : "No description yet..."}
+          { toggleEdit.description ?  <Form onSubmit={() => handleSubmit("description")}><Form.Input className="inputToggle" type="text" name="description" autoComplete="off" value={taskInput.description} onChange={handleChange} /></Form>
+      : <p className="inputToggle"> {currentTask.description ? currentTask.description : "No description yet..."}
       {/* nested ternary ^ */}
         <span>
           <Icon name="pencil" className="editIcon" onClick={() => handleEditClick("description")} ></Icon>

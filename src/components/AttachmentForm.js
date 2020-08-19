@@ -56,7 +56,7 @@ const AttachmentForm = ({ taskId }) => {
       return (
           <div className="form">
               <form onSubmit={onSubmit}>
-                  <label>Image Upload</label>
+                  <label>Upload an Image: </label>
                   <input type="file" name="image" onChange={onChange}/>
                   <br/>
                   <input type="submit"/>

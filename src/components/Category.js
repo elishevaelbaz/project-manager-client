@@ -7,6 +7,7 @@ import { Droppable } from 'react-beautiful-dnd'
 import { fetchAllComments } from '../store/comment/actions'
 import PlaceholderCard from './PlaceholderCard'
 import { updateCategoryAction } from '../store/category/actions'
+import { openForm } from '../store/modal/actions'
 
 const Category = ({ name, id, taskOrder}) => {
 
@@ -42,6 +43,7 @@ const Category = ({ name, id, taskOrder}) => {
   }
 
   const comments = useSelector(state => state.comment.comments)
+  const isEditOpen = useSelector(state => state.modal.focus)
 
 //   useEffect(() => {
 //     // dispatch(fetchCurrentTask(match.params.id))
@@ -54,9 +56,23 @@ const inputRef = createRef()
 const [toggleEdit, setToggleEdit] = useState(false)
 const [categoryInput, setCategoryInput] = useState(name)
 
+// if click anywhere else, dispatch(closeForm()) will be run
+// when that happens, isEditOpen will be false
+// so set toggleEdit to false which will change it to no longer be input field
+useEffect(() => {
+  if (!isEditOpen){
+    setToggleEdit(false)
+    // only update category names that were changed. otherwise will dispatch for all categories
+    if (categoryInput !== name){
+      dispatch(updateCategoryAction(id, {name: categoryInput}))
+    }
+  }
+}, [isEditOpen])
+
 const handleNameClick = () => {
   console.log("click", id)
   setToggleEdit(!toggleEdit)
+  dispatch(openForm())
   // console.log(toggleEdit)
 }
 
@@ -70,6 +86,7 @@ const handleSubmit = () => {
   }
 
   dispatch(updateCategoryAction(id, categoryObj))
+  setToggleEdit(false)
 }
 
   if (loading) return <PlaceholderCard />
@@ -81,8 +98,8 @@ const handleSubmit = () => {
       <Card className="categoryCard">
         
 
-      { toggleEdit ? <Form onSubmit={() => handleSubmit()}><Form.Input className="category-input" type="text" name="name" autoComplete="off" value={categoryInput} onChange={handleChange} /></Form>
-        : <CardContent onClick={handleNameClick}>{name}</CardContent>
+      { toggleEdit ? <Form onSubmit={() => handleSubmit()}><Form.Input className="category-input inputToggle" type="text" name="name" autoComplete="off" value={categoryInput} onChange={handleChange} /></Form>
+        : <CardContent className="inputToggle" onClick={handleNameClick}>{name}</CardContent>
       }
 
       <Droppable droppableId={id.toString()}>

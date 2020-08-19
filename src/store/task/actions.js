@@ -65,6 +65,7 @@ export const deleteTaskAction = (id) => dispatch => {
 }
 
 export const updateTaskAction = (id, body) => dispatch => {
+  console.log("Action", id, body)
   updateTask(id, body)
   .then(updatedTask => {
     console.log(updatedTask)

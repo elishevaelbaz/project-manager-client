@@ -1,11 +1,9 @@
-import { OPEN_MODAL, CLOSE_MODAL, CLEAR_MODAL, SET_MODAL } from "./types"
+import { OPEN_MODAL, CLOSE_MODAL, CLEAR_MODAL, SET_MODAL, OPEN_EDIT_FORM, CLOSE_EDIT_FORM } from "./types"
 
 const defaultState = {
   isOpen: false,
-  // task: {},
-  comments: [],
-  attachments: [],
   // loading: false
+  focus: false
 }
 
 const reducer = (state = defaultState, action) => {
@@ -28,6 +26,17 @@ const reducer = (state = defaultState, action) => {
     case CLOSE_MODAL:
       return {
         defaultState
+      }
+    case OPEN_EDIT_FORM:
+      return {
+        ...state,
+        focus: true
+
+      }
+    case CLOSE_EDIT_FORM:
+      return {
+        ...state,
+        focus: false
       }
     default:
       return state

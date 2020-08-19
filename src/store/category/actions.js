@@ -30,11 +30,11 @@ export const addCategoryAction = (categoryObj) => dispatch => {
 
 export const updateCategoryAction = (id, categoryObj) => dispatch => {
   updateCategory(id, categoryObj)
-  .then(response => {
-    console.log(response)
+  .then(updatedCategory => {
+    console.log(updatedCategory)
     dispatch({
       type: UPDATE_CATEGORY,
-      payload: categoryObj
+      payload: updatedCategory
     })
   })   
 }

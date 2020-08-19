@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoards } from './store/board/actions';
 import { signUpAction, loginAction, autoLoginAction} from './store/user/actions';
 import Login from './components/Login';
+import { closeForm } from './store/modal/actions';
 
 
 const App = () => {
@@ -50,10 +51,18 @@ const App = () => {
     //TODO: reorder the column
   }
 
+  const handleClick = (e) => {
+    if (!e.target.className.includes("inputToggle") && (!e.target.parentNode.parentNode.className.includes("inputToggle"))){
+console.log(e.target.parentNode.parentNode)
+      console.log("gotcha", e.target.className)
+      dispatch(closeForm())
+    }
+  }
+
   return (
     // <DragDropContext onDragEnd={onDragEnd}>
 
-    <div className="App">
+    <div className="App" onClick={handleClick}>
       {/* <Route exact path="/" /> */}
       <Header/>
       <Switch>
