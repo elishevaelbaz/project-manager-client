@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Search, } from 'semantic-ui-react'
 import { setFilter } from '../store/task/actions'
@@ -9,11 +9,20 @@ const SearchBar = () => {
 
   const tasks = useSelector(state => state.task.tasks)
   const members = useSelector(state => state.board.members)
+  const queryState = useSelector(state => state.task.query)
 
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState(queryState)
   const [results, setResults] = useState([])
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    // if query in state gets cleared (by clicking the x by filter icon)
+    if (queryState === ""){
+      // clear out the search bar
+      setQuery("")
+    }
+  }, [queryState])
 
 const handleSearchChange = (e, {value}) => {
   setQuery(value)
@@ -25,7 +34,9 @@ const handleSearchChange = (e, {value}) => {
   }
   else{
     console.log( tasks.filter(t => t.name.toLowerCase().includes(value.toLowerCase())))
-    const filtered = tasks.filter(t => t.name.toLowerCase().includes(value.toLowerCase()))
+    const filtered = tasks.filter(t => {
+      return ( t.name.toLowerCase().includes(value.toLowerCase()) ) || ( t.description.toLowerCase().includes(value.toLowerCase()) )
+    })
     setResults(filtered.map(t => ({ title: t.name, description: t.description })))
   }
 }

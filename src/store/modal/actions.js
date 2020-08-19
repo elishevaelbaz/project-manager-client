@@ -1,4 +1,5 @@
 import { OPEN_MODAL, CLOSE_MODAL, CLEAR_MODAL } from './types'
+import { CLEAR_FILTER } from '../task/types'
 // import { getBoards, addBoard, addMember, getMembers } from '../../api'
 // import { SET_ERROR } from '../error/types'
 // import { fetchCategories } from '../category/actions'
@@ -12,9 +13,11 @@ export const openModal = (task) => dispatch => {
 
 export const closeModal = () => dispatch => {
   dispatch({type: CLOSE_MODAL})
-
 }
 
+export const clearFilter = () => dispatch => {
+  dispatch({type: CLEAR_FILTER})
+}
 
 
 // export const changeCurrentBoard = (boardName) => dispatch => {

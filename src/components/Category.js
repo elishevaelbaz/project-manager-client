@@ -23,7 +23,10 @@ const Category = ({ name, id, taskOrder}) => {
       })
     }
     else{
-      tasks = tasks.filter(task => task.name.toLowerCase().includes(query.toLowerCase()))
+      // searching task names and descriptions for a match
+      tasks = tasks.filter(task => task.name.toLowerCase().includes(query.toLowerCase())
+        || task.description.toLowerCase().includes(query.toLowerCase())
+      )
     }
   }
   const filteredTasks = tasks.filter(task => task.category_id === id)
