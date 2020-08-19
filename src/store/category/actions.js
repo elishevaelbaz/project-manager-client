@@ -1,5 +1,5 @@
-import { FETCH_CATEGORIES, SET_CATEGORIES, ADD_CATEGORY} from "./types"
-import { getCategories, addCategory } from "../../api"
+import { FETCH_CATEGORIES, SET_CATEGORIES, ADD_CATEGORY, UPDATE_CATEGORY} from "./types"
+import { getCategories, addCategory, updateCategory } from "../../api"
 
 
 export const fetchCategories = (id) => dispatch => {
@@ -26,4 +26,15 @@ export const addCategoryAction = (categoryObj) => dispatch => {
       payload: category
     })
   })
+}
+
+export const updateCategoryAction = (id, categoryObj) => dispatch => {
+  updateCategory(id, categoryObj)
+  .then(response => {
+    console.log(response)
+    dispatch({
+      type: UPDATE_CATEGORY,
+      payload: categoryObj
+    })
+  })   
 }

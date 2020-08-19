@@ -162,3 +162,7 @@ button.corner, i.corner{
   overflow-y: scroll;
   scrollbar-width: none;
 }
+
+.category-input > .ui.input > input{
+  background-color: transparent !important;
+}

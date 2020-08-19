@@ -1,4 +1,4 @@
-import { FETCH_CATEGORIES, SET_CATEGORIES, ADD_CATEGORY, REORDER_CATEGORY_TASKS, REORDER_CATEGORIES_TASKS } from "./types"
+import { FETCH_CATEGORIES, SET_CATEGORIES, ADD_CATEGORY, REORDER_CATEGORY_TASKS, REORDER_CATEGORIES_TASKS, UPDATE_CATEGORY } from "./types"
 import { SET_CURRENT_BOARD } from "../board/types";
 
 const defaultState = {
@@ -25,6 +25,22 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         categories: [...state.categories, action.payload]
+      } 
+    case UPDATE_CATEGORY:
+      const updatedCategories = state.categories.map(category => {
+        if (category.id === action.payload.id){
+          return {
+            ...category,
+            ...action.payload
+          }
+        }
+        else {
+          return category
+        }
+      })
+      return {
+        ...state,
+        categories: updatedCategories
       } 
 
       case REORDER_CATEGORY_TASKS:

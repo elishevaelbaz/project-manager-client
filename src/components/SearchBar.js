@@ -52,5 +52,4 @@ const handleSearchChange = (e, {value}) => {
         />
   )
 }
-
 export default SearchBar

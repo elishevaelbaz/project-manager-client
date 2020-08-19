@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, createRef } from 'react'
 import Task from './Task'
 import { useDispatch, useSelector } from 'react-redux'
-import { Grid, Card, CardContent } from 'semantic-ui-react'
+import { Grid, Card, CardContent, Form } from 'semantic-ui-react'
 import TaskForm from './TaskForm'
 import { Droppable } from 'react-beautiful-dnd'
 import { fetchAllComments } from '../store/comment/actions'
 import PlaceholderCard from './PlaceholderCard'
+import { updateCategoryAction } from '../store/category/actions'
 
 const Category = ({ name, id, taskOrder}) => {
 
   let tasks = useSelector(state => state.task.tasks)
   const query = useSelector(state => state.task.query)
+  // filtering tasks by query string
   if (query.trim()){
     if (query[0] === "@"){
       tasks = tasks.filter(task => {
@@ -25,10 +27,6 @@ const Category = ({ name, id, taskOrder}) => {
     }
   }
   const filteredTasks = tasks.filter(task => task.category_id === id)
-  // const filteredTasks = useSelector(state => {
-  // return state.task.tasks.filter(task => task.category_id === id)} )
-  // console.log(name, filteredTasks.length)
-
 
   const sortedTasks = filteredTasks.sort((taskA, taskB) => (taskA.position > taskB.position) ? 1 : -1)
   console.log("SORTED", sortedTasks)
@@ -48,6 +46,29 @@ const Category = ({ name, id, taskOrder}) => {
 //     dispatch(fetchAllComments())
 //   }, [dispatch])
 
+const inputRef = createRef()
+
+const [toggleEdit, setToggleEdit] = useState(false)
+const [categoryInput, setCategoryInput] = useState(name)
+
+const handleNameClick = () => {
+  console.log("click", id)
+  setToggleEdit(!toggleEdit)
+  // console.log(toggleEdit)
+}
+
+const handleChange = (e) => {
+  setCategoryInput(e.target.value)
+}
+
+const handleSubmit = () => {
+  const categoryObj = {
+    name: categoryInput
+  }
+
+  dispatch(updateCategoryAction(id, categoryObj))
+}
+
   if (loading) return <PlaceholderCard />
 
   return(
@@ -56,7 +77,10 @@ const Category = ({ name, id, taskOrder}) => {
     <div >
       <Card className="categoryCard">
         
-      <CardContent>{name}</CardContent>
+
+      { toggleEdit ? <Form onSubmit={() => handleSubmit()}><Form.Input className="category-input" type="text" name="name" autoComplete="off" value={categoryInput} onChange={handleChange} /></Form>
+        : <CardContent onClick={handleNameClick}>{name}</CardContent>
+      }
 
       <Droppable droppableId={id.toString()}>
         {provided => (
