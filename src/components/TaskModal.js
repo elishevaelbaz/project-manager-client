@@ -22,6 +22,7 @@ const TaskModal = () => {
   const open = useSelector(state => state.modal.isOpen)
   
   const currentTask = useSelector(state => state.task.currentTask)
+  console.log(currentTask)
   const currentCategory = useSelector(state => state.category.categories.find(c => c.id === currentTask.category_id))
   const categories = useSelector(state => state.category.categories)
   const members = useSelector(state => state.board.members)
@@ -50,6 +51,7 @@ const TaskModal = () => {
 
   // see category.js for explanation
   useEffect(() => {
+    console.log("isEditOpen", isEditOpen)
     // also checking that the objects are not the same
     // using JSON.stringify because the objects are passed by value not reference, they will never be ===
     if (!isEditOpen && JSON.stringify(taskInput) !== JSON.stringify(currentTask)){
@@ -99,6 +101,7 @@ const TaskModal = () => {
   
   const handleEditClick = taskPart => {
     console.log("handleEditClick")
+    console.log("taskPart", taskPart)
     setToggleEdit({
       ...toggleEdit, [taskPart]: true
     })
@@ -108,11 +111,15 @@ const TaskModal = () => {
 
   const handleChange = (e) => {
     console.log(e.target.name)
-
-    if (e.target.name === "name"){
-      console.log("Ahhhh!")
-    }
     setTaskInput({...taskInput, [e.target.name]: e.target.value})
+  }
+
+  const handleNameChange = (e) => {
+    console.log(e.target.value)
+    setTaskInput({
+      ...taskInput,
+      name: e.target.value
+    })
   }
 
 
@@ -163,7 +170,7 @@ const TaskModal = () => {
             type="text" name="name" 
             autoComplete="off" 
             value={taskInput.name} 
-            onChange={handleChange} 
+            onChange={handleNameChange} 
           />
           </Form>
       : <><Header style={{display:"inline"}} className="inputToggle"> {currentTask.name}
