@@ -18,6 +18,8 @@ export const addLabelAction = (labelObj) => dispatch => {
         type: ADD_LABEL,
         payload: label
       })
+      // dispatch({type: FETCH_TASK_LABELS})
+        
     }
   })
 }
@@ -31,69 +33,3 @@ export const fetchLabels = (boardId) => dispatch => {
     })
   })
 }
-
-export const fetchTaskLabels = (taskId) => dispatch => {
-  dispatch({type: FETCH_TASK_LABELS})
-  getTaskLabels(taskId).then(taskLabels => {
-    console.log("taskLabels", taskLabels)
-    dispatch({ 
-      type: SET_TASK_LABELS, 
-      payload: taskLabels
-    })
-   
-  })
-}
-
-export const addTaskLabelAction = (taskLabelObj) => dispatch => {
-  addTaskLabel(taskLabelObj)
-  .then(taskLabel => {
-    if (taskLabel.error){
-      dispatch({
-        type: SET_ERROR,
-        payload: taskLabel.error
-      })
-    }
-    else{
-      console.log(taskLabel)
-      dispatch({
-        type: ADD_TASK_LABEL,
-        payload: taskLabel
-      })
-    }
-  })
-}
-
-export const deleteTaskLabelAction = (id) => dispatch => {
-  deleteTaskLabel(id)
-  .then(response => {
-    console.log(response)
-    dispatch({
-      type: DELETE_TASK_LABEL,
-      payload: id
-    })
-  })
-}
-
-
-export const fetchAllTaskLabels = (boardId) => dispatch => {
-  dispatch({type: FETCH_TASK_LABELS})
-  getAllTaskLabels(boardId).then(taskLabels => {
-    console.log("taskLabels", taskLabels)
-    dispatch({ 
-      type: SET_TASK_LABELS, 
-      payload: taskLabels
-    })
-   
-  })
-}
-
-
-// export const postTask = (taskObj) => dispatch => {
-//   addTask(taskObj)
-//   .then(task => {
-//     dispatch({
-//       type: ADD_TASK,
-//       payload: task
-//     })
-//   })
-// }

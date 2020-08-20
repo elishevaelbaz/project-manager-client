@@ -1,5 +1,8 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC, SET_FILTER, CLEAR_FILTER } from './types'
-import { getTasks, addTask, deleteTask, updateTask, getCurrentTask, updatePosition } from '../../api'
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK,
+   CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC,
+    SET_FILTER, CLEAR_FILTER, ADD_TASK_LABEL, FETCH_TASK_LABELS, SET_TASK_LABELS, DELETE_TASK_LABEL} from './types'
+import { getTasks, addTask, deleteTask, updateTask, getCurrentTask, updatePosition,
+  getTaskLabels, addTaskLabel, deleteTaskLabel } from '../../api'
 import { SET_ERROR } from '../error/types'
 
 //thunky action
@@ -146,5 +149,47 @@ export const setFilter = (filterQuery) => dispatch => {
 export const clearFilter = () => dispatch => {
   dispatch({
     type: CLEAR_FILTER,
+  })
+}
+
+export const fetchTaskLabels = (taskId) => dispatch => {
+  dispatch({type: FETCH_TASK_LABELS})
+  getTaskLabels(taskId).then(taskLabels => {
+    console.log("taskLabels", taskLabels)
+    dispatch({ 
+      type: SET_TASK_LABELS, 
+      payload: taskLabels
+    })
+   
+  })
+}
+
+export const addTaskLabelAction = (taskLabelObj) => dispatch => {
+  addTaskLabel(taskLabelObj)
+  .then(taskLabel => {
+    if (taskLabel.error){
+      dispatch({
+        type: SET_ERROR,
+        payload: taskLabel.error
+      })
+    }
+    else{
+      console.log(taskLabel)
+      dispatch({
+        type: ADD_TASK_LABEL,
+        payload: taskLabel
+      })
+    }
+  })
+}
+
+export const deleteTaskLabelAction = (id) => dispatch => {
+  deleteTaskLabel(id)
+  .then(response => {
+    console.log(response)
+    dispatch({
+      type: DELETE_TASK_LABEL,
+      payload: id
+    })
   })
 }

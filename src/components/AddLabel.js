@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Label, Input, Button, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addLabelAction, fetchTaskLabels, addTaskLabelAction, deleteTaskLabelAction } from '../store/label/actions'
-
+import { fetchTaskLabels, addTaskLabelAction, deleteTaskLabelAction } from '../store/task/actions'
+import { addLabelAction } from '../store/label/actions'
 
 const colors = [
   'red',
@@ -22,26 +22,10 @@ const colors = [
 
 const AddLabel = ({taskId}) => {
 
-  // const defaultLabelCheck = {
-  //   red: false,
-  //   orange: false,
-  //   yellow: false,
-  //   olive: false,
-  //   green: false,
-  //   teal: false,
-  //   blue: false,
-  //   violet: false,
-  //   purple: false,
-  //   pink: false,
-  //   brown: false,
-  //   grey: false,
-  //   black: false,
-  //   }
-
-
     const currentBoard = useSelector(state => state.board.currentBoard)
     const labels = useSelector(state => state.label.labels)
-    const taskLabels = useSelector(state => state.label.taskLabels)
+    // const taskLabels = useSelector(state => state.label.taskLabels)
+    const taskLabels = useSelector(state => state.task.currentTask.taskLabels)
 
     const filteredLabels = taskLabels.map(tl => {
       return labels.find(label => label.id === tl.label_id)
@@ -65,10 +49,10 @@ const AddLabel = ({taskId}) => {
     const [checkedColor, setCheckedColor] = useState("teal")
     const [nameInput, setnameInput] = useState("")
      
-  useEffect(() => {
-    fetchTaskLabels(taskId)
+  // useEffect(() => {
+  //   fetchTaskLabels(taskId)
 
-  }, [labels])
+  // }, [labels])
 
   const handleColorClick = (color) => {
     console.log("checkedColor", checkedColor)

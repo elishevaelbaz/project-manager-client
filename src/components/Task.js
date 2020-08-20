@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, Icon, Label} from 'semantic-ui-react'
+import { Card, Icon, Label, Image } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction } from '../store/task/actions'
 import { fetchComments } from '../store/comment/actions'
@@ -7,19 +7,25 @@ import { fetchAttachments,  } from '../store/attachment/actions'
 import { Draggable } from 'react-beautiful-dnd'
 import { openModal } from '../store/modal/actions'
 import TaskModal from './TaskModal'
-import { fetchTaskLabels } from '../store/label/actions'
+import { fetchTaskLabels } from '../store/task/actions'
 
 const Task = ({task, count, index,}) => {
   console.log("TASK", task)
   
   const currentUser = useSelector(state => state.user.currentUser.username)
   const comments = useSelector(state => state.comment.comments)
-  const taskLabels = useSelector(state => state.label.taskLabels)
-  console.log(taskLabels)
-  const filteredTaskLabels = taskLabels.filter(l => l.task_id ===task.id)
+
+  const members = useSelector(state => state.board.members)
+  const assignedMember = members.find(member => member.username === task.assigned_to)
+  const currentTask = useSelector(state => state.task.tasks.find(t => t.id === task.id))
+  // console.log(currentTask, "currentTask")
+  const taskLabels = currentTask.taskLabels
+  // console.log("taskLabels", taskLabels)
+  // const filteredTaskLabels = taskLabels.filter(l => l.task_id === task.id)
 
   const labels = useSelector(state => state.label.labels)
-  const filteredLabels = filteredTaskLabels.map(tl => {
+  // console.log("labels", labels)
+  const filteredLabels = taskLabels.map(tl => {
     return labels.find(label => label.id === tl.label_id)
   })
 
@@ -35,7 +41,7 @@ const Task = ({task, count, index,}) => {
     useEffect(() => {
     // dispatch(fetchCurrentTask(match.params.id))
 // comments associated with this task
-    dispatch(fetchTaskLabels(task.id))
+    // dispatch(fetchTaskLabels(task.id))
   }, [dispatch, task])
 
   // let history = useHistory()
@@ -67,7 +73,10 @@ const Task = ({task, count, index,}) => {
         <Card
           // href='#card-example-link-card'
           key={task.id}
-          onClick={() => {
+          onClick={(e) => {
+            if (e.target.className.includes("trash icon")){
+              return
+            }
             // dispatch({type: "OPEN_MODAL"})
             dispatch(fetchComments(task.id))
             dispatch(fetchTaskLabels(task.id))
@@ -79,13 +88,9 @@ const Task = ({task, count, index,}) => {
           
         >
           <Card.Content>
-          {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
           {/* <Card.Href>#card-example-link-card</Card.Header> */}
 
-          {filteredLabels.map((label) => (
-      <Label color={label.color} key={label.id}>
-        {label.name}
-      </Label>))}
+         
             <Card.Description>
             {task.name}
             </Card.Description>
@@ -100,9 +105,21 @@ const Task = ({task, count, index,}) => {
           onChange={(e, {value}) => handleSelect(value)}
           /> */}
           <Card.Content extra>
-      {comments.filter(c => c.task_id === task.id) ? 
-        <Icon name='comment outline' /> : null}
-   
+            <br />
+          {filteredLabels.length ? filteredLabels.map((label) => (
+      <Label color={label.color || "blue"} key={label.id}>
+        {label.name}
+      </Label>)) : null}
+
+      {task.assigned_to &&
+      <Image src={`https://react.semantic-ui.com/images/avatar/small/${assignedMember.avatar}.jpg`} alt="avatar" avatar className="top-left-corner" />
+      } 
+      {/* && <Icon name="trash" className="bottom-corner" onClick={() => handleDelete(task.id)} /> : null} */}
+
+
+      {task.created_by === currentUser ? <Icon name="trash" className="bottom-corner" onClick={() => handleDelete(task.id)} /> : null}
+
+      
     </Card.Content>
             {/* <Card.Meta><Icon comment outline/></Card.Meta> */}
       

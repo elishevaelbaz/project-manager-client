@@ -100,26 +100,28 @@ const Header = () => {
     
     </>}
 
-          <Popup trigger={<Menu.Item>
+{currentBoard &&
+          <Popup flowing trigger={<Menu.Item>
             <SearchBar/>
             {/* <Search icon='search' placeholder='Search tasks... ' /> */}
           </Menu.Item>} >
-            <Popup.Content>type to search task title and description </Popup.Content>
-            <Popup.Content>use @ to search tasks assigned to a specific member </Popup.Content>
-            </Popup>
+            <Popup.Content>type to search by task title or description </Popup.Content>
+            <Popup.Content>use @&lt;member_name&gt; to search for tasks assigned to a specific member </Popup.Content>
+            </Popup>}
           
-          {/* <Menu.Item
-            name='logout'
-            active={activeItem === 'logout'}
-            onClick={this.handleItemClick}
-          /> */}
+           {/* <Menu.Item
+          //   name='logout'
+          //   active={activeItem === 'logout'}
+          //   onClick={this.handleItemClick}
+          // /> */}
 
           
          { filter && <Menu.Item>
             <Icon name="filter" />
-            {`Filtering by ${filter}`}
+            {`Filtering tasks`}
             <Icon name="close" onClick={handleClearFilter}/>
             </Menu.Item>}
+    
             
     <Menu.Item  position='right'>
   

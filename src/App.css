@@ -166,3 +166,15 @@ button.corner, i.corner{
 .category-input > .ui.input > input{
   background-color: transparent !important;
 }
+
+i.bottom-corner{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+img.top-left-corner{
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+}

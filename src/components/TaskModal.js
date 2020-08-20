@@ -98,6 +98,7 @@ const TaskModal = () => {
   
   
   const handleEditClick = taskPart => {
+    console.log("handleEditClick")
     setToggleEdit({
       ...toggleEdit, [taskPart]: true
     })
@@ -107,6 +108,10 @@ const TaskModal = () => {
 
   const handleChange = (e) => {
     console.log(e.target.name)
+
+    if (e.target.name === "name"){
+      console.log("Ahhhh!")
+    }
     setTaskInput({...taskInput, [e.target.name]: e.target.value})
   }
 
@@ -147,7 +152,20 @@ const TaskModal = () => {
         />
         <h4 style={{display:"inline", paddingRight:"5px"}}><Icon name='book'/>Title:</h4>
       
-        { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}><Form.Input className="inputToggle" type="text" name="name" autoComplete="off" value={taskInput.name} onChange={handleChange} /></Form>
+        { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}>
+          {/* <Form.Input className="inputToggle" 
+            type="text" name="name" 
+            autoComplete="off" 
+            value={taskInput.name} 
+            onChange={handleChange} 
+          /> */}
+          <Form.Input
+            type="text" name="name" 
+            autoComplete="off" 
+            value={taskInput.name} 
+            onChange={handleChange} 
+          />
+          </Form>
       : <><Header style={{display:"inline"}} className="inputToggle"> {currentTask.name}
         {/* <span>
         </span> */}

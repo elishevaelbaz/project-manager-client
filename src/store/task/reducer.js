@@ -1,4 +1,6 @@
-import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK, CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC, SET_FILTER, CLEAR_FILTER } from "./types"
+import { SET_TASKS, FETCH_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_CURRENT_TASK,
+   CLOSE_CURRENT_TASK, UPDATE_POSITIONS_OPTIMISTIC, UPDATE_POSITIONS_PESSIMISTIC,
+    SET_FILTER, CLEAR_FILTER, ADD_TASK_LABEL, SET_TASK_LABELS, FETCH_TASK_LABELS, DELETE_TASK_LABEL } from "./types"
 import { OPEN_MODAL, CLOSE_MODAL } from "../modal/types";
 
 const defaultState = {
@@ -6,6 +8,26 @@ const defaultState = {
   currentTask: {},
   loading: false,
   query: ""
+}
+
+function deleteTask(state, action) {
+  const task = { ...state.currentTask, taskLabels: state.currentTask.taskLabels.filter(taskLabel => taskLabel.id !== action.payload) };
+
+  const tasks = state.tasks.map(t => {
+    if (t.id === task.id) {
+      return {
+        ...task
+      };
+    }
+    else {
+      return t;
+    }
+  });
+  return {
+    ...state,
+    currentTask: task,
+    tasks: tasks
+  };
 }
 
 const reducer = (state = defaultState, action) => {
@@ -182,16 +204,10 @@ const reducer = (state = defaultState, action) => {
           ...state,
           tasks: updatedTasks,
         }
-
-
         case UPDATE_POSITIONS_PESSIMISTIC:
           console.log("action.payload", action.payload)
           let updated = state.tasks.map(task => {
-            let updatedTask = action.payload.new_category_tasks.find(t => t.id === task.id)
-            return updatedTask ? updatedTask : task
-          })
-          updated = updated.map(task => {
-            let updatedTask = action.payload.old_category_tasks.find(t => t.id === task.id)
+            let updatedTask = action.payload.find(t => t.id === task.id)
             return updatedTask ? updatedTask : task
           })
           console.log("updatedTasks reducer", updated)
@@ -221,10 +237,41 @@ const reducer = (state = defaultState, action) => {
           currentTask: {}
         } 
       case DELETE_TASK:
-      return {
-        ...state,
-        tasks: state.tasks.filter(task => task.id !== action.payload)
-      } 
+        return {
+          ...state,
+          tasks: state.tasks.filter(task => task.id !== action.payload)
+        } 
+
+      case FETCH_TASK_LABELS:
+        return {
+          ...state,
+          // loading: true
+        } 
+      case SET_TASK_LABELS:
+        return {
+          ...state,
+          currentTask: {...state.currentTask, taskLabels: action.payload},
+          // loading: false
+        }
+      case ADD_TASK_LABEL:
+        const task = {...state.currentTask, taskLabels: [...state.currentTask.taskLabels, action.payload]}
+        const tasks = state.tasks.map(t => {
+          if (t.id === task.id){
+            return {
+              ...task
+            }
+          }
+          else{
+              return t
+            }
+          })
+        return {
+          ...state,
+          currentTask: task,
+          tasks: tasks
+        } 
+      case DELETE_TASK_LABEL:
+        return deleteTask(state, action); 
     default:
       return state
   }
