@@ -64,7 +64,7 @@ const boards = useSelector(state => state.board.boards)
 
     </Card.Content>
     {formShown && <Form onSubmit={handleSubmit}>
-    <Form.Input fluid name="name" placeholder='Board name' onChange={handleChange} />
+    <Form.Input fluid name="name" placeholder='Board name' autoComplete="off" onChange={handleChange} />
 
     </Form>}
       </Card>   

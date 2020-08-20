@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import { Form } from 'semantic-ui-react'
 
 const Login = (props) => {
 
@@ -16,22 +16,27 @@ const Login = (props) => {
   const handleSubmit = e => {
     e.preventDefault()
     props.handleLogin(loginInput)
-    // TODO: make a fetch request to login the current user
-    // then set that user in state in our App component
-
   }
 
     return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <h1>Login</h1>
-          <label>Username</label>
-          <input type="text" name="username" autoComplete="off" value={loginInput.username} onChange={handleChange} />
-          <label>Password</label>
-          <input type="password" name="password" value={loginInput.password} onChange={handleChange} autoComplete="current-password" />
-          <input type="submit" value="Login" />
-        </form>
-        <Link to="/signup" >Don't have an account yet? Sign up here</Link>
+      <div className="signin-container">
+        <div>
+          <h1 id="signin-logo" className="logo">Managely</h1>
+          <h3>The simple, yet effective project management tool</h3>
+          <h3>fit for all your collaborative needs</h3>
+        </div>
+        <div className="signin-form-container">
+          <Form onSubmit={handleSubmit}>
+          <h1 className="signin-header">Log in</h1>
+          <Form.Input label='Username' name="username" placeholder='username' autoComplete="off" onChange={handleChange}/>
+          <br />
+          <Form.Input label='Password' name="password" placeholder='password' type="password" autoComplete="off" onChange={handleChange}/>
+          <br />
+          <Form.Button onClick={handleSubmit}>Submit</Form.Button>
+          </Form>
+          <br />
+          <Link to="/signup" className="landing-page-text">Don't have an account yet? Sign up here</Link>
+        </div>
       </div>
     )
   }

@@ -47,9 +47,9 @@ const TaskForm = ({ categoryId }) => {
 
       <Icon name='close' onClick={handleClose} className="corner" />
 
-        <Form.Input  label='name' name="name" placeholder='Task name' onChange={handleChange} />
+        <Form.Input  label='name' name="name" placeholder='Task name' autoComplete="off" onChange={handleChange} />
 
-        <Form.Input  label='description' name="description" placeholder='description' onChange={handleChange} />
+        <Form.Input  label='description' name="description" placeholder='description' autoComplete="off" onChange={handleChange} />
 
         <Form.Button color='violet'>Submit</Form.Button>
                 </Form>}

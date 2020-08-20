@@ -179,7 +179,7 @@ const CategoryContainer = ({match}) => {
     //     trigger={<Button icon='add' content='Add a category' />}
     //     content={<Form onSubmit={handleAddCategory}>
 
-    //     <Form.Input  name="name" label="Add a category" placeholder='Category name' onChange={handleChange} />
+    //     <Form.Input  name="name" label="Add a category" autoComplete="off" placeholder='Category name' onChange={handleChange} />
     
     //     </Form>}
     //     on='click'
@@ -209,7 +209,7 @@ const CategoryContainer = ({match}) => {
         trigger={<Button icon='add' content='Add a category' />}
         content={<Form onSubmit={handleAddCategory}>
 
-        <Form.Input  name="name" label="Add a category" placeholder='Category name' onChange={handleChange} />
+        <Form.Input  name="name" label="Add a category" placeholder='Category name' autoComplete="off" onChange={handleChange} />
     
         </Form>}
         on='click'

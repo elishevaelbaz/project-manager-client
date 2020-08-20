@@ -110,7 +110,7 @@ const AddLabel = ({taskId}) => {
 
       {/* <Input name="name" onChange={(e) => handleInputChange}></Input> */}
       <label>Create a label: </label>
-      <input name="name" onChange={handleInputChange}/>
+      <input name="name" autoComplete="off" onChange={handleInputChange}/>
                  
     {colors.map((color) => (
       <Label color={color} key={color} onClick={() => handleColorClick(color)}>

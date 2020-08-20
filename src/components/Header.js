@@ -63,16 +63,12 @@ const Header = () => {
     {/* <Button onClick={handleAddTask}>Add Task</Button> */}
     { currentUser && 
     <Menu >
-    {/* <Menu.Item></Menu.Item> */}
-      {  currentBoard &&  <Menu.Item>{currentBoard.name}</Menu.Item>}
+    <Menu.Item className="logo">Managely</Menu.Item>
+      {  currentBoard &&  <><Menu.Item>{currentBoard.name}</Menu.Item>
     <Menu.Item>
     <BoardDropdown />
     </Menu.Item>
-
-    
-
-    
-    {currentBoard && <>
+   
     <Menu.Item>
       {members.length === 1 ? "you are the only member" : <Popup trigger={<p> {members.length} members</p>}>
       <Popup.Content>
@@ -82,15 +78,15 @@ const Header = () => {
          }
          </Menu.Item>
       <Menu.Item><Popup
-    // icon='plus '
-            trigger={<p><Icon.Group size='large'>
+            trigger={<p className="pointer"><Icon.Group size='large'>
+              
             <Icon name='users' />
             <Icon corner name='add' />
           </Icon.Group>
           Invite</p>
         }
             content={<Form onSubmit={handleAddMember}>
-            <Form.Input  name="name" label="Invite to board" placeholder='username' onChange={handleChange} />
+            <Form.Input  name="name" label="Invite to board" placeholder='username' autoComplete="off" onChange={handleChange} />
         
             </Form>}
             on='click'

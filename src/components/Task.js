@@ -71,6 +71,7 @@ const Task = ({task, count, index,}) => {
         {...provided.dragHandleProps}
         ref={provided.innerRef}>
         <Card
+        className="task-card"
           // href='#card-example-link-card'
           key={task.id}
           onClick={(e) => {
