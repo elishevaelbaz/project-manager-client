@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Category from './Category'
 import { useDispatch, useSelector, ReactReduxContext } from 'react-redux'
 import { fetchBoards, setCurrentBoard } from '../store/board/actions'
+import { fetchLabels, fetchTaskLabels, fetchAllTaskLabels } from '../store/label/actions'
 import { fetchCategories, addCategoryAction } from '../store/category/actions';
 import { addTaskAction, fetchTasks, updateTaskAction, updatePositionAction } from '../store/task/actions';
 import { Grid, Container, Form, Popup, Button } from 'semantic-ui-react'
@@ -24,6 +25,7 @@ const CategoryContainer = ({match}) => {
 
   const categories = useSelector(state => state.category.categories)
   const tasks = useSelector(state => state.task.tasks)
+  const tasksLabels = useSelector(state => state.label.taskLabels)
 
 
   const dispatch = useDispatch()
@@ -44,6 +46,8 @@ const CategoryContainer = ({match}) => {
     if (currentBoard) {
       dispatch(fetchCategories(currentBoard.id))
       dispatch(fetchTasks(currentBoard.id))
+      dispatch(fetchLabels(currentBoard.id))
+      // dispatch(fetchAllTaskLabels(currentBoard.id))
     }
     // else {
     //   console.log("here")

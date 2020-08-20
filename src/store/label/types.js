@@ -1,0 +1,6 @@
+export const SET_LABELS = "SET_LABELS"
+export const ADD_LABEL = "ADD_LABEL"
+export const SET_TASK_LABELS = "SET_TASK_LABELS"
+export const ADD_TASK_LABEL = "ADD_TASK_LABEL"
+export const FETCH_TASK_LABELS = "FETCH_TASK_LABELS"
+export const DELETE_TASK_LABEL = "DELETE_TASK_LABEL"

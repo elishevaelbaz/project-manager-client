@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Icon, Modal, Button, Form, Header, Comment } from 'semantic-ui-react'
+import { Icon, Modal, Button, Form, Header, Comment, Popup } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateTaskAction } from '../store/task/actions'
 import { addCommentAction, fetchComments } from '../store/comment/actions'
@@ -12,6 +12,7 @@ import CategoryDropdown from './CategoryDropdown'
 import AttachmentForm from './AttachmentForm'
 import { CLOSE_MODAL } from '../store/modal/types'
 import { openForm } from '../store/modal/actions'
+import AddLabel from './AddLabel'
 
 
 const TaskModal = () => {
@@ -194,6 +195,14 @@ const TaskModal = () => {
         {attachments && attachments.map(attachment => <><img src={attachment.image} />
         {attachment.username === currentUser && <Icon name="trash" onClick={() => handleDeleteAttachment(attachment.id)} ></Icon>}
         </>)}
+
+
+        
+        <AddLabel key={currentTask.id} taskId={currentTask.id} />
+       
+
+
+
 
         <h4>
           Comments

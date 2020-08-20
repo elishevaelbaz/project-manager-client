@@ -316,3 +316,77 @@ export function deleteAttachment(id) {
   })
   .then(r => r.json())
 }
+
+
+// =====================
+// label fetches
+// =====================
+
+export const getLabels = (id) => {
+  return fetch(`http://localhost:3000/labels?board_id=${id}`, {
+    credentials: "include"
+  })
+    .then(r => r.json())
+}
+
+export const addLabel = (labelObj) => {
+  // const labelObj = {name, due_date, category_id, created_by}
+  return fetch("http://localhost:3000/labels", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(labelObj)
+  })
+    .then(r => r.json().then(data => {
+      if (r.ok) return data
+      throw data
+    }))
+}
+
+// =====================
+// taskLabel fetches
+// =====================
+
+export const getTaskLabels = (taskId) => {
+  return fetch(`http://localhost:3000/task_labels?task_id=${taskId}`,{
+    credentials: "include"
+  })
+    .then(r => r.json())
+}
+
+export const addTaskLabel = (taskLabelObj) => {
+  // const labelObj = {name, due_date, category_id, created_by}
+  return fetch("http://localhost:3000/task_labels", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(taskLabelObj)
+  })
+    .then(r => r.json().then(data => {
+      if (r.ok) return data
+      throw data
+    }))
+}
+
+export function deleteTaskLabel(id) {
+  return fetch(`http://localhost:3000/task_labels/${id}`, {
+    method: 'DELETE',
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(r => r.json())
+}
+
+
+export const getAllTaskLabels = (boardId) => {
+  return fetch(`http://localhost:3000/task_labels/?board_id=${boardId}`,{
+    credentials: "include"
+  })
+    .then(r => r.json())
+}

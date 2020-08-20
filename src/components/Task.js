@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, Icon} from 'semantic-ui-react'
+import React, { useEffect } from 'react'
+import { Card, Icon, Label} from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteTaskAction } from '../store/task/actions'
 import { fetchComments } from '../store/comment/actions'
@@ -7,13 +7,23 @@ import { fetchAttachments,  } from '../store/attachment/actions'
 import { Draggable } from 'react-beautiful-dnd'
 import { openModal } from '../store/modal/actions'
 import TaskModal from './TaskModal'
+import { fetchTaskLabels } from '../store/label/actions'
 
 const Task = ({task, count, index,}) => {
   console.log("TASK", task)
   
   const currentUser = useSelector(state => state.user.currentUser.username)
   const comments = useSelector(state => state.comment.comments)
+  const taskLabels = useSelector(state => state.label.taskLabels)
+  console.log(taskLabels)
+  const filteredTaskLabels = taskLabels.filter(l => l.task_id ===task.id)
 
+  const labels = useSelector(state => state.label.labels)
+  const filteredLabels = filteredTaskLabels.map(tl => {
+    return labels.find(label => label.id === tl.label_id)
+  })
+
+  console.log("filteredLabels", filteredLabels)
 
   const modalIsOpen = useSelector(state => state.modal.isOpen)
 
@@ -22,11 +32,11 @@ const Task = ({task, count, index,}) => {
 
   // if separate out the modal, move this useeffect there
   // so don't have to fetch all the comments at once
-//     useEffect(() => {
-//     // dispatch(fetchCurrentTask(match.params.id))
-// // comments associated with this task
-//     // dispatch(fetchComments(task.id))
-//   }, [dispatch, task])
+    useEffect(() => {
+    // dispatch(fetchCurrentTask(match.params.id))
+// comments associated with this task
+    dispatch(fetchTaskLabels(task.id))
+  }, [dispatch, task])
 
   // let history = useHistory()
 
@@ -60,6 +70,7 @@ const Task = ({task, count, index,}) => {
           onClick={() => {
             // dispatch({type: "OPEN_MODAL"})
             dispatch(fetchComments(task.id))
+            dispatch(fetchTaskLabels(task.id))
             dispatch(fetchAttachments(task.id))
             dispatch(openModal(task))
 
@@ -69,8 +80,12 @@ const Task = ({task, count, index,}) => {
         >
           <Card.Content>
           {task.created_by === currentUser ? <Icon name="trash" onClick={() => handleDelete(task.id)} /> : null}
-
           {/* <Card.Href>#card-example-link-card</Card.Header> */}
+
+          {filteredLabels.map((label) => (
+      <Label color={label.color} key={label.id}>
+        {label.name}
+      </Label>))}
             <Card.Description>
             {task.name}
             </Card.Description>
@@ -94,7 +109,7 @@ const Task = ({task, count, index,}) => {
     </Card.Content>
       </Card>
 
-      {modalIsOpen && <TaskModal />}
+      {modalIsOpen && <TaskModal key={task.id}/>}
       
       </div>
     )}

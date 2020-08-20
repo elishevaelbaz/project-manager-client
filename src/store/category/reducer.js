@@ -43,6 +43,48 @@ const reducer = (state = defaultState, action) => {
         categories: updatedCategories
       } 
 
+      // case UPDATE_POSITIONS_OPTIMISTIC:
+
+      //   updatedCategories = state.categories.map((category, index) => {
+      //     console.log("indx=", index, "category=", JSON.stringify(category))
+
+      //   if (category.id === action.payload.id ){
+      //     const updatedCategory = {...action.payload}
+      //     // remove prev_category_id and prev_position before putting action.payload in state
+      //     delete updatedCategory.prev_position
+      //     console.log("category itself", category)
+          
+      //     return updatedCategory
+      //   }
+      //   // other categories
+      //   else if ("something"){
+
+
+      //   }
+      // })
+
+      //   return {
+      //     ...state,
+      //     tasks: updatedCategories,
+      //   }
+
+
+      //   case UPDATE_POSITIONS_PESSIMISTIC:
+      //     console.log("action.payload", action.payload)
+      //     let updated = state.categories.map(category => {
+      //       let updatedCategory = action.payload.find(c => c.id === category.id)
+      //       return updatedCategory ? updatedCategory : category
+      //     })
+      //     updated = updated.map(category => {
+      //       let updatedCategory = action.payload.find(c => c.id === category.id)
+      //       return updatedCategory ? updatedCategory : category
+      //     })
+      //     console.log("updatedCategorys reducer", updated)
+      //     return {
+      //       ...state,
+      //       categories: updated,
+      //     }
+
       case REORDER_CATEGORY_TASKS:
 
 

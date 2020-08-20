@@ -1,5 +1,5 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS } from './types'
-import { getBoards, addBoard, addMember, getMembers } from '../../api'
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS, ADD_LABEL, SET_LABELS, ADD_TASK_LABEL } from './types'
+import { getBoards, addBoard, addMember, getMembers, addLabel, getLabels } from '../../api'
 import { SET_ERROR } from '../error/types'
 // import { fetchCategories } from '../category/actions'
 
@@ -84,6 +84,55 @@ export const getMembersAction = (boardId) => dispatch => {
   })
 }
 
+
+// export const addLabelAction = (labelObj) => dispatch => {
+//   addLabel(labelObj)
+//   .then(label => {
+//     if (label.error){
+//       dispatch({
+//         type: SET_ERROR,
+//         payload: label.error
+//       })
+//     }
+//     else{
+//       console.log(label)
+//       dispatch({
+//         type: ADD_LABEL,
+//         payload: label
+//       })
+//     }
+//   })
+// }
+
+// export const fetchLabels = (boardId) => dispatch => {
+//   getLabels(boardId).then(labels => {
+//     console.log("labels", labels)
+//     dispatch({ 
+//       type: SET_LABELS, 
+//       payload: labels
+//     })
+//   })
+// }
+
+
+// export const addTaskLabelAction = (taskLabelObj) => dispatch => {
+//   addLabel(taskLabelObj)
+//   .then(taskLabel => {
+//     if (taskLabel.error){
+//       dispatch({
+//         type: SET_ERROR,
+//         payload: taskLabel.error
+//       })
+//     }
+//     else{
+//       console.log(taskLabel)
+//       dispatch({
+//         type: ADD_TASK_LABEL,
+//         payload: taskLabel
+//       })
+//     }
+//   })
+// }
 
 
 // export const postTask = (taskObj) => dispatch => {

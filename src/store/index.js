@@ -7,6 +7,7 @@ import categoryReducer from './category/reducer'
 import boardReducer from './board/reducer'
 import userReducer from './user/reducer'
 import attachmentReducer from './attachment/reducer'
+import labelReducer from './label/reducer'
 import modalReducer from './modal/reducer'
 import errorReducer from './error/reducer'
 import { LOGOUT_USER } from './user/types'
@@ -19,6 +20,7 @@ const appReducer = combineReducers({
   board: boardReducer,
   user: userReducer,
   attachment: attachmentReducer,
+  label: labelReducer,
   modal: modalReducer,
   error: errorReducer
 
