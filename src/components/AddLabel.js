@@ -48,6 +48,7 @@ const AddLabel = ({taskId}) => {
     const dispatch = useDispatch()
     const [checkedColor, setCheckedColor] = useState("teal")
     const [nameInput, setnameInput] = useState("")
+    const [isCreateOpen, setIsCreateOpen] = useState(false)
      
   // useEffect(() => {
   //   fetchTaskLabels(taskId)
@@ -105,31 +106,48 @@ const AddLabel = ({taskId}) => {
     }
 }
 
+const handlePlusClick = () => {
+  setIsCreateOpen(!isCreateOpen)
+}
+
   return(
     <div>
-
+      Add an existing label:
+     <br />
+     {filteredLabels.map(label =>  <Label color={label.color} key={label.id} onClick={() => handleRemoveLabel(label.id)}>
+     <Icon name="check"/>
+     {label.name}
+     </Label>)}
+     {unFilteredLabels.map(label =>  <Label color={label.color} key={label.id} onClick={() => handleAddLabel(label.id)}>
+     {label.name}
+     </Label>)}
+     <br />
+<br />
+     <Button 
+        icon={isCreateOpen ? 'close' : 'plus' }
+        onClick={null}
+        content={isCreateOpen ? "Close create label form" : "Create new label" }
+        onClick={handlePlusClick}
+        />
       {/* <Input name="name" onChange={(e) => handleInputChange}></Input> */}
-      <label>Create a label: </label>
+      {/* <label>Create a new label: </label> */}
+      {isCreateOpen && <><br />
+      <label for="name">Name:</label>
       <input name="name" autoComplete="off" onChange={handleInputChange}/>
-                 
+              <br />   
+    <label >Color:</label>
+
     {colors.map((color) => (
       <Label color={color} key={color} onClick={() => handleColorClick(color)}>
 
         { checkedColor === color && <Icon name="check"/>}
       </Label>
-    ))}
+    ))
+    }
+    <br/>
     <Button onClick={handleButtonClick}>Create</Button>
+    </>}
 <br />
-Add a label:
-     
-
-        {filteredLabels.map(label =>  <Label color={label.color} key={label.id} onClick={() => handleRemoveLabel(label.id)}>
-        <Icon name="check"/>
-        {label.name}
-        </Label>)}
-        {unFilteredLabels.map(label =>  <Label color={label.color} key={label.id} onClick={() => handleAddLabel(label.id)}>
-        {label.name}
-        </Label>)}
 
     </div>
   )

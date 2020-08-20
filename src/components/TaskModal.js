@@ -151,12 +151,14 @@ const TaskModal = () => {
       open={open}
       // trigger={<Button>Show Modal</Button>}
   >
-    <Modal.Content >
-      <Modal.Description>
-        <Button 
+    <Button 
+    className="corner"
         icon='close' 
         onClick={() => {dispatch({type: CLOSE_MODAL})}}
         />
+    <Modal.Content className="two-col-grid">
+      <Modal.Description>
+        
         <h4 style={{display:"inline", paddingRight:"5px"}}><Icon name='book'/>Title:</h4>
       
         { toggleEdit.name ?  <Form onSubmit={() => handleSubmit("name")}>
@@ -223,7 +225,7 @@ const TaskModal = () => {
 
 
         
-        <AddLabel key={currentTask.id} taskId={currentTask.id} />
+        
        
 
 
@@ -240,6 +242,10 @@ const TaskModal = () => {
           
         </Form>
       </Modal.Description>
+
+      <div className="task-label">
+      <AddLabel key={currentTask.id} taskId={currentTask.id} />
+      </div>
     </Modal.Content>
   </Modal>
  )
