@@ -107,8 +107,8 @@ const Task = ({task, count, index,}) => {
           <Card.Content extra>
             <br />
           {filteredLabels.length ? filteredLabels.map((label) => (
-      <Label color={label.color || "blue"} key={label.id}>
-        {label.name}
+      <Label color={(label && label.color )|| "blue"} key={label && label.id}>
+       {label && label.name}
       </Label>)) : null}
 
       {task.assigned_to &&
