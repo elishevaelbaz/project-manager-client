@@ -8,9 +8,9 @@ const  SignUp = (props) => {
     password: ""
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e, {value}) => {
     console.log(e)
-    console.log(e.target.value)
+    console.log(value)
     setSignUpInput({...signUpInput, [e.target.name]: e.target.value})
   }
 
@@ -20,23 +20,6 @@ const  SignUp = (props) => {
     props.handleSignUp(signUpInput)
   }
 
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
     return (
       <>
       {/* // <div className="signUp"> */}
@@ -44,13 +27,15 @@ const  SignUp = (props) => {
         
         <div className="signup-container">
           <h1 className="signup-header">Create an Account</h1>
-          <Form.Input label='Username' name="username" placeholder='username' onChange={( e) => handleChange}/>
+          <Form>
+          <Form.Input label='Username' name="username" placeholder='username' onChange={handleChange}/>
           <br />
-          <Form.Input label='Password' name="password" placeholder='password' type="password"/>
+          <Form.Input label='Password' name="password" placeholder='password' type="password" onChange={handleChange}/>
           <br />
          
 
         <Form.Button onClick={handleSubmit}>Submit</Form.Button>
+        </Form>
         <br />
       {/* </Form> */}
       {/* <form onSubmit={handleSubmit}>
