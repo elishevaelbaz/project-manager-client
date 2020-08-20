@@ -32,22 +32,22 @@ const  SignUp = (props) => {
             <h3>fit for all your collaborative needs</h3>
           </div>
 
-        <div className="signin-form-container">
+          <div className="signin-form-container">
 
-          <h1 className="signin-header">Create an Account</h1>
-          <Form>
-          <Form.Input label='Username' name="username" placeholder='username' autoComplete="off" onChange={handleChange}/>
-          <br />
-          <Form.Input label='Password' name="password" placeholder='password' type="password" autoComplete="off" onChange={handleChange}/>
-          <br />
-         
+            <h1 className="signin-header">Create an Account</h1>
+            <Form>
+            <Form.Input label='Username' name="username" placeholder='username' autoComplete="off" onChange={handleChange}/>
+            <br />
+            <Form.Input label='Password' name="password" placeholder='password' type="password" autoComplete="off" onChange={handleChange}/>
+            <br />
+          
 
-        <Form.Button onClick={handleSubmit}>Submit</Form.Button>
-        </Form>
-        <br />
-    
-      <Link to="/login" className="landing-page-text">Already have an account? Log in here</Link>
-    </div>
+          <Form.Button onClick={handleSubmit}>Submit</Form.Button>
+          </Form>
+          <br />
+      
+          <Link to="/login" className="landing-page-text">Already have an account? Log in here</Link>
+        </div>
       </div>
       </>
     )
