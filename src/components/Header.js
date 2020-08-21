@@ -43,6 +43,7 @@ const Header = ({history}) => {
       board_id: currentBoard.id
     }
     dispatch(addMemberAction(memberObj))
+    setNewMemberInput("")
   }
 
   const handleClearFilter = () => {
@@ -84,7 +85,7 @@ const Header = ({history}) => {
           Invite</p>
         }
             content={<Form onSubmit={handleAddMember}>
-            <Form.Input  name="name" label="Invite to board" placeholder='username' autoComplete="off" onChange={handleChange} />
+            <Form.Input  name="name" label="Invite to board" placeholder='username' value={newMemberInput} autoComplete="off" onChange={handleChange} />
         
             </Form>}
             on='click'
