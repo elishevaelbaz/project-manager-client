@@ -1,10 +1,9 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS, SET_LABELS, ADD_LABEL, ADD_TASK_LABEL } from "./types"
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS, CLEAR_CURRENT_BOARD } from "./types"
 
 const defaultState = {
   boards: [],
   currentBoard: "",
   members: [],
-  labels: [],
   loading: false
 }
 
@@ -42,6 +41,11 @@ const reducer = (state = defaultState, action) => {
         ...state,
         currentBoard: state.boards[index]
       }
+    case CLEAR_CURRENT_BOARD:
+      return {
+        ...state,
+        currentBoard: ""
+      }
       case ADD_MEMBER:
         return {
           ...state,
@@ -52,31 +56,6 @@ const reducer = (state = defaultState, action) => {
           ...state,
           members: action.payload
         }
-      // case ADD_LABEL:
-      //   return {
-      //     ...state,
-      //     labels: [...state.labels, action.payload]
-      //   }
-      // case SET_LABELS:
-      //   return {
-      //     ...state,
-      //     labels: action.payload
-      //   }
-      // case ADD_TASK_LABEL:
-      //   const updatedLabels = state.labels.map(label => {
-      //     if (label.id === action.payload.label_id){
-      //       return {
-      //         ...label
-      //       }
-      //     }
-      //     else{
-      //       return label
-      //     }
-      //     )}
-      //   return {
-      //     ...state,
-      //     labels: [...state.labels, action.payload]
-      //   }
     default:
       return state
   }

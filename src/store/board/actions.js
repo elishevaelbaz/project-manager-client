@@ -1,4 +1,4 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS, ADD_LABEL, SET_LABELS, ADD_TASK_LABEL } from './types'
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS, ADD_LABEL, SET_LABELS, ADD_TASK_LABEL, CLEAR_CURRENT_BOARD } from './types'
 import { getBoards, addBoard, addMember, getMembers, addLabel, getLabels } from '../../api'
 import { SET_ERROR } from '../error/types'
 // import { fetchCategories } from '../category/actions'
@@ -53,6 +53,10 @@ export const setCurrentBoard = (id) => dispatch => {
     payload: id
   })
   // fetchCategories(boards[0].id)
+}
+
+export const clearCurrentBoard = () => dispatch => {
+  dispatch({type: CLEAR_CURRENT_BOARD})
 }
 
 export const addMemberAction = (memberObj) => dispatch => {
