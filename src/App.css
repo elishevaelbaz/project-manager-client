@@ -70,6 +70,10 @@ body{
   min-height: 100px !important; 
 
 }
+
+.board-card{
+  background-color: #e3e3e3 !important;
+}
 /* .row{
   grid-row: 1;   
 } */
@@ -89,10 +93,15 @@ body{
   right: 5px;
 } */
 
-button.corner, i.corner{
+ i.corner{
   position: absolute;
   top: 0px;
   right: 0px;
+}
+button.corner{
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
  /* ui.menu + .ui.compact.floating.negative.message{
@@ -226,4 +235,12 @@ img.top-left-corner{
 
 .task-label{
   margin-top: 2vh;
+}
+
+.header-logo{
+  font-size: 28px;
+}
+
+.margin-bottom{
+  margin-bottom:5px !important;
 }

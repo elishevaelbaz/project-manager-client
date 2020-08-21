@@ -47,7 +47,7 @@ const AddLabel = ({taskId}) => {
 
     const dispatch = useDispatch()
     const [checkedColor, setCheckedColor] = useState("teal")
-    const [nameInput, setnameInput] = useState("")
+    const [nameInput, setNameInput] = useState("")
     const [isCreateOpen, setIsCreateOpen] = useState(false)
      
   // useEffect(() => {
@@ -66,7 +66,7 @@ const AddLabel = ({taskId}) => {
   const handleInputChange = (e) => {
     
       e.persist()
-      setnameInput(e.target.value)
+      setNameInput(e.target.value)
     console.log(nameInput)
 
 
@@ -86,6 +86,7 @@ const AddLabel = ({taskId}) => {
     }
     console.log(body)
     dispatch(addLabelAction(body))
+    setNameInput("")
     
   }
 
@@ -112,38 +113,47 @@ const handlePlusClick = () => {
 
   return(
     <div>
-      Add an existing label:
-     <br />
+      Labels:
+      <br />
      {filteredLabels.map(label =>  <Label color={label.color} key={label.id} onClick={() => handleRemoveLabel(label.id)}>
      <Icon name="check"/>
      {label.name}
      </Label>)}
+     <br />
+      Add an existing label:
+     <br />
      {unFilteredLabels.map(label =>  <Label color={label.color} key={label.id} onClick={() => handleAddLabel(label.id)}>
      {label.name}
      </Label>)}
      <br />
 <br />
      <Button 
-        icon={isCreateOpen ? 'close' : 'plus' }
+        icon={isCreateOpen ? 'minus' : 'plus' }
         onClick={null}
-        content={isCreateOpen ? "Close create label form" : "Create new label" }
+        content="Create new label"
         onClick={handlePlusClick}
+        className="margin-bottom"
         />
       {/* <Input name="name" onChange={(e) => handleInputChange}></Input> */}
       {/* <label>Create a new label: </label> */}
-      {isCreateOpen && <><br />
+      {isCreateOpen && <><div class="margin-bottom"><br />
       <label for="name">Name:</label>
-      <input name="name" autoComplete="off" onChange={handleInputChange}/>
+      <input name="name" autoComplete="off" value={nameInput} onChange={handleInputChange}/>
               <br />   
-    <label >Color:</label>
+              </div>
+    
+      <label >Color:</label>
 
     {colors.map((color) => (
       <Label color={color} key={color} onClick={() => handleColorClick(color)}>
 
         { checkedColor === color && <Icon name="check"/>}
       </Label>
+      
     ))
     }
+    
+   
     <br/>
     <Button onClick={handleButtonClick}>Create</Button>
     </>}

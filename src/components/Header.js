@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Image, Button, Menu, Popup, Form, Icon, Checkbox, Search, Dropdown, Input} from 'semantic-ui-react'
-import { addMemberAction, getMembersAction } from '../store/board/actions';
+import { addMemberAction, getMembersAction, clearCurrentBoard } from '../store/board/actions';
 import ErrorNotification from './ErrorNotification';
 import { setFilter, clearFilter } from '../store/task/actions';
 import SearchBar from './SearchBar';
 
-const Header = () => {
+const Header = ({history}) => {
 
   const currentBoard = useSelector(state => state.board.currentBoard)
   const members = useSelector(state => state.board.members)
@@ -56,6 +56,12 @@ const Header = () => {
     dispatch(clearFilter())
   }
 
+  const handleLogoClick = () => {
+    history.push("/boards")
+    // clear out current board so header doesn't have all the things, invite, search etc
+    dispatch(clearCurrentBoard())
+  }
+
   
   return(
     <div className="page-header">
@@ -63,7 +69,7 @@ const Header = () => {
     {/* <Button onClick={handleAddTask}>Add Task</Button> */}
     { currentUser && 
     <Menu >
-    <Menu.Item className="logo">Managely</Menu.Item>
+    <Menu.Item className="logo header-logo" onClick={handleLogoClick}>Managely</Menu.Item>
       {  currentBoard &&  <><Menu.Item>{currentBoard.name}</Menu.Item>
     <Menu.Item>
     <BoardDropdown />
@@ -97,7 +103,7 @@ const Header = () => {
     </>}
 
 {currentBoard &&
-          <Popup flowing trigger={<Menu.Item>
+          <Popup flowing trigger={<Menu.Item >
             <SearchBar/>
             {/* <Search icon='search' placeholder='Search tasks... ' /> */}
           </Menu.Item>} >
@@ -105,11 +111,6 @@ const Header = () => {
             <Popup.Content>use @&lt;member_name&gt; to search for tasks assigned to a specific member </Popup.Content>
             </Popup>}
           
-           {/* <Menu.Item
-          //   name='logout'
-          //   active={activeItem === 'logout'}
-          //   onClick={this.handleItemClick}
-          // /> */}
 
           
          { filter && <Menu.Item>
@@ -118,9 +119,20 @@ const Header = () => {
             <Icon name="close" onClick={handleClearFilter}/>
             </Menu.Item>}
     
-            
-    <Menu.Item  position='right'>
+     {/* putting search bar on right */}
+      {/* {currentBoard ? <Menu.Item>
   
+        <Link to="/login" >
+          <Button onClick={handleLogout}>Logout</Button>
+        </Link>
+      </Menu.Item> : 
+      <Menu.Item  position="right">
+        <Link to="/login" >
+          <Button onClick={handleLogout}>Logout</Button>
+        </Link>
+      </Menu.Item>}      
+     */}
+    <Menu.Item position="right">
       <Link to="/login" >
         <Button onClick={handleLogout}>Logout</Button>
       </Link>
@@ -149,4 +161,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default withRouter(Header);

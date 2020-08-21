@@ -56,6 +56,7 @@ const boards = useSelector(state => state.board.boards)
   return(
     <div className="tileWrapper">
             <Card
+            className="board-card"
       // key={board.id}
       onClick={handleNewBoard}>
       <Card.Content>

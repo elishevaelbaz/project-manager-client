@@ -30,6 +30,7 @@ const BoardCard = ({board, history, match}) => {
 
     <Card
       key={board.id}
+      className="board-card"
       onClick={handleBoardClick}
     >
       <Card.Content>

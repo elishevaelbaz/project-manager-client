@@ -112,7 +112,7 @@ const Task = ({task, count, index,}) => {
        {label && label.name}
       </Label>)) : null}
 
-      {task.assigned_to &&
+      {(task.assigned_to && assignedMember) &&
       <Image src={`https://react.semantic-ui.com/images/avatar/small/${assignedMember.avatar}.jpg`} alt="avatar" avatar className="top-left-corner" />
       } 
       {/* && <Icon name="trash" className="bottom-corner" onClick={() => handleDelete(task.id)} /> : null} */}
