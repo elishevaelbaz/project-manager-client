@@ -19,12 +19,12 @@ Tasks in a project board can be filtered based on a user's search.
 
 ### Technologies include:
 
-React-router-dom
-Redux
-React-redux
-authentication and authorization
-Semantic UI
-Cloudinary
-React-beautiful-dnd (drag-and-drop)
+- React-router-dom
+- Redux
+- React-redux
+- authentication and authorization
+- Semantic UI
+- Cloudinary
+- React-beautiful-dnd (via drag-and-drop)
 ---
 You can find the [Backend Repository](https://github.com/elishevaelbaz/project-manager-api) here
