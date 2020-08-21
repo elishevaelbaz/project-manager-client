@@ -18,6 +18,7 @@ Tasks in a project board can be filtered based on a user's search.
 
 
 ### Technologies include:
+
 React-router-dom
 Redux
 React-redux
