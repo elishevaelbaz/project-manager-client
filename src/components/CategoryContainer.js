@@ -62,15 +62,11 @@ const CategoryContainer = ({match}) => {
 
   const handleAddCategory = (e) => {
     e.preventDefault()
-    if (name.trim())
-    {
+    if (name.trim()){
       const categoryObj = {
       name,
       board_id: currentBoard.id
-
     }
-
-    
     dispatch(addCategoryAction(categoryObj))
   }
     setIsOpen(false)
@@ -167,67 +163,30 @@ const CategoryContainer = ({match}) => {
   }
 
   return(
-    // <Container>
-
-    // <Grid columns={categories.length + 1}>
-    //   <Grid.Row>
-    //     {categories.map(category => <Category key={category.id} name={category.name} id={category.id}/>)}
-      
-      
-    //     <Grid.Column>
-    // <Popup
-    //     trigger={<Button icon='add' content='Add a category' />}
-    //     content={<Form onSubmit={handleAddCategory}>
-
-    //     <Form.Input  name="name" label="Add a category" autoComplete="off" placeholder='Category name' onChange={handleChange} />
-    
-    //     </Form>}
-    //     on='click'
-    //     // open={isOpen}
-    //     // onOpen={handleOpen}
-    //   />
-    //   </Grid.Column>
-      
-    // </Grid.Row>
-    // </Grid>
-
-    // {categories.length === 0 && <h1>Add categories to begin</h1>}
-    
-    // </Container>
     <DragDropContext onDragEnd={onDragEnd}>
 
     <div className="container">
 
-    {/* <Grid columns={categories.length + 1}>
-      <Grid.Row> */}
-        {/* <div className="row"> */}
-        {categories.map(category => <Category key={category.id} name={category.name} id={category.id} taskOrder={category.tasks}/>)}
+      {categories.map(category => <Category key={category.id} name={category.name} id={category.id} taskOrder={category.tasks}/>)}
       
-        {/* <Grid.Column> */}
-        <div>
-    <Popup
-        trigger={<Button icon='add' content='Add a category' />}
-        content={<Form onSubmit={handleAddCategory}>
+      <div>
+        <Popup
+          trigger={<Button icon='add' content='Add a category' />}
+          content={<Form onSubmit={handleAddCategory}>
 
-        <Form.Input  name="name" label="Add a category" placeholder='Category name' autoComplete="off" onChange={handleChange} />
-    
-        </Form>}
-        on='click'
-        // open={isOpen}
-        // onOpen={handleOpen}
-      />
-      {/* </div> */}
+          <Form.Input  name="name" label="Add a category" placeholder='Category name' autoComplete="off" onChange={handleChange} />
+      
+          </Form>}
+          on='click'
+          // open={isOpen}
+          // onOpen={handleOpen}
+        />
       </div>
-
-      {/* </Grid.Column> */}
-      
-    {/* </Grid.Row> */}
-    {/* </Grid> */}
 
     {categories.length === 0 && <h1>Add categories to begin</h1>}
     
     </div>
-    </DragDropContext>
+  </DragDropContext>
 
   )
 }

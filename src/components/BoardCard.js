@@ -13,15 +13,13 @@ const BoardCard = ({board, history, match}) => {
 
   const handleBoardClick = () => {
     if (match.params.id=== "new"){
-
+      return
     }
     else{
       console.log("click")
       dispatch(setCurrentBoard(board.id))
       history.push(`/boards/${board.id}`)
-
     }
-
   }
 
   

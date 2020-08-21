@@ -18,27 +18,6 @@ const reducer = (state = defaultState, action) => {
         ...state,
         labels: action.payload
       }
-    // case FETCH_TASK_LABELS:
-    //   return {
-    //     ...state,
-    //     loading: true
-    //   }  
-    // case SET_TASK_LABELS:
-    //   return {
-    //     ...state,
-    //     taskLabels: action.payload,
-    //     loading: false
-    //   }
-    // case ADD_TASK_LABEL:
-    //   return {
-    //     ...state,
-    //     taskLabels: [...state.taskLabels, action.payload]
-    //   }
-    // case DELETE_TASK_LABEL:
-    //   return {
-    //     ...state,
-    //     taskLabels: state.taskLabels.filter(taskLabel => taskLabel.id !== action.payload)
-    //   } 
     default:
       return state
   }

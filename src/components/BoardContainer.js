@@ -11,29 +11,14 @@ const BoardContainer = ({history}) => {
   const [nameInput, setNameInput] = useState("")
   const [formShown, setFormShown] = useState(false)
 
-  // const currentBoard = useSelector(state => state.board.currentBoard)
-  // const loading = useSelector(state => state.categories.loading)
-const boards = useSelector(state => state.board.boards)
-  // const categories = useSelector(state => state.category.categories)
-  // const tasks = useSelector(state => state.task.tasks)
-
+  const boards = useSelector(state => state.board.boards)
+  
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchBoards())
   }, [dispatch])
 
-  // useEffect(() => {
-  //   // if (currentBoard.id) {
-  //   //   dispatch(fetchCategories(currentBoard.id))
-  //   //   dispatch(fetchTasks(currentBoard.id))
-
-  //   // }
-  //   const id = boards[boards.length -1].id
-  //   dispatch(setCurrentBoard(id))
-
-  //   history.push(`/boards/${id}`)
-
-  // }, [boards])
+  
   const handleNewBoard = () => {
     setFormShown(true)
   }
@@ -50,32 +35,28 @@ const boards = useSelector(state => state.board.boards)
     dispatch(addBoardAction(boardObj))
     setNameInput("")
     setFormShown(false)
-
   }
 
   return(
     <div className="tileWrapper">
-            <Card
-            className="board-card"
-      // key={board.id}
-      onClick={handleNewBoard}>
-      <Card.Content>
+      {/* add a board card */}
+      <Card
+        className="board-card"
+        // key={board.id}
+        onClick={handleNewBoard}>
+        <Card.Content>
 
-      <Card.Header><Icon name="plus" />Add a Board</Card.Header>
+          <Card.Header><Icon name="plus" />Add a Board</Card.Header>
 
-    </Card.Content>
-    {formShown && <Form onSubmit={handleSubmit}>
-    <Form.Input fluid name="name" placeholder='Board name' autoComplete="off" onChange={handleChange} />
+        </Card.Content>
+        {formShown && <Form onSubmit={handleSubmit}>
+        <Form.Input fluid name="name" placeholder='Board name' autoComplete="off" onChange={handleChange} />
 
-    </Form>}
+        </Form>}
       </Card>   
-      
+        
       {boards[0] && boards.map(board => <BoardCard key={board.id} board={board} />)}
-      
-   
     </div>
-    
-    
   )
 }
 

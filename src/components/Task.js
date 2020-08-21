@@ -89,9 +89,6 @@ const Task = ({task, count, index,}) => {
           
         >
           <Card.Content>
-          {/* <Card.Href>#card-example-link-card</Card.Header> */}
-
-         
             <Card.Description>
             {task.name}
             </Card.Description>

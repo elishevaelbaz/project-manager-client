@@ -18,21 +18,13 @@ const BoardDropdown = ( {history} ) => {
     const chosenBoard = boards.find(board => board.name === boardName)
     dispatch(setCurrentBoard(chosenBoard.id))
     history.push(`/boards/${chosenBoard.id}`)
-
-    // dispatch(changeCurrentBoard(e.target.textContent))
   }
+
   return (
     <Dropdown icon="table" text=' Boards' >
       <Dropdown.Menu>
         {/* boards.length avoids logout error - because when logout the message goes in boards for some reason */}
-        {boards.length && boards.map(board => <Dropdown.Item key={board.id} text={board.name} onClick={handleDropdownClick}/>)}
-        
-        {/* <Dropdown.Item text='Open...' description='ctrl + o' />
-        <Dropdown.Item icon='folder' text='Move to folder' />
-
-        <Dropdown.Divider />
-        <Dropdown.Item text='Download As...' /> */}
-       
+        {boards.length && boards.map(board => <Dropdown.Item key={board.id} text={board.name} onClick={handleDropdownClick}/>)}   
       </Dropdown.Menu>
     </Dropdown>
   )

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { HIDE_ERROR } from '../store/error/types';
 import { Message, Icon } from 'semantic-ui-react'
 
-const ErrorNotification = (props) => {
+const ErrorNotification = () => {
  const isOpen = useSelector(state => state.error.isOpen);
  const error = useSelector(state => state.error.error);
 

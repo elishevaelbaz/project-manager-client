@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Label, Input, Button, Icon } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Label, Button, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchTaskLabels, addTaskLabelAction, deleteTaskLabelAction } from '../store/task/actions'
+import { addTaskLabelAction, deleteTaskLabelAction } from '../store/task/actions'
 import { addLabelAction } from '../store/label/actions'
 
 const colors = [

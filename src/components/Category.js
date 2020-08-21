@@ -45,12 +45,6 @@ const Category = ({ name, id, taskOrder}) => {
   const comments = useSelector(state => state.comment.comments)
   const isEditOpen = useSelector(state => state.modal.focus)
 
-//   useEffect(() => {
-//     // dispatch(fetchCurrentTask(match.params.id))
-// // comments associated with this task
-//     dispatch(fetchAllComments())
-//   }, [dispatch])
-
 const inputRef = createRef()
 
 const [toggleEdit, setToggleEdit] = useState(false)
@@ -92,28 +86,25 @@ const handleSubmit = () => {
   if (loading) return <PlaceholderCard />
 
   return(
-  
-    // <Grid.Column key={id}>
     <div >
       <Card className="categoryCard">
         
 
-      { toggleEdit ? <Form onSubmit={() => handleSubmit()}><Form.Input className="category-input inputToggle" type="text" name="name" autoComplete="off" value={categoryInput} onChange={handleChange} /></Form>
-        : <CardContent className="inputToggle" onClick={handleNameClick}>{name}</CardContent>
-      }
+        { toggleEdit ? <Form onSubmit={() => handleSubmit()}><Form.Input className="category-input inputToggle" type="text" name="name" autoComplete="off" value={categoryInput} onChange={handleChange} /></Form>
+          : <CardContent className="inputToggle" onClick={handleNameClick}>{name}</CardContent>
+        }
 
-      <Droppable droppableId={id.toString()}>
-        {provided => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
-        {sortedTasks[0] && sortedTasks.map((task, index) => <Task key={task.id} task={task} count={sortedTasks.length} index={index} />)}
-        {provided.placeholder}
-        </div>
-        )}
-      </Droppable>
-      <TaskForm categoryId={id}/>
+        <Droppable droppableId={id.toString()}>
+          {provided => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+          {sortedTasks[0] && sortedTasks.map((task, index) => <Task key={task.id} task={task} count={sortedTasks.length} index={index} />)}
+          {provided.placeholder}
+          </div>
+          )}
+        </Droppable>
+        <TaskForm categoryId={id}/>
       </Card>
-      </div>
-      // </Grid.Column>
+    </div>
   )
 }
 

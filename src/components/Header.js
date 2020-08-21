@@ -3,10 +3,10 @@ import BoardDropdown from './BoardDropdown'
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../store/user/actions';
 import { Link, withRouter } from 'react-router-dom';
-import { Image, Button, Menu, Popup, Form, Icon, Checkbox, Search, Dropdown, Input} from 'semantic-ui-react'
+import { Image, Button, Menu, Popup, Form, Icon } from 'semantic-ui-react'
 import { addMemberAction, getMembersAction, clearCurrentBoard } from '../store/board/actions';
 import ErrorNotification from './ErrorNotification';
-import { setFilter, clearFilter } from '../store/task/actions';
+import { clearFilter } from '../store/task/actions';
 import SearchBar from './SearchBar';
 
 const Header = ({history}) => {
@@ -45,13 +45,6 @@ const Header = ({history}) => {
     dispatch(addMemberAction(memberObj))
   }
 
-  // hardcoding to filter assigned tasks
-  const handleFilter = (e) => {
-    console.log("filter")
-    console.log(e.target)
-    dispatch(setFilter(currentUser.username))
-  }
-
   const handleClearFilter = () => {
     dispatch(clearFilter())
   }
@@ -66,7 +59,6 @@ const Header = ({history}) => {
   return(
     <div className="page-header">
     
-    {/* <Button onClick={handleAddTask}>Add Task</Button> */}
     { currentUser && 
     <Menu >
     <Menu.Item className="logo header-logo" onClick={handleLogoClick}>Managely</Menu.Item>
@@ -102,10 +94,9 @@ const Header = ({history}) => {
     
     </>}
 
-{currentBoard &&
+        {currentBoard &&
           <Popup flowing trigger={<Menu.Item >
             <SearchBar/>
-            {/* <Search icon='search' placeholder='Search tasks... ' /> */}
           </Menu.Item>} >
             <Popup.Content>type to search by task title or description </Popup.Content>
             <Popup.Content>use @&lt;member_name&gt; to search for tasks assigned to a specific member </Popup.Content>
@@ -119,44 +110,14 @@ const Header = ({history}) => {
             <Icon name="close" onClick={handleClearFilter}/>
             </Menu.Item>}
     
-     {/* putting search bar on right */}
-      {/* {currentBoard ? <Menu.Item>
-  
-        <Link to="/login" >
-          <Button onClick={handleLogout}>Logout</Button>
-        </Link>
-      </Menu.Item> : 
-      <Menu.Item  position="right">
-        <Link to="/login" >
-          <Button onClick={handleLogout}>Logout</Button>
-        </Link>
-      </Menu.Item>}      
-     */}
-    <Menu.Item position="right">
-      <Link to="/login" >
-        <Button onClick={handleLogout}>Logout</Button>
-      </Link>
-    </Menu.Item>
-  </Menu>
-
-
-
+        <Menu.Item position="right">
+          <Link to="/login" >
+            <Button onClick={handleLogout}>Logout</Button>
+          </Link>
+        </Menu.Item>
+      </Menu>
     }
-    <ErrorNotification />
-    
-    {/* <Modal
-      trigger={<Button>Add Task</Button>}
-      header='Add a task'
-      content='Call Benjamin regarding the reports.'
-      actions={['Snooze', { key: 'done', content: 'Done', positive: true }]}
-    /> */}
-
-
-
- 
-
-
-
+      <ErrorNotification />
     </div>
   )
 }
