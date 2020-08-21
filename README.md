@@ -9,7 +9,7 @@ Tasks details can be edited:
 - description
 - assignee
 - category (via dropdown and drag-and-drop)
-- position within a category (drag-and-drop)
+- position within a category (via drag-and-drop)
 - labels
 
 Images can also be added to tasks as attachments
@@ -25,6 +25,6 @@ Tasks in a project board can be filtered based on a user's search.
 - authentication and authorization
 - Semantic UI
 - Cloudinary
-- React-beautiful-dnd (via drag-and-drop)
+- React-beautiful-dnd (drag-and-drop)
 ---
 You can find the [Backend Repository](https://github.com/elishevaelbaz/project-manager-api) here
