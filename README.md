@@ -28,3 +28,5 @@ Tasks in a project board can be filtered based on a user's search.
 - React-beautiful-dnd (drag-and-drop)
 ---
 You can find the [Backend Repository](https://github.com/elishevaelbaz/project-manager-api) here
+
+*If cloning and running on your machine, start the rails server first (on PORT 3000), and then allow React frontend to run on PORT 3001
