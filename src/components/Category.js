@@ -24,12 +24,14 @@ const Category = ({ name, id, taskOrder}) => {
     }
     else{
       // searching task names and descriptions for a match
+      // 'task.description && ' to make sure no error is caused if desc is null
       tasks = tasks.filter(task => task.name.toLowerCase().includes(query.toLowerCase())
-        || task.description.toLowerCase().includes(query.toLowerCase())
+        || ( task.description && task.description.toLowerCase().includes(query.toLowerCase()))
       )
     }
   }
-  const filteredTasks = tasks.filter(task => task.category_id === id)
+  // Todo: saw task was undefined in certain cases and caused crash - figure out why task was undefined
+  const filteredTasks = tasks.filter(task => task && task.category_id === id)
 
   const sortedTasks = filteredTasks.sort((taskA, taskB) => (taskA.position > taskB.position) ? 1 : -1)
   console.log("SORTED", sortedTasks)

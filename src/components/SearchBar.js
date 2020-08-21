@@ -33,7 +33,8 @@ const handleSearchChange = (e, {value}) => {
   else{
     console.log( tasks.filter(t => t.name.toLowerCase().includes(value.toLowerCase())))
     const filtered = tasks.filter(t => {
-      return ( t.name.toLowerCase().includes(value.toLowerCase()) ) || ( t.description.toLowerCase().includes(value.toLowerCase()) )
+      //' t.description && ' to make sure no error is caused if desc is null
+      return ( t.name.toLowerCase().includes(value.toLowerCase()) ) || ( t.description && t.description.toLowerCase().includes(value.toLowerCase()) )
     })
     setResults(filtered.map(t => ({ title: t.name, description: t.description })))
   }
