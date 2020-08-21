@@ -12,8 +12,6 @@ export const signUpAction = (username, password) => dispatch => {
         type: SET_CURRENT_USER,
         payload: newUser
       })
-      // props.handleLogIn(newUser)
-      // props.history.push("/")
     }
   })
 }
@@ -21,7 +19,6 @@ export const signUpAction = (username, password) => dispatch => {
 
 export const loginAction = (username, password) => dispatch => {
   login(username, password).then(user => {
-
     console.log("login user", user)
     // if login was successful
     if (user.username){

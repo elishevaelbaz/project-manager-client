@@ -1,9 +1,7 @@
-import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS, ADD_LABEL, SET_LABELS, ADD_TASK_LABEL, CLEAR_CURRENT_BOARD } from './types'
-import { getBoards, addBoard, addMember, getMembers, addLabel, getLabels } from '../../api'
+import { SET_BOARDS, SET_CURRENT_BOARD, FETCH_BOARDS, CHANGE_CURRENT_BOARD, ADD_BOARD, ADD_MEMBER, SET_MEMBERS, CLEAR_CURRENT_BOARD } from './types'
+import { getBoards, addBoard, addMember, getMembers } from '../../api'
 import { SET_ERROR } from '../error/types'
-// import { fetchCategories } from '../category/actions'
 
-//another syntax
 export const fetchBoards = () => dispatch => {
   dispatch({type: FETCH_BOARDS})
   getBoards().then(boards => {
@@ -12,11 +10,6 @@ export const fetchBoards = () => dispatch => {
       type: SET_BOARDS, 
       payload: boards
     })
-    // setCurrentBoard(boards[0].id)
-    // dispatch({ 
-    //   type: SET_CURRENT_BOARD, 
-    //   payload: boards[0].id
-    // })
   })
 }
 

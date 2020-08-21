@@ -10,7 +10,8 @@ const defaultState = {
   query: ""
 }
 
-function deleteTask(state, action) {
+// pulling this out of reducer to try to make it cleaner
+function deleteTaskLabel(state, action) {
   const task = { ...state.currentTask, taskLabels: state.currentTask.taskLabels.filter(taskLabel => taskLabel.id !== action.payload) };
 
   const tasks = state.tasks.map(t => {
@@ -271,7 +272,7 @@ const reducer = (state = defaultState, action) => {
           tasks: tasks
         } 
       case DELETE_TASK_LABEL:
-        return deleteTask(state, action); 
+        return deleteTaskLabel(state, action); 
     default:
       return state
   }

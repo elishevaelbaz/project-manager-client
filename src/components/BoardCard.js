@@ -7,8 +7,6 @@ import { setCurrentBoard } from '../store/board/actions';
 const BoardCard = ({board, history, match}) => {
   console.log("board", board)
   
-
-  
   const dispatch = useDispatch()
 
   const handleBoardClick = () => {
@@ -21,8 +19,6 @@ const BoardCard = ({board, history, match}) => {
       history.push(`/boards/${board.id}`)
     }
   }
-
-  
 
   return(
 

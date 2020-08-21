@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Form, Dropdown, Popup, Button, Icon} from 'semantic-ui-react'
-import { useSelector, useDispatch } from 'react-redux'
-import CategoryDropdown from './CategoryDropdown'
+import React, { useState, useRef } from 'react'
+import { Form, Popup, Button, Icon} from 'semantic-ui-react'
+import { useDispatch } from 'react-redux'
 import { addTaskAction } from '../store/task/actions'
-
-// import { Link } from 'react-router-dom'
 
 const TaskForm = ({ categoryId }) => {
 

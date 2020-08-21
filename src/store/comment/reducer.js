@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT, ADD_COMMENT, UPDATE_COMMENT, CLEAR_COMMENTS } from './types'
+import { FETCH_COMMENTS, SET_COMMENTS, DELETE_COMMENT, ADD_COMMENT, UPDATE_COMMENT } from './types'
 import { CLOSE_MODAL } from '../modal/types'
 
 const defaultState = {
@@ -8,7 +8,6 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   console.log("commentReducer", action)
-  // let index;
   switch (action.type) {
     
     case FETCH_COMMENTS:
@@ -57,8 +56,6 @@ const reducer = (state = defaultState, action) => {
           ...state,
           comments: state.comments.filter(comment => comment.id !== action.payload)
         } 
-      
-  
     default:
       return state
   }

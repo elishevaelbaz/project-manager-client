@@ -1,9 +1,7 @@
-import _ from 'lodash'
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Search, } from 'semantic-ui-react'
 import { setFilter } from '../store/task/actions'
-
 
 const SearchBar = () => {
 

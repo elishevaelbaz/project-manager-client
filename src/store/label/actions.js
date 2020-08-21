@@ -1,5 +1,5 @@
-import { ADD_LABEL, SET_LABELS, ADD_TASK_LABEL, SET_TASK_LABELS, FETCH_TASK_LABELS, DELETE_TASK_LABEL } from './types'
-import { addLabel, getLabels, getTaskLabels, addTaskLabel, deleteTaskLabel, getAllTaskLabels } from '../../api'
+import { ADD_LABEL, SET_LABELS } from './types'
+import { addLabel, getLabels } from '../../api'
 import { SET_ERROR } from '../error/types'
 
 
@@ -18,8 +18,7 @@ export const addLabelAction = (labelObj) => dispatch => {
         type: ADD_LABEL,
         payload: label
       })
-      // dispatch({type: FETCH_TASK_LABELS})
-        
+      // dispatch({type: FETCH_TASK_LABELS})  
     }
   })
 }

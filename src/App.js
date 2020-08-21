@@ -19,8 +19,7 @@ const App = () => {
   
   useEffect(() => {
     dispatch(autoLoginAction())
-    
-    
+       
     // getTasks()
     //   .then(tasks => dispatch({ type: SET_TASKS, payload: tasks}))
   }, [dispatch])
@@ -47,9 +46,6 @@ const App = () => {
     //   this.props.history.push('/home')
     // })
   }
-  const onDragEnd = result => {
-    //TODO: reorder the column
-  }
 
 //   const handleClick = (e) => {
 //     if (!e.target.className.includes("inputToggle") && (!e.target.parentNode.parentNode.className.includes("inputToggle"))){
@@ -60,45 +56,36 @@ const App = () => {
 //   }
 
   return (
-    // <DragDropContext onDragEnd={onDragEnd}>
-
     <div className="App" onClick={null}>
-      {/* <Route exact path="/" /> */}
       <Header/>
       <Switch>
-      {/* <Route exact path="/">
-        {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
-      </Route> */}
-      <Route exact path="/boards/:id">
-        {currentUser && <CategoryContainer />}
-      </Route>
-      <Route exact path="/boards">
-        {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
-      </Route>
-      
-      
-      <Route path="/signup">
-        {currentUser ?  <Redirect to='/boards' /> : <SignUp handleSignUp={handleSignUp} />}  
-      </Route>
-      <Route path="/login">
-        {currentUser ?  <Redirect to='/boards' /> : <Login handleLogin={handleLogin} />} 
-      </Route>
-      <Route path="/">
-        {currentUser ?  <CategoryContainer/> : <Login handleLogin={handleLogin} />}  
-      </Route>
-      
-
-      {/* history.push(`/tasks/${task.id}`); */}
-      {/* <Route path="/boards/:id" render={routeProps => (
-              <CategoryContainer {...routeProps} />
-              )} /> */}
+        {/* <Route exact path="/">
+          {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
+        </Route> */}
+        <Route exact path="/boards/:id">
+          {currentUser && <CategoryContainer />}
+        </Route>
+        <Route exact path="/boards">
+          {currentUser ? <BoardContainer /> : <Redirect to='/login' />}
+        </Route>
+        
+        
+        <Route path="/signup">
+          {currentUser ?  <Redirect to='/boards' /> : <SignUp handleSignUp={handleSignUp} />}  
+        </Route>
+        <Route path="/login">
+          {currentUser ?  <Redirect to='/boards' /> : <Login handleLogin={handleLogin} />} 
+        </Route>
+        <Route path="/">
+          {currentUser ?  <Redirect to='/boards' /> : <Login handleLogin={handleLogin} />}  
+        </Route>
+        
       </Switch>
 
      
       
    
     </div>
-    // </DragDropContext>
   );
 }
 

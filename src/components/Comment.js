@@ -3,7 +3,7 @@ import { Form, Comment } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteCommentAction, editComment } from '../store/comment/actions'
 
-const CommentComp = ({id, text, userId, taskId, username, avatar}) => {
+const CommentComp = ({id, text, username, avatar}) => {
   
 
   const currentUser = useSelector(state => state.user.currentUser.username)

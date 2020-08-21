@@ -1,11 +1,10 @@
 
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import { Icon, Modal, Button, Form, Header, Comment, Popup } from 'semantic-ui-react'
+import { Icon, Modal, Button, Form, Header, Comment } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateTaskAction } from '../store/task/actions'
-import { addCommentAction, fetchComments } from '../store/comment/actions'
-import { fetchAttachments, deleteAttachmentAction } from '../store/attachment/actions'
+import { addCommentAction } from '../store/comment/actions'
+import { deleteAttachmentAction } from '../store/attachment/actions'
 import CommentComp from './Comment'
 import AssigneeDropdown from './AssigneeDropdown'
 import CategoryDropdown from './CategoryDropdown'
@@ -141,7 +140,7 @@ const TaskModal = () => {
     dispatch(deleteAttachmentAction(id))
   }
 
-  const renderComments = () =>  comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} taskId={currentTask.id} userId={comment.user_id} username={comment.username} avatar={comment.avatar}/>)
+  const renderComments = () =>  comments.map(comment => <CommentComp key={comment.id} id={comment.id} text={comment.text} username={comment.username} avatar={comment.avatar}/>)
     
   return (
   <Modal

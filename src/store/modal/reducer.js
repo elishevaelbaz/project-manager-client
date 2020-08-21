@@ -14,7 +14,6 @@ const reducer = (state = defaultState, action) => {
     case OPEN_MODAL:
       return {
         ...state,
-        // task: action.payload,
         isOpen: true,
         // loading: true
       }  

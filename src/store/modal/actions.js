@@ -1,10 +1,6 @@
-import { OPEN_MODAL, CLOSE_MODAL, CLEAR_MODAL, OPEN_EDIT_FORM, CLOSE_EDIT_FORM } from './types'
+import { OPEN_MODAL, CLOSE_MODAL, OPEN_EDIT_FORM, CLOSE_EDIT_FORM } from './types'
 import { CLEAR_FILTER } from '../task/types'
-// import { getBoards, addBoard, addMember, getMembers } from '../../api'
-// import { SET_ERROR } from '../error/types'
-// import { fetchCategories } from '../category/actions'
 
-//another syntax
 export const openModal = (task) => dispatch => {
   dispatch({
     type: OPEN_MODAL,

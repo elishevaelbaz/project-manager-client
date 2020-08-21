@@ -137,14 +137,12 @@ export const closeCurrentTask = () => dispatch => {
   })
 }
 
-
 export const setFilter = (filterQuery) => dispatch => {
   dispatch({
     type: SET_FILTER,
     payload: filterQuery
   })
 }
-
 
 export const clearFilter = () => dispatch => {
   dispatch({

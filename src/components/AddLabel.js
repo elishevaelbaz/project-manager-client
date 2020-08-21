@@ -33,17 +33,6 @@ const AddLabel = ({taskId}) => {
 
     const unFilteredLabels = labels.filter(label => {
       return !taskLabels.find(tl => label.id === tl.label_id)})
-  
-    // const [isChecked, setIsChecked] = useState({...defaultLabelCheck})
-
-
-
-    // {taskLabels.map(label =>  <Label color={label.color} key={label.id} onClick={() => handleAddLabel(label.id)}>
-    // { taskLabels.find(l => l.id === label.id) && <Icon name="check"/>}
-    // {label.name}
-    // </Label>)}
-
-    // const uncheckedLabels = labels.filter(label => )
 
     const dispatch = useDispatch()
     const [checkedColor, setCheckedColor] = useState("teal")
@@ -64,12 +53,9 @@ const AddLabel = ({taskId}) => {
   }
 
   const handleInputChange = (e) => {
-    
-      e.persist()
-      setNameInput(e.target.value)
+    e.persist()
+    setNameInput(e.target.value)
     console.log(nameInput)
-
-
   }
 
   const handleButtonClick = (color) => {
@@ -86,8 +72,7 @@ const AddLabel = ({taskId}) => {
     }
     console.log(body)
     dispatch(addLabelAction(body))
-    setNameInput("")
-    
+    setNameInput("") 
   }
 
   const handleAddLabel = (labelId) => {
@@ -105,11 +90,11 @@ const AddLabel = ({taskId}) => {
     if (taskLabelId){
       dispatch(deleteTaskLabelAction(taskLabelId))
     }
-}
+  }
 
-const handlePlusClick = () => {
-  setIsCreateOpen(!isCreateOpen)
-}
+  const handlePlusClick = () => {
+    setIsCreateOpen(!isCreateOpen)
+  }
 
   return(
     <div>
@@ -148,20 +133,17 @@ const handlePlusClick = () => {
       <Label color={color} key={color} onClick={() => handleColorClick(color)}>
 
         { checkedColor === color && <Icon name="check"/>}
-      </Label>
-      
+      </Label>   
     ))
     }
     
-   
-    <br/>
-    <Button onClick={handleButtonClick}>Create</Button>
-    </>}
-<br />
+      <br/>
+      <Button onClick={handleButtonClick}>Create</Button>
+      </>}
+      <br />
 
     </div>
   )
-
 }
 
 export default AddLabel

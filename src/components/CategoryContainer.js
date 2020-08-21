@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Category from './Category'
-import { useDispatch, useSelector, ReactReduxContext } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchBoards, setCurrentBoard } from '../store/board/actions'
-import { fetchLabels, fetchTaskLabels, fetchAllTaskLabels } from '../store/label/actions'
+import { fetchLabels } from '../store/label/actions'
 import { fetchCategories, addCategoryAction } from '../store/category/actions';
-import { addTaskAction, fetchTasks, updateTaskAction, updatePositionAction } from '../store/task/actions';
-import { Grid, Container, Form, Popup, Button } from 'semantic-ui-react'
-// import TaskForm from './TaskForm';
+import { fetchTasks, updatePositionAction } from '../store/task/actions';
+import { Form, Popup, Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd'
-// import { REORDER_CATEGORY_TASKS, REORDER_CATEGORIES_TASKS } from '../store/category/types';
-// import { REORDER_TASKS } from '../store/task/types';
-
 
 const CategoryContainer = ({match}) => {
 

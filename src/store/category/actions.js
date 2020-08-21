@@ -10,11 +10,6 @@ export const fetchCategories = (id) => dispatch => {
       type: SET_CATEGORIES, 
       payload: categories
     })
-   
-    // dispatch({ 
-    //   type: SET_CURRENT_BOARD, 
-    //   payload: boards[0]
-    // })
   })
 }
 
