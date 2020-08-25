@@ -1,12 +1,16 @@
 import { SET_CURRENT_USER, LOGOUT_USER} from './types'
 import { signUp, login, autoLogin, logout } from '../../api'
+import { SET_ERROR } from '../error/types'
 
 export const signUpAction = (username, password) => dispatch => {
   signUp(username, password).then(newUser => {
     console.log(newUser)
     if (newUser.messages){
-      // setErrors(newUser.messages)
-    }
+        dispatch({
+          type: SET_ERROR,
+          payload: newUser.messages
+        })
+      }
     else{
       dispatch({
         type: SET_CURRENT_USER,
@@ -28,7 +32,10 @@ export const loginAction = (username, password) => dispatch => {
       })
     }
     else{
-      // setError(user.message)
+      dispatch({
+        type: SET_ERROR,
+        payload: user.message
+      })
     }
   })
 }

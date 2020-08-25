@@ -9,7 +9,7 @@ import { openModal } from '../store/modal/actions'
 import TaskModal from './TaskModal'
 import { fetchTaskLabels } from '../store/task/actions'
 
-const Task = ({task, count, index,}) => {
+const Task = ({task, count, index}) => {
   console.log("TASK", task)
   
   const currentUser = useSelector(state => state.user.currentUser.username)
@@ -17,7 +17,7 @@ const Task = ({task, count, index,}) => {
 
   const members = useSelector(state => state.board.members)
   const assignedMember = members.find(member => member.username === task.assigned_to)
-  const currentTask = useSelector(state => state.task.tasks.find(t => t.id === task.id))
+  const currentTask = useSelector(state => state.task.tasks.find(t => task && (t.id === task.id)))
   // console.log(currentTask, "currentTask")
   const taskLabels = currentTask.taskLabels
   // console.log("taskLabels", taskLabels)

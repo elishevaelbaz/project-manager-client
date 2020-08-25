@@ -41,10 +41,10 @@ export const fetchCurrentTask = (id) => dispatch => {
 export const addTaskAction = (taskObj) => dispatch => {
   addTask(taskObj)
   .then(task => {
-    if (task.error){
+    if (task.errors){
       dispatch({
         type: SET_ERROR,
-        payload: task.error
+        payload: task.errors
       })
     }
     else{
@@ -72,10 +72,10 @@ export const updateTaskAction = (id, body) => dispatch => {
   updateTask(id, body)
   .then(updatedTask => {
     console.log(updatedTask)
-    if (updatedTask.error){
+    if (updatedTask.errors){
       dispatch({
         type: SET_ERROR,
-        payload: updatedTask.error
+        payload: updatedTask.errors
       })
     }
     else{
@@ -165,10 +165,12 @@ export const fetchTaskLabels = (taskId) => dispatch => {
 export const addTaskLabelAction = (taskLabelObj) => dispatch => {
   addTaskLabel(taskLabelObj)
   .then(taskLabel => {
-    if (taskLabel.error){
+
+    // errors not being sent back from api yet
+    if (taskLabel.errors){
       dispatch({
         type: SET_ERROR,
-        payload: taskLabel.error
+        payload: taskLabel.errors
       })
     }
     else{

@@ -21,7 +21,9 @@ const ErrorNotification = () => {
 
 <Message negative compact floating >
 <Icon name='close' onClick={handleClose} className="corner" color="red"/>
+{ Array.isArray(error) ? error.map((errorElem, index) => <Message.Header key={index} className="errorMessage">{errorElem}</Message.Header>) :
 <Message.Header className="errorMessage">{error}</Message.Header>
+}
 {/* <p>{error}</p> */}
 </Message>
  )}
