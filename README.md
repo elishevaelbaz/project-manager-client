@@ -27,6 +27,17 @@ Tasks in a project board can be filtered based on a user's search.
 - Cloudinary
 - React-beautiful-dnd (drag-and-drop)
 ---
-You can find the [Backend Repository](https://github.com/elishevaelbaz/project-manager-api) here
 
-*If cloning and running on your machine, start the rails server first (on PORT 3000), and then allow React frontend to run on PORT 3001
+To run on your local machine:
+Clone both the [frontend](https://github.com/elishevaelbaz/project-manager-client) and the [backend](https://github.com/elishevaelbaz/project-manager-api) repositories onto your machine using `git clone`.
+
+`cd` into the backend repository
+Run `bundle install` to download the necessary gems.
+Run `rails db:create && rails db:migrate` to create the database and the migrations.
+Run `rails db:seed` to seed the database.
+Run `rails s` to start the rails server (it will run on on PORT 3000)
+
+`cd` into the frontend repository:
+Run `npm install` to install the necessary package dependencies
+Follow the prompt to allow React to run on PORT 3001
+
