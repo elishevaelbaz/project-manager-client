@@ -28,8 +28,8 @@ Tasks in a project board can be filtered based on a user's search.
 - React-beautiful-dnd (drag-and-drop)
 ---
 
-To run on your local machine:  
--Clone both the [frontend](https://github.com/elishevaelbaz/project-manager-client) and the [backend](https://github.com/elishevaelbaz/project-manager-api) repositories onto your machine using `git clone`.  
+__To run on your local machine:__  
+Clone both the [frontend](https://github.com/elishevaelbaz/project-manager-client) and the [backend](https://github.com/elishevaelbaz/project-manager-api) repositories onto your machine using `git clone`.  
 
 `cd` into the backend repository  
 Run `bundle install` to download the necessary gems.  
