@@ -2,6 +2,8 @@
 
 Managely is a project management app, based off of Trello or something similar.
 
+<img src="src/images/readme-demo.gif" alt="managely demo gif">
+
 Users can create project boards, create categories, tasks, labels, and invite other to collaborate with them on their projects.
 
 Tasks details can be edited:
