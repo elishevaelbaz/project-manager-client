@@ -39,5 +39,5 @@ Run `rails s` to start the rails server (it will run on on PORT 3000)
 
 `cd` into the frontend repository:  
 Run `npm install` to install the necessary package dependencies  
+Run `npm start` to run the app in development mode  
 Follow the prompt to allow React to run on PORT 3001  
-
