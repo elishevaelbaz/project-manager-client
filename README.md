@@ -1,6 +1,6 @@
 # Managely
 
-Managely is a project management app, based off of Trello or something similar.
+Managely is a multi-user collaborative project management app.
 
 <img src="src/images/readme-demo.gif" alt="managely demo gif">
 
@@ -19,12 +19,18 @@ Images can also be added to tasks as attachments
 Tasks in a project board can be filtered based on a user's search.
 
 
+### Built with
+
+[Frontend:](https://github.com/elishevaelbaz/project-manager-client): React.js, Redux  
+[Backend:](https://github.com/elishevaelbaz/project-manager-api)Backend: Ruby On Rails, PostgreSQL
+
+
 ### Technologies include:
 
 - React-router-dom
 - Redux
 - React-redux
-- authentication and authorization
+- Session based authentication and authorization
 - Semantic UI
 - Cloudinary
 - React-beautiful-dnd (drag-and-drop)
