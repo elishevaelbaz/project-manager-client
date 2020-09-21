@@ -21,8 +21,8 @@ Tasks in a project board can be filtered based on a user's search.
 
 ### Built with
 
-[Frontend:](https://github.com/elishevaelbaz/project-manager-client): React.js, Redux  
-[Backend:](https://github.com/elishevaelbaz/project-manager-api)Backend: Ruby On Rails, PostgreSQL
+- [Frontend:](https://github.com/elishevaelbaz/project-manager-client) React.js, Redux  
+- [Backend:](https://github.com/elishevaelbaz/project-manager-api) Ruby On Rails, PostgreSQL
 
 
 ### Technologies include:
