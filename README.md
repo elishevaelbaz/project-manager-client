@@ -36,7 +36,16 @@ Tasks in a project board can be filtered based on a user's search.
 - React-beautiful-dnd (drag-and-drop)
 ---
 
-__To run on your local machine:__  
+### Getting started
+#### To run on your local machine:
+
+#### Prerequisites:
+- Node.js
+- npm
+- Ruby on Rails
+- PostgreSQL
+
+#### Instructions:  
 Clone both the [frontend](https://github.com/elishevaelbaz/project-manager-client) and the [backend](https://github.com/elishevaelbaz/project-manager-api) repositories onto your machine using `git clone`.  
 
 `cd` into the backend repository  
